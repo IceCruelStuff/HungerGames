@@ -26,6 +26,10 @@ class WaitingTask extends PluginTask{
     }
     public function onRun($currentTick)
     {
+        if(!isset(HGGame::getApi()->players[$this->game])){
+            $this->main->getServer()->getScheduler()->cancelTask($this->getTaskId());
+            return;
+        }
         $this->secs--;
         if($this->secs === 1){
             foreach($this->main->getServer()->getLevelByName($this->main->getConfig()->getAll()["hg_games"][$this->game]["level"])->getTiles() as $chest){
