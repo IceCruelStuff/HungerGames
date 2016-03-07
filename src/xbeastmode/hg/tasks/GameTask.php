@@ -7,7 +7,7 @@ use pocketmine\scheduler\PluginTask;
 use xbeastmode\hg\HGManagement;
 use xbeastmode\hg\Loader;
 use xbeastmode\hg\utility\HGGame;
-use xbeastmode\skywars\utils\FMT;
+use xbeastmode\hg\utils\FMT;
 class GameTask extends PluginTask{
     private $game;
     /** @var Loader */
@@ -26,7 +26,7 @@ class GameTask extends PluginTask{
      */
     public function onRun($currentTick)
     {
-        if(isset(HGManagement::$players[$this->game])){
+        if(isset(HGManagement::$players[$this->game]) || !isset(HGGame::getApi()->onWait[$this->game])){
             $this->main->getServer()->getScheduler()->cancelTask($this->getTaskId());
             return;
         }
@@ -44,9 +44,13 @@ class GameTask extends PluginTask{
                     $level = $this->main->getServer()->getLevelByName($match["level"]);
                     $p->teleport(new Position($match["x"], $match[1], $match["z"], $level), 0, 0);
                     $this->main->getServer()->broadcastMessage(FMT::colorMessage(str_replace("%game%", $this->game, $this->main->getMessage("game_open"))));
-                    $p->sendMessage(FMT::colorMessage("not_enough_players"));
+                    $p->sendMessage(FMT::colorMessage($this->main->getMessage("not_enough_players")));
                 break;
             }
+        }
+        if(isset(HGManagement::$players[$this->game]) || !isset(HGGame::getApi()->onWait[$this->game])){
+            $this->main->getServer()->getScheduler()->cancelTask($this->getTaskId());
+            return;
         }
         if(HGGame::getApi()->onWait[$this->game] <= 1){
             $this->main->getServer()->getScheduler()->cancelTask($this->getTaskId());
