@@ -26,7 +26,7 @@ class GameTask extends PluginTask{
      */
     public function onRun($currentTick)
     {
-        if(isset(HGManagement::$players[$this->game]) || !isset(HGGame::getApi()->onWait[$this->game])){
+        if(!isset(HGGame::getApi()->players[$this->game])){
             $this->main->getServer()->getScheduler()->cancelTask($this->getTaskId());
             return;
         }
@@ -48,7 +48,7 @@ class GameTask extends PluginTask{
                 break;
             }
         }
-        if(isset(HGManagement::$players[$this->game]) || !isset(HGGame::getApi()->onWait[$this->game])){
+        if(!isset(HGGame::getApi()->players[$this->game])){
             $this->main->getServer()->getScheduler()->cancelTask($this->getTaskId());
             return;
         }
