@@ -117,7 +117,7 @@ class HGGame{
             $this->main->createWaitingTask($game);
         }
         if($this->onWait[$game] < $this->getMinPlayers($game)){
-            $this->main->createMessageTask($p, $game);
+            $this->main->createMessageTask($game);
         }
         if($this->counters[$game] <= -1){
             $p->sendMessage(FMT::colorMessage($this->main->getMessage("match_full")));
