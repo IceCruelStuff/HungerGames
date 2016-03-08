@@ -158,7 +158,7 @@ class hgCmd extends Command implements PluginIdentifiableCommand{
                                     "x" => $sender->x,
                                     1 => $sender->y,
                                     "z" => $sender->z,
-                                    "level" => $s->level->getName()
+                                    "level" => $sender->level->getName()
                                 ],
                             "slots" => []
                         ];
