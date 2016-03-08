@@ -6,7 +6,7 @@ use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
 use xbeastmode\hg\HGManagement;
 use xbeastmode\hg\Loader;
-use xbeastmode\hg\utility\HGGame;
+use xbeastmode\hg\api\HGGame;
 use xbeastmode\hg\utils\FMT;
 class hgCmd extends Command implements PluginIdentifiableCommand{
     /** @var Loader */
