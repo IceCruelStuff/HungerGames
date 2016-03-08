@@ -67,7 +67,7 @@ class Loader extends PluginBase{
         $t->setHandler($h);
         $this->tasks[$game] = $t->getTaskId();
     }
-    public function createMessageTask(Player $p, $game){
+    public function createMessageTask($game){
         $t = new MessageTask($this, $game);
         $h = $this->getServer()->getScheduler()->scheduleRepeatingTask($t, 20);
         $t->setHandler($h);
