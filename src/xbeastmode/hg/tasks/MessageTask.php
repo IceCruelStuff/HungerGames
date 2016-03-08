@@ -17,7 +17,7 @@ class MessageTask extends PluginTask{
     }
     public function onRun($currentTick)
     {
-        if(!isset(HGGame::getApi()->onWait[$this->game])){
+        if(!isset(HGGame::getApi()->players[$this->game])){
             $this->main->getServer()->getScheduler()->cancelTask($this->getTaskId());
             return;
         }
