@@ -10,7 +10,7 @@ use pocketmine\Player;
 use pocketmine\tile\Sign;
 use pocketmine\utils\TextFormat as color;
 
-use xbeastmode\hg\utility\HGGame;
+use xbeastmode\hg\api\HGGame;
 use xbeastmode\hg\utils\FMT;
 class Events implements Listener{
     /** @var Loader */
