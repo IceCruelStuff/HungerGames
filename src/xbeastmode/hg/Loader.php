@@ -5,11 +5,11 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
 use xbeastmode\hg\commands\hgCmd;
-use xbeastmode\hg\etc\EndGame;
+use xbeastmode\hg\api\EndGame;
 use xbeastmode\hg\tasks\MessageTask;
 use xbeastmode\hg\tasks\RefreshSignTask;
 use xbeastmode\hg\tasks\WaitingTask;
-use xbeastmode\hg\utility\HGGame;
+use xbeastmode\hg\api\HGGame;
 use xbeastmode\hg\tasks\GameTask;
 class Loader extends PluginBase{
     /** @var array */
