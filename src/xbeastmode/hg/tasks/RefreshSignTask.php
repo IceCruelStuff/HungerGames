@@ -6,7 +6,7 @@ use pocketmine\utils\TextFormat as color;
 
 use xbeastmode\hg\HGManagement;
 use xbeastmode\hg\Loader;
-use xbeastmode\hg\utility\HGGame;
+use xbeastmode\hg\api\HGGame;
 use xbeastmode\hg\utils\FMT;
 class RefreshSignTask extends PluginTask{
     /** @var Loader */
