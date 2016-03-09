@@ -11,6 +11,8 @@ use pocketmine\tile\Sign;
 use pocketmine\utils\TextFormat as color;
 
 use xbeastmode\hg\api\HGGame;
+use xbeastmode\hg\event\player\PlayerJoinGameEvent;
+use xbeastmode\hg\event\player\PlayerQuitGameEvent;
 use xbeastmode\hg\utils\FMT;
 class Events implements Listener{
     /** @var Loader */
@@ -62,6 +64,9 @@ class Events implements Listener{
                 if(HGGame::getApi()->tpToOpenSlot($e->getPlayer(), $clean) === false){
                     return;
                 }
+                $pjge = new PlayerJoinGameEvent($this->main, $e->getPlayer(), $clean);
+                $this->main->getServer()->getPluginManager()->callEvent($pjge);
+                if($pjge->isCancelled()) return;
                 HGManagement::$players[$clean][$e->getPlayer()->getName()] = $e->getPlayer();
                 HGManagement::$data[$e->getPlayer()->getName()] = $clean;
                 foreach(HGGame::getApi()->players[$clean] as $p){
@@ -118,6 +123,9 @@ class Events implements Listener{
         $player = $e->getPlayer();
         if(!isset(HGManagement::$data[$player->getName()])) return;
         if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]][spl_object_hash($player)])) {
+            $pqge = new PlayerQuitGameEvent($this->main, $player, HGManagement::$data[$player->getName()]);
+            $this->main->getServer()->getPluginManager()->callEvent($pqge);
+            if($pqge->isCancelled()) return;
             HGGame::getApi()->onWait[HGManagement::$data[$player->getName()]] -= 1;
             $onWait = HGGame::getApi()->onWait[HGManagement::$data[$player->getName()]];
             if($onWait == 0){
