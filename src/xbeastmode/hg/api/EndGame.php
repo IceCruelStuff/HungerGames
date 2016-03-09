@@ -4,6 +4,7 @@ use pocketmine\command\ConsoleCommandSender;
 use pocketmine\entity\Item;
 use pocketmine\level\Position;
 use pocketmine\Player;
+use xbeastmode\hg\event\player\PlayerWinGameEvent;
 use xbeastmode\hg\HGManagement;
 use xbeastmode\hg\Loader;
 use xbeastmode\hg\utils\FMT;
@@ -46,6 +47,9 @@ class EndGame{
             foreach (HGGame::getApi()->players[$game] as $p) {
                 if ($p instanceof Player) {
                     $p->teleport(new Position($pos["x"], $pos[1], $pos["z"], $level));
+                    $pwge = new PlayerWinGameEvent($this->main, $p, $game);
+                    $this->main->getServer()->getPluginManager()->callEvent($pwge);
+                    if($pwge->isCancelled()) return;
                     $msg = FMT::colorMessage($this->main->getMessage("won_match"));
                     $msg = str_replace(["%player%", "%game%"], [$p->getName(), $game], $msg);
                     $this->main->getServer()->broadcastMessage($msg);
