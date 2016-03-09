@@ -6,7 +6,7 @@ use pocketmine\scheduler\PluginTask;
 
 use xbeastmode\hg\HGManagement;
 use xbeastmode\hg\Loader;
-use xbeastmode\hg\utility\HGGame;
+use xbeastmode\hg\api\HGGame;
 use xbeastmode\hg\utils\FMT;
 class GameTask extends PluginTask{
     private $game;
