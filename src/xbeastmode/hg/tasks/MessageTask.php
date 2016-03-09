@@ -4,7 +4,7 @@ use pocketmine\Player;
 use pocketmine\scheduler\PluginTask;
 
 use xbeastmode\hg\Loader;
-use xbeastmode\hg\utility\HGGame;
+use xbeastmode\hg\api\HGGame;
 use xbeastmode\hg\utils\FMT;
 class MessageTask extends PluginTask{
     /** @var Loader */
