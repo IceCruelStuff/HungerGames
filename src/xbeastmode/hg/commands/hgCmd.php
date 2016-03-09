@@ -4,6 +4,8 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
+use xbeastmode\hg\event\player\PlayerJoinGameEvent;
+use xbeastmode\hg\event\player\PlayerQuitGameEvent;
 use xbeastmode\hg\HGManagement;
 use xbeastmode\hg\Loader;
 use xbeastmode\hg\api\HGGame;
@@ -35,15 +37,22 @@ class hgCmd extends Command implements PluginIdentifiableCommand{
             switch (strtolower($args[0])) {
                 case 'help':
                     if ($sender->isOp()) {
-                        $sender->sendMessage(FMT::colorMessage("&f-=[&eHunger&6Games&f]=-"));
-                        $sender->sendMessage(FMT::colorMessage("&e/hg join <game> &fjoin game"));
-                        $sender->sendMessage(FMT::colorMessage("&e/hg quit &fquit game"));
-                        $sender->sendMessage(FMT::colorMessage("&e/hg addslot <game> &f add slot to game"));
-                        $sender->sendMessage(FMT::colorMessage("&e/hg create <name> &fcreate a game"));
-                        $sender->sendMessage(FMT::colorMessage("&e/hg min <game> <number> &fset minimum players for game"));
-                        $sender->sendMessage(FMT::colorMessage("&e/hg max <game> <number> &fset maximum players for game"));
-                        $sender->sendMessage(FMT::colorMessage("&e/hg time <game> <game|wait> <number> &fchange game/wait time"));
-                        $sender->sendMessage(FMT::colorMessage("&e/hg level <game> [level] &fchange level for a game"));
+                        if(isset($args[1]) == 2){
+                            $sender->sendMessage(FMT::colorMessage("&f-=[&eHunger&6Games&f &bHELP (2/2)&f]=-"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg join <game> &fjoin game"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg quit &fquit game"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg addslot <game> &f add slot to game"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg create <name> &fcreate a game"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg min <game> <number> &fset minimum players for game"));
+                        }elseif(empty($args[1])) {
+                            $sender->sendMessage(FMT::colorMessage("&f-=[&eHunger&6Games&f &bHELP (1/2)&f]=-"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg max <game> <number> &fset maximum players for game"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg time <game> <game|wait> <number> &fchange game/wait time"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg level <game> [level] &fchange level for a game"));
+                            $sender->sendMessage(FMT::colorMessage("&e/hg pos <game> <lobby|death-match> &fadd slot to game"));
+                        }else{
+                            $sender->sendMessage(FMT::colorMessage("&cError[H-1]: &eno command like that exists. &aTry: /hg help"));
+                        }
                     } else {
                         $sender->sendMessage(FMT::colorMessage("&e/hg join <game> &fjoin game"));
                         $sender->sendMessage(FMT::colorMessage("&e/hg quit &fquit game"));
@@ -63,6 +72,9 @@ class hgCmd extends Command implements PluginIdentifiableCommand{
                         }
                         break;
                     }
+                    $pjge = new PlayerJoinGameEvent($this->main, $sender, $game);
+                    $this->main->getServer()->getPluginManager()->callEvent($pjge);
+                    if($pjge->isCancelled()) return;
                     if(isset(HGGame::getApi()->players[$game][spl_object_hash($sender)])){
                         $sender->sendMessage(FMT::colorMessage("&cError[J-1]: &ealready joined game."));
                         return;
@@ -88,6 +100,9 @@ class hgCmd extends Command implements PluginIdentifiableCommand{
                     if(isset(HGManagement::$data[$sender->getName()])){
                         $game = HGManagement::$data[$sender->getName()];
                         if(isset(HGGame::getApi()->players[$game][spl_object_hash($sender)])){
+                            $pqge = new PlayerQuitGameEvent($this->main, $sender, $game);
+                            $this->main->getServer()->getPluginManager()->callEvent($pqge);
+                            if($pqge->isCancelled()) return;
                             $sender->teleport(HGGame::getApi()->getLobbyPosition($game));
                             HGGame::getApi()->onWait[HGManagement::$data[$sender->getName()]] -= 1;
                             $onWait = HGGame::getApi()->onWait[HGManagement::$data[$sender->getName()]];
@@ -256,6 +271,36 @@ class hgCmd extends Command implements PluginIdentifiableCommand{
                         $this->main->getConfig()->save();
                         $sender->sendMessage(FMT::colorMessage("&aSuccessfully changed level for $game to ".$level->getName()."."));
                     }
+                    break;
+                case 'p':
+                case 'pos':
+                case 'position':
+                if($sender->isOp()) {
+                    if (empty($args[1]) || empty($args[2])) {
+                        $sender->sendMessage(FMT::colorMessage("&e/hg pos <game> <lobby|death-match> &fadd slot to game"));
+                        return;
+                    }
+                    $game = $args[1];
+                    if (!isset($this->main->getConfig()->getAll()["hg_games"][$game])) {
+                        $sender->sendMessage(FMT::colorMessage("&cError[T-1]: &egame does not exist."));
+                        return;
+                    }
+                    if(strtolower($args[2]) === "lobby"){
+                        $this->main->getConfig()->setNested("hg_games.$game.lobby_pos", ["x" => $sender->x, 1=> $sender->y, "z" => $sender->z, "level" => $sender->level->getName()]);
+                        $this->main->getConfig()->setAll($this->main->getConfig()->getAll());
+                        $this->main->getConfig()->save();
+                        $sender->sendMessage(FMT::colorMessage("&aSuccessfully changed lobby position for $game to current position."));
+                    }
+                    if(strtolower($args[2]) === "death-match"){
+                        $this->main->getConfig()->setNested("hg_games.$game.death_match_pos", ["x" => $sender->x, 1=> $sender->y, "z" => $sender->z, "level" => $sender->level->getName()]);
+                        $this->main->getConfig()->setAll($this->main->getConfig()->getAll());
+                        $this->main->getConfig()->save();
+                        $sender->sendMessage(FMT::colorMessage("&aSuccessfully changed death-match position for $game to current position."));
+                    }
+                }
+                    break;
+                default:
+                    $sender->sendMessage(FMT::colorMessage("&eUnknown command. &6Please use: ".$this->getUsage()));
                     break;
             }
         }else{
