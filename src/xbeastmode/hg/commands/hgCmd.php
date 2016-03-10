@@ -106,15 +106,20 @@ class hgCmd extends Command implements PluginIdentifiableCommand{
                             $sender->teleport(HGGame::getApi()->getLobbyPosition($game));
                             HGGame::getApi()->onWait[HGManagement::$data[$sender->getName()]] -= 1;
                             $onWait = HGGame::getApi()->onWait[HGManagement::$data[$sender->getName()]];
-                            $sender->sendMessage(FMT::colorMessage("&aQuiting..."));
                             if($onWait == 0){
+                                $this->main->e->resetMap(HGManagement::$data[$sender->getName()]);
                                 $this->main->e->deleteGameData(HGManagement::$data[$sender->getName()]);
+                                $this->main->e->deletePlayerData($sender);
+                                return;
                             }
                             if($onWait == 1){
+                                $this->main->e->resetMap(HGManagement::$data[$sender->getName()]);
                                 $this->main->e->endGame(HGManagement::$data[$sender->getName()]);
                                 $this->main->e->deleteGameData(HGManagement::$data[$sender->getName()]);
+                                $this->main->e->deletePlayerData($sender);
+                                return;
                             }
-                            $this->main->e->deletePlayerData($sender);
+                            $sender->sendMessage(FMT::colorMessage("&aQuiting..."));
                         }else{
                             $sender->sendMessage(FMT::colorMessage("&cYou are not in a game."));
                         }
