@@ -89,7 +89,7 @@ class Events implements Listener{
     public function onMove(PlayerMoveEvent $e){
         $player = $e->getPlayer();
         if(!isset(HGManagement::$data[$e->getPlayer()->getName()])) return;
-        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])){
+        if(isset(HGManagement::$players[HGManagement::$data[$e->getPlayer()->getName()]][$player->getName()])){
             $from = clone $e->getFrom();
             $to = $e->getTo();
             $from->yaw = $to->yaw;
@@ -127,7 +127,7 @@ class Events implements Listener{
     public function onQuit(PlayerQuitEvent $e){
         $player = $e->getPlayer();
         if(!isset(HGManagement::$data[$player->getName()])) return;
-        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])) {
+        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]][spl_object_hash($player)])) {
             $pqge = new PlayerQuitGameEvent($this->main, $player, HGManagement::$data[$player->getName()]);
             $this->main->getServer()->getPluginManager()->callEvent($pqge);
             if($pqge->isCancelled()) return;
@@ -155,7 +155,7 @@ class Events implements Listener{
         $player = $e->getPlayer();
         $b = $e->getBlock();
         if(!isset(HGManagement::$data[$player->getName()])) return;
-        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])) {
+        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]][spl_object_hash($player)])) {
             HGManagement::$BBlocks[HGManagement::$data[$player->getName()]][] = $b;
         }
     }
@@ -166,8 +166,9 @@ class Events implements Listener{
         $player = $e->getPlayer();
         $b = $e->getBlock();
         if(!isset(HGManagement::$data[$player->getName()])) return;
-        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])) {
+        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]][spl_object_hash($player)])) {
             HGManagement::$PBlocks[HGManagement::$data[$player->getName()]][] = $b;
         }
     }
 }
+
