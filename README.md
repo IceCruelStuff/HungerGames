@@ -20,6 +20,7 @@ Features:
 + customizable status signs
 + customizable messages
 + customizable game settings
++ automatic map reset when game ends
 
 Setup:
 You can set everything in the config. You can change the game however you want it and also configure it with commands.
