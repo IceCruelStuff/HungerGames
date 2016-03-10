@@ -4,6 +4,7 @@ use pocketmine\level\Position;
 use pocketmine\Player;
 use pocketmine\scheduler\PluginTask;
 
+use xbeastmode\hg\HGManagement;
 use xbeastmode\hg\Loader;
 use xbeastmode\hg\api\HGGame;
 use xbeastmode\hg\utils\FMT;
@@ -30,7 +31,7 @@ class GameTask extends PluginTask{
             return;
         }
         foreach(HGGame::getApi()->players[$this->game] as $p){
-            if(HGGame::getApi()->onWait[$this->game] >= 2 and $p instanceof Player) {
+            if(HGGame::getApi()->onWait[$this->game] >= 2 and $p instanceof Player and isset(HGManagement::$games[$this->game])) {
                 $match = $this->main->getConfig()->getAll()["hg_games"][$this->game]["death_match_pos"];
                 $level = $this->main->getServer()->getLevelByName($match["level"]);
                 $p->sendMessage(FMT::colorMessage(str_replace("%game%", $this->game, $this->main->getMessage("death_match_started"))));
