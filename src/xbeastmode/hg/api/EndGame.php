@@ -55,7 +55,7 @@ class EndGame{
                     $this->main->getServer()->broadcastMessage($msg);
                     $ent = $p->getLevel()->getEntities();
                     foreach ($this->main->getConfig()->get("winning_commands") as $cm) {
-                        $this->main->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace("%player%", $p->getName(), $cm));
+                        $this->main->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace(["%player%", "%game%"], [$p->getName(), $game], $cm));
                     }
                     foreach ($ent as $e) {
                         if ($e instanceof Item) {
@@ -63,6 +63,7 @@ class EndGame{
                         }
                     }
                 }
+                break;
             }
         }
     }
