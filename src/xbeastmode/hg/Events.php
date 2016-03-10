@@ -1,5 +1,7 @@
 <?php
 namespace xbeastmode\hg;
+use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\block\SignChangeEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
@@ -85,9 +87,9 @@ class Events implements Listener{
      * @param PlayerMoveEvent $e
      */
     public function onMove(PlayerMoveEvent $e){
+        $player = $e->getPlayer();
         if(!isset(HGManagement::$data[$e->getPlayer()->getName()])) return;
-        $clean = HGManagement::$data[$e->getPlayer()->getName()];
-        if(isset(HGManagement::$players[$clean][$e->getPlayer()->getName()])){
+        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])){
             $from = clone $e->getFrom();
             $to = $e->getTo();
             $from->yaw = $to->yaw;
@@ -102,17 +104,20 @@ class Events implements Listener{
         $player = $e->getEntity();
         if($player instanceof Player) {
             if(!isset(HGManagement::$data[$player->getName()])) return;
-            if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]][spl_object_hash($player)])) {
+            if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])) {
                 HGGame::getApi()->onWait[HGManagement::$data[$player->getName()]] -= 1;
                 $onWait = HGGame::getApi()->onWait[HGManagement::$data[$player->getName()]];
                 if($onWait == 0){
                     $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
+                    $this->main->e->deletePlayerData($player);
+                    return;
                 }
                 if ($onWait == 1) {
                     $this->main->e->endGame(HGManagement::$data[$player->getName()]);
                     $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
+                    $this->main->e->deletePlayerData($player);
+                    return;
                 }
-                $this->main->e->deletePlayerData($player);
             }
         }
     }
@@ -122,7 +127,7 @@ class Events implements Listener{
     public function onQuit(PlayerQuitEvent $e){
         $player = $e->getPlayer();
         if(!isset(HGManagement::$data[$player->getName()])) return;
-        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]][spl_object_hash($player)])) {
+        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])) {
             $pqge = new PlayerQuitGameEvent($this->main, $player, HGManagement::$data[$player->getName()]);
             $this->main->getServer()->getPluginManager()->callEvent($pqge);
             if($pqge->isCancelled()) return;
@@ -130,12 +135,37 @@ class Events implements Listener{
             $onWait = HGGame::getApi()->onWait[HGManagement::$data[$player->getName()]];
             if($onWait == 0){
                 $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
+                $this->main->e->deletePlayerData($player);
+                return;
             }
             if ($onWait == 1) {
                 $this->main->e->endGame(HGManagement::$data[$player->getName()]);
                 $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
+                $this->main->e->deletePlayerData($player);
+                return;
             }
-            $this->main->e->deletePlayerData($player);
+        }
+    }
+    /**
+     * @param BlockBreakEvent $e
+     */
+    public function onBlockBreak(BlockBreakEvent $e){
+        $player = $e->getPlayer();
+        $b = $e->getBlock();
+        if(!isset(HGManagement::$data[$player->getName()])) return;
+        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])) {
+            HGManagement::$BBlocks[HGManagement::$data[$player->getName()]][] = $b;
+        }
+    }
+    /**
+     * @param BlockPlaceEvent $e
+     */
+    public function onBlockPlace(BlockPlaceEvent $e){
+        $player = $e->getPlayer();
+        $b = $e->getBlock();
+        if(!isset(HGManagement::$data[$player->getName()])) return;
+        if(isset(HGGame::getApi()->players[HGManagement::$data[$player->getName()]])) {
+            HGManagement::$PBlocks[HGManagement::$data[$player->getName()]][] = $b;
         }
     }
 }
