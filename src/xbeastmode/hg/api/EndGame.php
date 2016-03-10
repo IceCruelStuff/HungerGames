@@ -1,8 +1,10 @@
 <?php
 namespace xbeastmode\hg\api;
+use pocketmine\block\Block;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\entity\Item;
 use pocketmine\level\Position;
+use pocketmine\math\Vector3;
 use pocketmine\Player;
 use xbeastmode\hg\event\player\PlayerWinGameEvent;
 use xbeastmode\hg\HGManagement;
@@ -66,5 +68,28 @@ class EndGame{
                 break;
             }
         }
+    }
+    /**
+     * @param $game
+     */
+    public function resetMap($game){
+        if(isset(HGManagement::$BBlocks[$game])) {
+            foreach (HGManagement::$BBlocks[$game] as $b) {
+                if ($b instanceof Block) {
+                    $lvl = $b->getLevel();
+                    $lvl->setBlock(new Vector3($b->x, $b->y, $b->z), Block::get($b->getId(), 0));
+                }
+            }
+        }
+        if(isset(HGManagement::$PBlocks[$game])) {
+            foreach (HGManagement::$PBlocks[$game] as $p) {
+                if ($p instanceof Block) {
+                    $lvl = $p->getLevel();
+                    $lvl->setBlock(new Vector3($p->x, $p->y, $p->z), Block::get(0, 0));
+                }
+            }
+        }
+        unset(HGManagement::$BBlocks[$game]);
+        unset(HGManagement::$PBlocks[$game]);
     }
 }
