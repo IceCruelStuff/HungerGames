@@ -134,11 +134,13 @@ class Events implements Listener{
             HGGame::getApi()->onWait[HGManagement::$data[$player->getName()]] -= 1;
             $onWait = HGGame::getApi()->onWait[HGManagement::$data[$player->getName()]];
             if($onWait == 0){
+                $this->main->e->resetMap(HGManagement::$data[$player->getName()]);
                 $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
                 $this->main->e->deletePlayerData($player);
                 return;
             }
             if ($onWait == 1) {
+                $this->main->e->resetMap(HGManagement::$data[$player->getName()]);
                 $this->main->e->endGame(HGManagement::$data[$player->getName()]);
                 $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
                 $this->main->e->deletePlayerData($player);
