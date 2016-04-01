@@ -36,7 +36,7 @@ class Loader extends PluginBase{
         (new HGGame($this));
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
-        $this->msg = new Config($this->getDataFolder()."messages.yml", Config::YAML, $messages);
+        $this->msg = new Config($this->getDataFolder()."messages.yml", Config::YAML, yaml_emit($messages));
         $this->getServer()->getCommandMap()->register("hg", new hgCmd($this));
         $this->getServer()->getPluginManager()->registerEvents(new Events($this), $this);
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new RefreshSignTask($this), 20);

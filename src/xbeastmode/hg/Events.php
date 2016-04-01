@@ -16,6 +16,7 @@ use xbeastmode\hg\api\HGGame;
 use xbeastmode\hg\event\player\PlayerJoinGameEvent;
 use xbeastmode\hg\event\player\PlayerQuitGameEvent;
 use xbeastmode\hg\utils\FMT;
+use xbeastmode\hg\utils\exc;
 class Events implements Listener{
     /** @var Loader */
     private $main;
@@ -34,12 +35,12 @@ class Events implements Listener{
         if (strtolower($line[0]) === strtolower("HG") and $p->isOp()){
             if(!$e->getPlayer()->isOp()) return;
             if(!isset($this->main->getConfig()->getAll()["hg_games"][color::clean($line[1])])){
-                $p->sendMessage(FMT::colorMessage("&cError[CS-1]: &egame does not exist."));
+                $p->sendMessage(exc::_("%c%Error[CS-1]: %e%game does not exist."));
                 return;
             }
             $e->setLine(0, FMT::colorMessage($this->main->getConfig()->getAll()["sign"]["line1"]));
             $e->setLine(1, $line[1]);
-            $p->sendMessage(color::GREEN . "Successfully created sign for game '" . $line[1] . "'!");
+            $p->sendMessage(exc::_("Successfully created sign for game '%0%'!", [$line[1]]));
         }
     }
     /**
@@ -54,13 +55,12 @@ class Events implements Listener{
                 $e->getPlayer()->getInventory()->clearAll();
                 foreach(HGGame::getApi()->players as $g){
                     if(isset($g[spl_object_hash($e->getPlayer())])){
-                        $e->getPlayer()->sendMessage(FMT::colorMessage("&cError[J-1]: &ealready joined game."));
+                        $e->getPlayer()->sendMessage(exc::_("%c%Error[J-1]: %e%Already joined game."));
                         return;
                     }
-                    break;
                 }
                 if(isset(HGGame::getApi()->players[$clean][spl_object_hash($e->getPlayer())])){
-                    $clean->sendMessage(FMT::colorMessage("&cError[J-1]: &ealready joined game."));
+                    $clean->sendMessage(exc::_("%c%Error[J-1]: %e%Already joined game."));
                     return;
                 }
                 if(HGGame::getApi()->tpToOpenSlot($e->getPlayer(), $clean) === false){
@@ -90,11 +90,9 @@ class Events implements Listener{
         $player = $e->getPlayer();
         if(!isset(HGManagement::$data[$e->getPlayer()->getName()])) return;
         if(isset(HGManagement::$players[HGManagement::$data[$e->getPlayer()->getName()]][$player->getName()])){
-            $from = clone $e->getFrom();
-            $to = $e->getTo();
-            $from->yaw = $to->yaw;
-            $from->pitch = $to->pitch;
-            $e->setTo($from);
+            if(!$e->getFrom()->equals($t = $e->getTo())){
+                $e->setCancelled();
+            }
         }
     }
     /**
@@ -109,15 +107,12 @@ class Events implements Listener{
                 $onWait = HGGame::getApi()->onWait[HGManagement::$data[$player->getName()]];
                 if($onWait == 0){
                     $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
-                    $this->main->e->deletePlayerData($player);
-                    return;
                 }
                 if ($onWait == 1) {
                     $this->main->e->endGame(HGManagement::$data[$player->getName()]);
                     $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
-                    $this->main->e->deletePlayerData($player);
-                    return;
                 }
+                $this->main->e->deletePlayerData($player);
             }
         }
     }
@@ -136,16 +131,13 @@ class Events implements Listener{
             if($onWait == 0){
                 $this->main->e->resetMap(HGManagement::$data[$player->getName()]);
                 $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
-                $this->main->e->deletePlayerData($player);
-                return;
             }
             if ($onWait == 1) {
                 $this->main->e->resetMap(HGManagement::$data[$player->getName()]);
                 $this->main->e->endGame(HGManagement::$data[$player->getName()]);
                 $this->main->e->deleteGameData(HGManagement::$data[$player->getName()]);
-                $this->main->e->deletePlayerData($player);
-                return;
             }
+            $this->main->e->deletePlayerData($player);
         }
     }
     /**

@@ -7,6 +7,7 @@ use pocketmine\utils\TextFormat as color;
 use xbeastmode\hg\HGManagement;
 use xbeastmode\hg\Loader;
 use xbeastmode\hg\api\HGGame;
+use xbeastmode\hg\utils\exc;
 use xbeastmode\hg\utils\FMT;
 class RefreshSignTask extends PluginTask{
     /** @var Loader */
@@ -31,21 +32,21 @@ class RefreshSignTask extends PluginTask{
                         $max = HGGame::getApi()->getMaxPlayers($game);
                         if (isset(HGGame::getApi()->onWait[$game]) and isset(HGManagement::$games[$game])) {
                             $l1 = FMT::colorMessage($cf["sign"]["line1"]);
-                            $l2 = FMT::colorMessage(str_replace("{game}", $game, $cf["sign"]["line2"]));
-                            $l3 = FMT::colorMessage(str_replace(["{count}", "{max}"], [HGGame::getApi()->onWait[$game], $max], $cf["sign"]["line3"]));
-                            $l4 = FMT::colorMessage(str_replace("{status}", FMT::colorMessage($cf["status"]["running"]), $cf["sign"]["line4"]));
+                            $l2 = FMT::colorMessage(str_replace(exc::_("%0%", ["{game}"]), $game, $cf["sign"]["line2"]));
+                            $l3 = FMT::colorMessage(str_replace([exc::_("%0%", ["{count}"]), exc::_("%0%", ["{max}"])], [HGGame::getApi()->onWait[$game], $max], $cf["sign"]["line3"]));
+                            $l4 = FMT::colorMessage(str_replace(exc::_("%0%", ["{status}"]), FMT::colorMessage($cf["status"]["running"]), $cf["sign"]["line4"]));
                             $t->setText($l1, $l2, $l3, $l4);
                         } elseif (!isset(HGGame::getApi()->onWait[$game]) and !isset(HGManagement::$games[$game])){
                             $l1 = FMT::colorMessage($cf["sign"]["line1"]);
-                            $l2 = FMT::colorMessage(str_replace("{game}", $game, $cf["sign"]["line2"]));
-                            $l3 = FMT::colorMessage(str_replace(["{count}", "{max}"], [0, $max], $cf["sign"]["line3"]));
-                            $l4 = FMT::colorMessage(str_replace("{status}", FMT::colorMessage($cf["status"]["waiting"]), $cf["sign"]["line4"]));
+                            $l2 = FMT::colorMessage(str_replace(exc::_("%0%", ["{game}"]), $game, $cf["sign"]["line2"]));
+                            $l3 = FMT::colorMessage(str_replace([exc::_("%0%", ["{count}"]), exc::_("%0%", ["{max}"])], [0, $max], $cf["sign"]["line3"]));
+                            $l4 = FMT::colorMessage(str_replace(exc::_("%0%", ["{status}"]), FMT::colorMessage($cf["status"]["waiting"]), $cf["sign"]["line4"]));
                             $t->setText($l1, $l2, $l3, $l4);
                         }elseif(isset(HGGame::getApi()->onWait[$game]) and !isset(HGManagement::$games[$game])){
                             $l1 = FMT::colorMessage($cf["sign"]["line1"]);
-                            $l2 = FMT::colorMessage(str_replace("{game}", $game, $cf["sign"]["line2"]));
-                            $l3 = FMT::colorMessage(str_replace(["{count}", "{max}"], [HGGame::getApi()->onWait[$game], $max], $cf["sign"]["line3"]));
-                            $l4 = FMT::colorMessage(str_replace("{status}", FMT::colorMessage($cf["status"]["waiting"]), $cf["sign"]["line4"]));
+                            $l2 = FMT::colorMessage(str_replace(exc::_("%0%", ["{game}"]), $game, $cf["sign"]["line2"]));
+                            $l3 = FMT::colorMessage(str_replace([exc::_("%0%", ["{count}"]), exc::_("%0%", ["{max}"])], [HGGame::getApi()->onWait[$game], $max], $cf["sign"]["line3"]));
+                            $l4 = FMT::colorMessage(str_replace(exc::_("%0%", ["{status}"]), FMT::colorMessage($cf["status"]["waiting"]), $cf["sign"]["line4"]));
                             $t->setText($l1, $l2, $l3, $l4);
                         }
                     }

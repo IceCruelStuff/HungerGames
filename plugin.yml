@@ -3,7 +3,7 @@ api: 2.0.0
 load: STARTUP
 name: HungerGames
 description: "the hunger games"
-version: build#07
+version: build#10
 author: xbeastmode
 
 permissions:

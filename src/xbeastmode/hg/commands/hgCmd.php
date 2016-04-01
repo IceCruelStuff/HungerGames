@@ -109,16 +109,13 @@ class hgCmd extends Command implements PluginIdentifiableCommand{
                             if($onWait == 0){
                                 $this->main->e->resetMap(HGManagement::$data[$sender->getName()]);
                                 $this->main->e->deleteGameData(HGManagement::$data[$sender->getName()]);
-                                $this->main->e->deletePlayerData($sender);
-                                return;
                             }
                             if($onWait == 1){
                                 $this->main->e->resetMap(HGManagement::$data[$sender->getName()]);
                                 $this->main->e->endGame(HGManagement::$data[$sender->getName()]);
                                 $this->main->e->deleteGameData(HGManagement::$data[$sender->getName()]);
-                                $this->main->e->deletePlayerData($sender);
-                                return;
                             }
+                            $this->main->e->deletePlayerData($sender);
                             $sender->sendMessage(FMT::colorMessage("&aQuiting..."));
                         }else{
                             $sender->sendMessage(FMT::colorMessage("&cYou are not in a game."));
