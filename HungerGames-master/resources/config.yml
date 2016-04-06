@@ -1,0 +1,40 @@
+---
+#HG config by xbeastmode
+sign:
+   line1: "&eSG"
+   line2: "&b{game}"
+   line3: "&c{count}&f/&a{max}"
+   line4: "{status}"
+status:
+   waiting: "&eWaiting"
+   running: "&aRunning"
+#commands ran when player wins
+winning_commands:
+   - say [HungerGames] %player% won the match %game%!
+hg_games:
+  test:
+    min_players: 1
+    max_players: 6
+    game_time: 300
+    wait_time: 10
+    level: world
+    lobby_pos:
+      x: 4
+      y: 127
+      z: 93
+      level: world
+    death_match_pos:
+      x: 13
+      y: 119
+      z: 61
+      level: world
+    slots:
+      slot1:
+        x: 130
+        y: 5
+        z: 61
+      slot2:
+        x: 108
+        y: 5
+        z: 61
+...

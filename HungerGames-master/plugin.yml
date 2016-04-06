@@ -1,0 +1,21 @@
+main: xbeastmode\hg\Loader
+api: 2.0.0
+load: STARTUP
+name: HungerGames
+description: "the hunger games"
+version: build#11
+author: xbeastmode
+
+permissions:
+  hg.vip:
+    default: op
+    description: "allows to get the vip kit"
+  hg.mvp:
+    default: op
+    description: "Allow to get the mvp kit"
+  hg.admin:
+    default: op
+    description: "Allows to get admin rank"
+  hg.builder:
+      default: op
+      description: "Allows to get builder rank"
