@@ -1,0 +1,25 @@
+name: HungerGames
+version: Build#11
+main: hungergames\Loader
+author: xBeastMode
+description: "The ultimate starvation game for minecraft pocket!"
+api: [2.0.0, 1.13.0]
+load: STARTUP
+
+permissions:
+  hg.command.add:
+    default: op
+  hg.command.del:
+      default: op
+  hg.command.min:
+      default: op
+  hg.command.max:
+      default: op
+  hg.command.level:
+      default: op
+  hg.command.ws:
+      default: op
+  hg.command.gs:
+      default: op
+  hg.sign.create:
+      default: op
