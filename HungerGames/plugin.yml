@@ -23,3 +23,7 @@ permissions:
       default: op
   hg.sign.create:
       default: op
+  hg.command.slot.add:
+      default: op
+  hg.command.slot.del:
+      default: op
