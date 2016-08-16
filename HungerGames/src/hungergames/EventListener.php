@@ -122,4 +122,12 @@ class EventListener implements Listener{
             }
         }
     }
+    /**
+     * @param BlockBreakEvent $e
+     */
+    public function onBlockBreak(BlockBreakEvent $e){
+        if($this->HGApi->getStorage()->isPlayerWaiting($e->getPlayer())){
+            $e->setCancelled();
+        }
+    }
 }
