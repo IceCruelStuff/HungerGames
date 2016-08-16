@@ -99,7 +99,7 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                     $sender->sendMessage(Msg::color("&cGame does not exist!"));
                     return;
                 }
-                if(!is_int($number)){
+                if(!is_numeric($number)){
                     $sender->sendMessage(Msg::color("&cInvalid int/number value."));
                     return;
                 }
@@ -210,7 +210,7 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                 $sender->sendMessage(Msg::color("&aAdded slot $slot for game $game."));
             break;
             case "delslot":
-                if(!$sender->hasPermission("hg.command.slot.add")) return;
+                if(!$sender->hasPermission("hg.command.slot.del")) return;
                 if(empty($args[1]) or empty($args[2])){
                     $sender->sendMessage(Msg::color("&a- /hg delslot <game> <name>"));
                     return;
