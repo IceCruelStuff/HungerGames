@@ -15,7 +15,7 @@ When you join a game the plugin will automatically backup the map.
 - Other features: Scripts have been added. I did not make any scripts for it yet, maybe in the future.
 
 #Future updates? 
-I am planning to adding many more features to this plugin, if you wish me to add one, please say it in the thread, thank you.
+I am planning to adding many more features to this plugin, if you wish me to add one, please say it in issues, thank you.
 
 - For Devs:
 
