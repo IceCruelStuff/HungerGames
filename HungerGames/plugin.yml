@@ -1,5 +1,5 @@
 name: HungerGames
-version: Build#12
+version: Build#14
 main: hungergames\Loader
 author: xBeastMode
 description: "The ultimate starvation game for minecraft pocket!"
@@ -27,3 +27,7 @@ permissions:
       default: op
   hg.command.slot.del:
       default: op
+  hg.command.lobby:
+        default: op
+  hg.command.dm:
+        default: op

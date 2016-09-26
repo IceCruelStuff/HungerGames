@@ -101,15 +101,13 @@ class GameManager{
      * @param $message
      */
     public function sendGameMessage($message){
-        foreach($this->HGApi->getStorage()->getPlayersInGame($this->getGame()) as $pl){
-            if(!$pl instanceof Player) continue;
-            $pl->sendMessage($message);
-            break;
+        $pig = $this->HGApi->getStorage()->getPlayersInGame($this->getGame());
+        for($i = 0; $i < count($pig); ++$i){
+            $pig[$i]->sendMessage($message);
         }
-        foreach($this->HGApi->getStorage()->getPlayersInWaitingGame($this->getGame()) as $pl){
-            if(!$pl instanceof Player) continue;
-            $pl->sendMessage($message);
-            break;
+        $piWg = $this->HGApi->getStorage()->getPlayersInWaitingGame($this->getGame());
+        for($i = 0; $i < count($piWg); ++$i){
+            $piWg[$i]->sendMessage($message);
         }
     }
 
@@ -119,15 +117,13 @@ class GameManager{
      * @param $message
      */
     public function sendGameTip($message){
-        foreach($this->HGApi->getStorage()->getPlayersInGame($this->getGame()) as $pl){
-            if(!$pl instanceof Player) continue;
-            $pl->sendTip($message);
-            break;
+        $pig = $this->HGApi->getStorage()->getPlayersInGame($this->getGame());
+        for($i = 0; $i < count($pig); ++$i){
+            $pig[$i]->sendTip($message);
         }
-        foreach($this->HGApi->getStorage()->getPlayersInWaitingGame($this->getGame()) as $pl){
-            if(!$pl instanceof Player) continue;
-            $pl->sendTip($message);
-            break;
+        $piWg = $this->HGApi->getStorage()->getPlayersInWaitingGame($this->getGame());
+        for($i = 0; $i < count($piWg); ++$i){
+            $piWg[$i]->sendTip($message);
         }
     }
 
@@ -137,15 +133,13 @@ class GameManager{
      * @param $message
      */
     public function sendGamePopup($message){
-        foreach($this->HGApi->getStorage()->getPlayersInGame($this->getGame()) as $pl){
-            if(!$pl instanceof Player) continue;
-            $pl->sendPopup($message);
-            break;
+        $pig = $this->HGApi->getStorage()->getPlayersInGame($this->getGame());
+        for($i = 0; $i < count($pig); ++$i){
+            $pig[$i]->sendPopup($message);
         }
-        foreach($this->HGApi->getStorage()->getPlayersInWaitingGame($this->getGame()) as $pl){
-            if(!$pl instanceof Player) continue;
-            $pl->sendPopup($message);
-            break;
+        $piWg = $this->HGApi->getStorage()->getPlayersInWaitingGame($this->getGame());
+        for($i = 0; $i < count($piWg); ++$i){
+            $piWg[$i]->sendPopup($message);
         }
     }
 

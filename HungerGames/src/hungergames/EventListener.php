@@ -2,6 +2,7 @@
 namespace hungergames;
 use hungergames\lib\utils\Msg;
 use hungergames\tasks\WaitingForPlayersTask;
+use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\SignChangeEvent;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\Listener;
@@ -66,7 +67,7 @@ class EventListener implements Listener{
                 if($game === null) return;
                 if($this->HGApi->getStorage()->isPlayerSet($p) or $this->HGApi->getStorage()->isPlayerWaiting($p)) return;
                 $this->HGApi->getGlobalManager()->getGameManager($game)->addWaitingPlayer($p, true);
-                if($this->HGApi->getGlobalManager()->getGameManager($game)->isWaiting === true) return;
+                if($this->HGApi->getGlobalManager()->getGameManager($game)->isWaiting) return;//checks if task started
                 $t = new WaitingForPlayersTask($this->HGApi, $game);
                 $h = $this->HGApi->getServer()->getScheduler()->scheduleRepeatingTask($t, 20);
                 $t->setHandler($h);
@@ -111,10 +112,10 @@ class EventListener implements Listener{
         $p = $e->getEntity();
         if($this->HGApi->getStorage()->isPlayerSet($p)){
             $game = $this->HGApi->getStorage()->getPlayerGame($p);
-            $count = $this->HGApi->getStorage()->getPlayersInGameCount($game);
             if($game !== null){
                 $this->HGApi->getGlobalManager()->getGameManager($game)->removePlayer($p);
             }
+            $count = $this->HGApi->getStorage()->getPlayersInGameCount($game);
             if($count > 1){
                 $msg = Msg::getHGMessage("hg.message.death");
                 $msg = str_replace(["%player%", "%game%", "%left%"], [$p->getName(), $game->getName(), $count], $msg);

@@ -45,11 +45,14 @@ class HungerGames extends Game{
         $this->max = exc::stringToInteger($game->get("max_players"));
         $this->gameSeconds = floatval($game->get("game_seconds"));
         $this->waitingSeconds = floatval($game->get("waiting_seconds"));
+        Loader::getInstance()->getServer()->loadLevel($game->get("game_level"));
         $this->gameLevel = Loader::getInstance()->getServer()->getLevelByName($game->get("game_level"));
         $lobby_pos = $game->get("lobby_pos");
+        Loader::getInstance()->getServer()->loadLevel($lobby_pos["level"]);
         $lobby_level = Loader::getInstance()->getServer()->getLevelByName($lobby_pos["level"]);
         $this->lobbyPos = new Position(floatval($lobby_pos["x"]), floatval($lobby_pos["y"]), floatval($lobby_pos["z"]), $lobby_level);
         $dm_pos = $game->get("death_match_pos");
+        Loader::getInstance()->getServer()->loadLevel($dm_pos["level"]);
         $dm_level = Loader::getInstance()->getServer()->getLevelByName($dm_pos["level"]);
         $this->deathMatchPos = new Position(floatval($dm_pos["x"]), floatval($dm_pos["y"]), floatval($dm_pos["z"]), $dm_level);
         $this->slots = $game->get("slots");

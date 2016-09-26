@@ -144,6 +144,7 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                 if(!$loaded){
                     if($check){
                         $game1 = $this->HGApi->getGlobalManager()->getGameEditorByName($game);
+                        var_dump($game1);
                         $game1->setGameLevel($level);
                         $sender->sendMessage(Msg::color("&aSet game level of $game to $level."));
                         return;
@@ -242,6 +243,34 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                 }else{
                     $p->sendMessage(Msg::color("&cYou are not playing on any game."));
                 }
+            break;
+            case "lobby":
+                if(!$sender->hasPermission("hg.command.lobby")) return;
+                if(empty($args[1])){
+                    $sender->sendMessage(Msg::color("&a- /hg lobby <game>"));
+                    return;
+                }
+                $game = $args[1];
+                if(!$this->HGApi->gameResourceExists($game) or !$this->HGApi->gameArenaExists($game)){
+                    $sender->sendMessage(Msg::color("&cGame does not exist!"));
+                    return;
+                }
+                $this->HGApi->getGlobalManager()->getGameEditorByName($game)->setLobbyPosition($sender);
+                $sender->sendMessage(Msg::color("&aSuccessfully set lobby position where you are standing!"));
+            break;
+            case "dm":
+                if(!$sender->hasPermission("hg.command.dm")) return;
+                if(empty($args[1])){
+                    $sender->sendMessage(Msg::color("&a- /hg lobby <game>"));
+                    return;
+                }
+                $game = $args[1];
+                if(!$this->HGApi->gameResourceExists($game) or !$this->HGApi->gameArenaExists($game)){
+                    $sender->sendMessage(Msg::color("&cGame does not exist!"));
+                    return;
+                }
+                $this->HGApi->getGlobalManager()->getGameEditorByName($game)->setDeathMatchPosition($sender);
+                $sender->sendMessage(Msg::color("&aSuccessfully set death match position where you are standing!"));
             break;
         }
     }

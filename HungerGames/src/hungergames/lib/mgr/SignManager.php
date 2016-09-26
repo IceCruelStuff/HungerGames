@@ -32,7 +32,7 @@ class SignManager{
      */
     public function setRefreshedSignsCount($amount){
         if(!is_int($amount)) return;
-        $this->refreshedSignsCount = $amount;
+        $this->refreshedSigns = $amount;
     }
     /**
      * Gets refreshed signs tiles

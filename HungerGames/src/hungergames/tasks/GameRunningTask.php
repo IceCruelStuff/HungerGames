@@ -40,7 +40,7 @@ class GameRunningTask extends PluginTask{
             $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
             return;
         }
-        if($count <= 1){
+        if($count == 1){
             $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
             $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("open");
             foreach($this->HGApi->getStorage()->getPlayersInGame($this->game) as $p){
