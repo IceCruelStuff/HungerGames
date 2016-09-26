@@ -144,7 +144,6 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                 if(!$loaded){
                     if($check){
                         $game1 = $this->HGApi->getGlobalManager()->getGameEditorByName($game);
-                        var_dump($game1);
                         $game1->setGameLevel($level);
                         $sender->sendMessage(Msg::color("&aSet game level of $game to $level."));
                         return;
