@@ -232,13 +232,17 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                 $p = $sender;
                 if($this->HGApi->getStorage()->isPlayerSet($p)){
                     $game = $this->HGApi->getStorage()->getPlayerGame($p);
-                    if($game !== null) $this->HGApi->getGlobalManager()->getGameManager($game)->removePlayer($p, true);
-                    $p->sendMessage(Msg::color("&aExiting game..."));
+                    if($game !== null) {
+                        $this->HGApi->getGlobalManager()->getGameManager($game)->removePlayer($p, true);
+                        $p->sendMessage(Msg::color("&aExiting game..."));
+                    }
                 }
                 elseif($this->HGApi->getStorage()->isPlayerWaiting($p)){
                     $game = $this->HGApi->getStorage()->getWaitingPlayerGame($p);
-                    if($game !== null) $this->HGApi->getGlobalManager()->getGameManager($game)->removeWaitingPlayer($p, true);
-                    $p->sendMessage(Msg::color("&aExiting game..."));
+                    if($game !== null) {
+                        $this->HGApi->getGlobalManager()->getGameManager($game)->removeWaitingPlayer($p, true);
+                        $p->sendMessage(Msg::color("&aExiting game..."));
+                    }
                 }else{
                     $p->sendMessage(Msg::color("&cYou are not playing on any game."));
                 }
