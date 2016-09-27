@@ -49,10 +49,10 @@ class GameRunningTask extends PluginTask{
                     if (!$script->isEnabled()) continue;
                     $script->onPlayerWinGame($p, $this->game);
                 }
+                $msg = Msg::getHGMessage("hg.message.win");
+                $msg = str_replace(["%game%", "%player%"], [$this->game->getName(), $p->getName()], $msg);
+                $this->HGApi->getServer()->broadcastMessage(Msg::color($msg));
             }
-            $msg = Msg::getHGMessage("hg.message.win");
-            $msg = str_replace(["%game%", "%player%"], [$this->game->getName(), $this->HGApi->getStorage()->getPlayersInGame($this->game)[0]->getName()], $msg);
-            $this->HGApi->getServer()->broadcastMessage(Msg::color($msg));
             $this->HGApi->getStorage()->removePlayersInGame($this->game);
             $lvl_path = Loader::getInstance()->getServer()->getDataPath()."worlds/";
             $this->HGApi->getMapBackup()->reset(Loader::getInstance()->dataPath()."mapBackups/".$this->game->gameLevel->getFolderName(), $lvl_path.$this->game->gameLevel->getFolderName());
@@ -77,5 +77,9 @@ class GameRunningTask extends PluginTask{
             $task->setHandler($h);
             return;
         }
+        $msg = Msg::getHGMessage("hg.message.dmTime");
+        $msg = str_replace(["%game%", "%seconds%"], [$this->game->getName(), $this->seconds], $msg);
+        $msg = Msg::color($msg);
+        $this->HGApi->getGlobalManager()->getGameManager($this->game)->sendGamePopup($msg);
     }
 }

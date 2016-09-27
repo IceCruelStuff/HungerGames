@@ -37,6 +37,7 @@ class Msg{
         Msg::$messages["hg.message.quit"] = self::getDefaultHGMessages()["quit"];
         Msg::$messages["hg.message.death"] = self::getDefaultHGMessages()["death"];
         Msg::$messages["hg.message.win"] =  self::getDefaultHGMessages()["win"];
+        Msg::$messages["hg.message.dmTime"] = self::getDefaultHGMessages()["death_match_timer"];
         Msg::$messages["hg.message.awaiting"] = self::getDefaultHGMessages()["awaiting_game_tip"];
         Msg::$messages["hg.message.start"] = self::getDefaultHGMessages()["game_started"];
         Msg::$messages["hg.message.deathMatch"] = self::getDefaultHGMessages()["death_match_started"];
@@ -120,6 +121,7 @@ class Msg{
                 "quit" => "&e%game% > %player% quit.",
                 "death" => "&c%game% > %player% died. Left players: %left%",
                 "win" => "&a&b%game% > %player% won match!",
+                "death_match_timer" => "&a%game% => %seconds% left till death match.",
                 "awaiting_game_tip" => "&a%game% > &eWaiting for players...",
                 "game_started" => "&a%game% > &aTournament started! Good luck!",
                 "death_match_started" => "&a%game% > &aDeath match started! Good luck!",
