@@ -39,7 +39,7 @@ class GameManager{
      */
     public function refresh(){
         $this->status = "open";
-        $this->slotN = 0;
+        $this->slotN = $this->getOpenSlots();
         $this->lastSlotN = null;
         $this->isWaiting = false;
     }
