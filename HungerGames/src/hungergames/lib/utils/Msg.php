@@ -33,18 +33,18 @@ class Msg{
      * Initiates all messages
      */
     public static function initHGMessages(){
-        Msg::$messages["hg.message.join"] = self::getDefaultHGMessages()["join"];
-        Msg::$messages["hg.message.quit"] = self::getDefaultHGMessages()["quit"];
-        Msg::$messages["hg.message.death"] = self::getDefaultHGMessages()["death"];
-        Msg::$messages["hg.message.win"] =  self::getDefaultHGMessages()["win"];
-        Msg::$messages["hg.message.dmTime"] = self::getDefaultHGMessages()["death_match_timer"];
-        Msg::$messages["hg.message.awaiting"] = self::getDefaultHGMessages()["awaiting_game_tip"];
-        Msg::$messages["hg.message.start"] = self::getDefaultHGMessages()["game_started"];
-        Msg::$messages["hg.message.deathMatch"] = self::getDefaultHGMessages()["death_match_started"];
-        Msg::$messages["hg.message.waiting"] = self::getDefaultHGMessages()["waiting_tip"];
-        Msg::$messages["hg.message.full"] = self::getDefaultHGMessages()["match_full"];
-        Msg::$messages["hg.message.running"] = self::getDefaultHGMessages()["already_running"];
-        Msg::$messages["hg.message.refill"] = self::getDefaultHGMessages()["refill_chests"];
+        Msg::$messages["hg.message.join"] = self::getConfigMessages()["join"];
+        Msg::$messages["hg.message.quit"] = self::getConfigMessages()["quit"];
+        Msg::$messages["hg.message.death"] = self::getConfigMessages()["death"];
+        Msg::$messages["hg.message.win"] =  self::getConfigMessages()["win"];
+        Msg::$messages["hg.message.dmTime"] = self::getConfigMessages()["death_match_timer"];
+        Msg::$messages["hg.message.awaiting"] = self::getConfigMessages()["awaiting_game_tip"];
+        Msg::$messages["hg.message.start"] = self::getConfigMessages()["game_started"];
+        Msg::$messages["hg.message.deathMatch"] = self::getConfigMessages()["death_match_started"];
+        Msg::$messages["hg.message.waiting"] = self::getConfigMessages()["waiting_tip"];
+        Msg::$messages["hg.message.full"] = self::getConfigMessages()["match_full"];
+        Msg::$messages["hg.message.running"] = self::getConfigMessages()["already_running"];
+        Msg::$messages["hg.message.refill"] = self::getConfigMessages()["refill_chests"];
         Msg::$init = true;
     }
     /**
@@ -108,6 +108,14 @@ class Msg{
         $message = str_replace("&o", "", $message);
         $message = str_replace("&r", "", $message);
         return $message;
+    }
+    /**
+    * Returns customized config messages
+    *
+    * @return \string[]
+    */
+    public static function getConfigMessages(){
+        return Loader::getInstance()->getMessages();
     }
     /**
      * Hg default messages
