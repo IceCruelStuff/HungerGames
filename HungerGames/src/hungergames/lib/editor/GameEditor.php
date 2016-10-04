@@ -118,9 +118,9 @@ class GameEditor{
     /**
      * Sets sign lines
      *
-     * @param $params
+     * @param array $params
      */
-    public function setSignLines($params){
+    public function setSignLines(array $params){
         for($i = 0; $i < 4; ++$i) {
             $j = $i + 1;
             $this->push("sign_line_{$j}", $params[$i]);
