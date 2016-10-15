@@ -42,6 +42,8 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                 $sender->sendMessage(Msg::color("&a- /hg level <game> <level name>"));
                 $sender->sendMessage(Msg::color("&a- /hg ws <game> <seconds>"));
                 $sender->sendMessage(Msg::color("&a- /hg gs <game> <seconds>"));
+                $sender->sendMessage(Msg::color("&a- /hg lobby <game>"));
+                $sender->sendMessage(Msg::color("&a- /hg dm <game>"));
                 $sender->sendMessage(Msg::color("&a- /hg addslot <game> <name>"));
                 $sender->sendMessage(Msg::color("&a- /hg delslot <game> <name>"));
                 $sender->sendMessage(Msg::color("&a- /hg leave"));
