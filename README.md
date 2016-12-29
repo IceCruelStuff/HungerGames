@@ -1,5 +1,10 @@
 # HungerGames
 =============
+
+BIG NOTE
+---------
+COMPILING IT WITH pmt.mcpe.me WILL MAKE THE PLUGIN CORRUPTED. DOWNLOAD FROM _RELEASES_ INSTEAD: https://github.com/InfinityGamers/HungerGames-UPDATED/releases/tag/Build%2316
+
 A HungerGames plugin for PocketMine-MP developed by xBeastMode
 --------------------------------------------------------------
 
