@@ -13,6 +13,8 @@ Yes, of course. You can choose between SkyWars or HungerGames!
 How? You can make a game with the following command: /hg add <game name>
 Then, run the command "/reload", and check the config inside the folder "arenas", inside the plugin folder. Configure it to your needs, there you will find the "is_sky_wars" option, set it to true to make it skywars ;)
 
+Watch my YouTube video showing bow to setup a game arena:
+[![MCPE - HG plugin tutorial updated](http://img.youtube.com/vi/0Jtt696xak4/0.jpg)](http://www.youtube.com/watch?v=0Jtt696xak4
 <h3> 
 When you join a game the plugin will automatically backup the map.
 </h3>
