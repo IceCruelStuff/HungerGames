@@ -1,5 +1,6 @@
 <?php
 namespace hungergames\lib\utils;
+use hungergames\Loader;
 class Msg{
     /** @var array */
     private static $messages = [];
