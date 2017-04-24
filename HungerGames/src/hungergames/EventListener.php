@@ -99,7 +99,7 @@ class EventListener implements Listener{
         $p = $e->getPlayer();
         if($this->HGApi->getStorage()->isPlayerSet($p)){
             $game = $this->HGApi->getStorage()->getPlayerGame($p);
-            if($game !== null) $this->HGApi->getGlobalManager()->getGameManager($game)->removePlayer($p, true);
+            if($game !== null) $this->HGApi->getGlobalManager()->getGameManager($game)->removePlayerWithoutTeleport($p, true);
         }
         elseif($this->HGApi->getStorage()->isPlayerWaiting($p)){
             $game = $this->HGApi->getStorage()->getWaitingPlayerGame($p);

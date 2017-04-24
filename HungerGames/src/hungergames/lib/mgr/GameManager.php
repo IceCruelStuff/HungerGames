@@ -187,6 +187,23 @@ class GameManager{
             $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
         }
     }
+    
+        /**
+     * Removes player from game without teleporting
+     *
+     * @param Player $p
+     * @param bool $message
+     */
+    public function removePlayerWithoutTeleport(Player $p, $message = false){
+        $this->HGApi->getStorage()->removePlayer($p);
+        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
+            if(!$script->isEnabled()) continue;
+            $script->onPlayerQuitGame($p, $this->getGame());
+        }
+        if($message){
+            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
+        }
+    }
     /**
      * Adds player into game
      *
