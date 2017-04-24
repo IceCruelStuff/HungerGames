@@ -21,6 +21,12 @@ When you join a game the plugin will automatically backup the map.
 
 - Other features: Scripts have been added. I did not make any scripts for it yet, maybe in the future.
 
+#How to setup a join sign?
+
+on the first line set the line to "hg" and on the second line set the line to the name of your game.
+Next, reload your server with the "/reload" command.
+The sign should now refresh automatically and you'll be able to join.
+
 #Future updates? 
 I am planning to adding many more features to this plugin, if you wish me to add one, please say it in issues, thank you.
 
@@ -179,7 +185,7 @@ class ExampleScript extends \hungergames\api\scripts\HGAPIScript{
      */
     public function onPlayerWinGame(Player $p, HungerGames $game){
     //your code here
-    }
+    }information
 ```
 </details>
 
@@ -193,7 +199,7 @@ Commands:
   * OP perm: hg.command.add
     
 * /hg del <game> : deletes a game
-  * OP perm: hg.command.del
+  * OP perm: hg.command.del
   
 * /hg min <game> <number> : changes the number of minimum players required to start a game
   * OP perm: hg.command.min
@@ -203,12 +209,12 @@ Commands:
   * OP perm: hg.command.max
 
 * /hg level <game> <level name> : changes level of game where players are gonna go
-  * OP perm: hg.command.level
+  * OP perm: hg.command.level
 
-* /hg ws <game> <number> : sets amount of seconds to wait before game starts  
+* /hg ws <game> <number> : sets amount of seconds to wait before game starts  
   * OP perm: hg.command.ws
 
-* /hg gs <game> <number> : sets amount of second to wait before death match starts
+* /hg gs <game> <number> : sets amount of second to pass before death match starts
   * OP perm: hg.command.gs
 
 * /hg addslot <game> <name> : adds new slot to game (positions sets where you are standing)
