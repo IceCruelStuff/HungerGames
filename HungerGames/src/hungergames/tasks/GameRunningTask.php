@@ -45,6 +45,7 @@ class GameRunningTask extends PluginTask{
             $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("open");
             foreach($this->HGApi->getStorage()->getPlayersInGame($this->game) as $p){
                 $p->teleport($this->game->getLobbyPosition());
+                $p->getInventory()->clearAll();
                 foreach ($this->HGApi->getScriptManager()->getScripts() as $script) {
                     if (!$script->isEnabled()) continue;
                     $script->onPlayerWinGame($p, $this->game);
