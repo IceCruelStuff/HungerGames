@@ -3,6 +3,6 @@ branches:
 - xBeastMode-patch-1
 projects:
   HungerGames:
-    path: ./
+    path: /
     icon: icon.png
 ...
