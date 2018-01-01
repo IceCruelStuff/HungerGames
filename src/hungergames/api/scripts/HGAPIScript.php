@@ -101,7 +101,7 @@ abstract class HGAPIScript{
      * @param $message
      */
     public function sendConsoleMessage($message){
-        $this->logger->notice($message, "HungerGames Script: ".$this->getName());
+        $this->logger->notice("[HungerGames Script: ".$this->getName() . "]: " . $message);
     }
     /**
      * Called when script is loaded

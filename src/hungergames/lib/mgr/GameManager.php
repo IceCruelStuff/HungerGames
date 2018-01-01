@@ -353,7 +353,7 @@ class GameManager{
                 $this->HGApi->getStorage()->removeWaitingPlayer($p);
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){
                         if(!$script->isEnabled()) continue;
-                        $script->onPlayerJoinGame($p, $this->getGame());
+                        $script->onPlayerQuitGame($p, $this->getGame());
                 }
                 if($message){
                         $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
