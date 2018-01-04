@@ -37,18 +37,20 @@ class Msg{
          * Initiates all messages
          */
         public static function initHGMessages(){
-                Msg::$messages["hg.message.join"] = self::getConfigMessages()["join"];
-                Msg::$messages["hg.message.quit"] = self::getConfigMessages()["quit"];
-                Msg::$messages["hg.message.death"] = self::getConfigMessages()["death"];
-                Msg::$messages["hg.message.win"] = self::getConfigMessages()["win"];
-                Msg::$messages["hg.message.dmTime"] = self::getConfigMessages()["death_match_timer"];
-                Msg::$messages["hg.message.awaiting"] = self::getConfigMessages()["awaiting_game_tip"];
-                Msg::$messages["hg.message.start"] = self::getConfigMessages()["game_started"];
-                Msg::$messages["hg.message.deathMatch"] = self::getConfigMessages()["death_match_started"];
-                Msg::$messages["hg.message.waiting"] = self::getConfigMessages()["waiting_tip"];
-                Msg::$messages["hg.message.full"] = self::getConfigMessages()["match_full"];
-                Msg::$messages["hg.message.running"] = self::getConfigMessages()["already_running"];
-                Msg::$messages["hg.message.refill"] = self::getConfigMessages()["refill_chests"];
+                Msg::$messages["hg.message.join"] = self::getConfigMessage('join', self::getDefaultMessage('join'));
+                Msg::$messages["hg.message.quit"] = self::getConfigMessage('quit', self::getDefaultMessage('quit'));
+                Msg::$messages["hg.message.death"] = self::getConfigMessage('death', self::getDefaultMessage('death'));
+                Msg::$messages["hg.message.win"] = self::getConfigMessage('win', self::getDefaultMessage('win'));
+                Msg::$messages["hg.message.dmTime"] = self::getConfigMessage('death_match_timer', self::getDefaultMessage('death_match_timer'));
+                Msg::$messages["hg.message.awaiting"] = self::getConfigMessage('awaiting_game_tip', self::getDefaultMessage('awaiting_game_tip'));
+                Msg::$messages["hg.message.start"] = self::getConfigMessage('game_started', self::getDefaultMessage('game_started'));
+                Msg::$messages["hg.message.deathMatch"] = self::getConfigMessage('death_match_started', self::getDefaultMessage('death_match_started'));
+                Msg::$messages["hg.message.waiting"] = self::getConfigMessage('waiting_tip', self::getDefaultMessage('waiting_tip'));
+                Msg::$messages["hg.message.full"] = self::getConfigMessage('match_full', self::getDefaultMessage('match_full'));
+                Msg::$messages["hg.message.running"] = self::getConfigMessage('already_running', self::getDefaultMessage('already_running'));
+                Msg::$messages["hg.message.refill"] = self::getConfigMessage('refill_chests', self::getDefaultMessage('refill_chests'));
+                Msg::$messages["hg.messages.noWin"] = self::getConfigMessage('no_win', self::getDefaultMessage('no_win'));
+                Msg::$messages["hg.messages.swTimeLeft"] = self::getConfigMessage('skywars_time_left', self::getDefaultMessage('skywars_time_left'));
                 Msg::$init = true;
         }
 
@@ -119,10 +121,14 @@ class Msg{
         /**
          * Returns customized config messages
          *
+         * @param string $key
+         * @param string $default
+         *
          * @return \string[]
          */
-        public static function getConfigMessages(){
-                return Loader::getInstance()->getMessages();
+        public static function getConfigMessage(string $key, string $default){
+                Loader::getInstance()->pushMessage($key, $default);
+                return Loader::getInstance()->getMessages()[$key];
         }
 
         /**
@@ -137,6 +143,7 @@ class Msg{
                         "quit" => "&e%game% > %player% quit.",
                         "death" => "&c%game% > %player% died. Left players: %left%",
                         "win" => "&a&b%game% > %player% won match!",
+                        "no_win" => "&a&b%game% > &aGame is now open!",
                         "death_match_timer" => "&a%game% => %seconds% left till death match.",
                         "awaiting_game_tip" => "&a%game% > &eWaiting for players...",
                         "game_started" => "&a%game% > &aTournament started! Good luck!",
@@ -144,8 +151,18 @@ class Msg{
                         "waiting_tip" => "&6 > &eStarting game in &b%seconds% &eseconds! &6 <",
                         "match_full" => "&cGame full. Please find a different game !",
                         "already_running" => "&cGame running. Please find a different game !",
-                        "refill_chests" => "&a%game% > &eAll chests were refilled!"
+                        "refill_chests" => "&a%game% > &eAll chests were refilled!",
+                        "skywars_time_left" => "&a%game% > &egame ends in &b%seconds% &eseconds."
                     ];
                 return $cnt;
+        }
+
+        /**
+         * @param string $key
+         *
+         * @return string|null
+         */
+        public static function getDefaultMessage(string $key): ?string {
+                return self::getDefaultHGMessages()[$key] ?? null;
         }
 }

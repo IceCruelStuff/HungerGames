@@ -43,11 +43,10 @@ class EventListener implements Listener{
          * @return bool|void
          *
          * @throws \InvalidStateException
-         *
          */
         public function onSignChange(SignChangeEvent $e){
                 $p = $e->getPlayer();
-                if(!$p->hasPermission("hg.sign.create")) return false;
+                if(!$p->hasPermission("hg.sign.create")) return;
                 $b = $e->getBlock()->level->getTile($e->getBlock());
                 if($b instanceof Sign){
                         $line1 = $e->getLine(0);

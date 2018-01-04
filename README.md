@@ -189,10 +189,6 @@ class ExampleScript extends \hungergames\api\scripts\HGAPIScript{
 ```
 </details>
 
-===
-BIG NOTE: after every change you will have to run the command /reload
-===
-
 Commands:
 
 * /hg add <game> : adds a new game
@@ -203,7 +199,6 @@ Commands:
   
 * /hg min <game> <number> : changes the number of minimum players required to start a game
   * OP perm: hg.command.min
-  
   
 * /hg max <game> <number> : changes number of maximum players that can enter a game
   * OP perm: hg.command.max
@@ -223,5 +218,14 @@ Commands:
 * /hg delslot <game> <name> : deletes slot from game by name
   * OP perm: hg.command.slot.del
 
+* /hg lobby <game> : sets the lobby position of a game where you're standing
+  * OP perm: hg.command.lobby
+  
+* /hg dm <game> : sets the death match position of a game where you're standing
+  * OP perm: hg.command.dm
+
 * /hg leave : leaves game that you are playing
+  * OP perm: none
+  
+* /hg join <game> : join a new game
   * OP perm: none

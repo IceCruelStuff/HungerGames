@@ -28,7 +28,7 @@ class GameEditor{
         public function setMinimumPlayers($min){
                 if(!exc::checkIsNumber($min)) return;
                 $this->push("min_players", (int)$min);
-                $this->game->init();
+                $this->game->reloadMinimumPlayers();
         }
 
         /**
@@ -41,7 +41,7 @@ class GameEditor{
         public function setMaximumPlayers($max){
                 if(!exc::checkIsNumber($max)) return;
                 $this->push("max_players", (int)$max);
-                $this->game->init();
+                $this->game->reloadMaximumPlayers();
         }
 
         /**
@@ -54,7 +54,7 @@ class GameEditor{
         public function setGameSeconds($seconds){
                 if(!exc::checkIsNumber($seconds)) return;
                 $this->push("game_seconds", (float)$seconds);
-                $this->game->init();
+                $this->game->reloadGameSeconds();
         }
 
         /**
@@ -67,7 +67,7 @@ class GameEditor{
         public function setWaitingSeconds($seconds){
                 if(!exc::checkIsNumber($seconds)) return;
                 $this->push("waiting_seconds", (float)$seconds);
-                $this->game->init();
+                $this->game->reloadWaitingSeconds();
         }
 
         /**
@@ -79,7 +79,7 @@ class GameEditor{
          */
         public function setGameLevel($level){
                 $this->push("game_level", $level);
-                $this->game->init();
+                $this->game->reloadGameLevel();
         }
 
         /**
@@ -97,7 +97,7 @@ class GameEditor{
                         "y" => floatval($pos->y),
                         "z" => floatval($pos->z)
                     ]);
-                $this->game->init();
+                $this->game->reloadLobbyPosition();
         }
 
         /**
@@ -115,7 +115,7 @@ class GameEditor{
                         "y" => floatval($pos->y),
                         "z" => floatval($pos->z)
                     ]);
-                $this->game->init();
+                $this->game->reloadDeathMatchPosition();
         }
 
         /**
@@ -128,7 +128,7 @@ class GameEditor{
          */
         public function addSlot(Vector3 $pos, $slotName){
                 $this->push("slots.$slotName", ["x" => $pos->x, "y" => $pos->y, "z" => $pos->z]);
-                $this->game->init();
+                $this->game->reloadSlots();
         }
 
         /**
@@ -143,7 +143,7 @@ class GameEditor{
                 if(empty($this->gameArena->getAll()["slots"][$slotName])) return false;
                 unset($this->gameArena->getAll()["slots"][$slotName]);
                 $this->gameArena->save();
-                $this->game->init();
+                $this->game->reloadSlots();
                 return true;
         }
 
@@ -158,7 +158,7 @@ class GameEditor{
         public function updateSlot(Vector3 $pos, $slotName){
                 $this->removeSlot($slotName);
                 $this->addSlot($pos, $slotName);
-                $this->game->init();
+                $this->game->reloadSlots();
         }
 
         /**
@@ -173,7 +173,6 @@ class GameEditor{
                         $j = $i + 1;
                         $this->push("sign_line_{$j}", $params[$i]);
                 }
-                $this->game->init();
         }
 
         /**
@@ -189,7 +188,7 @@ class GameEditor{
                 $this->gameArena->setAll($val);
                 $this->gameArena->save();
                 $this->gameArena->reload();
-                $this->game->init();
+                $this->game->reloadSignList();
         }
 
         /**
@@ -206,7 +205,7 @@ class GameEditor{
                 }
                 $this->gameArena->save();
                 $this->gameArena->reload();
-                $this->game->init();
+                $this->game->reloadSignList();
         }
 
         /**

@@ -54,12 +54,11 @@ class WaitingToStartTask extends PluginTask{
                         return;
                 }
                 if($this->seconds == 0 and $count >= $this->game->getMinimumPlayers()){
-                        if($this->game->isSkyWars() === "no"){
-                                $task = new GameRunningTask($this->HGApi, $this->game);
-                                $h = $this->HGApi->getServer()->getScheduler()->scheduleRepeatingTask($task, 20);
-                                $task->setHandler($h);
-                        }else{
-                                foreach($this->HGApi->getStorage()->getAllWaitingPlayers() as $p){
+                        $task = new GameRunningTask($this->HGApi, $this->game);
+                        $h = $this->HGApi->getServer()->getScheduler()->scheduleRepeatingTask($task, 20);
+                        $task->setHandler($h);
+                        foreach($this->HGApi->getStorage()->getAllWaitingPlayers() as $p){
+                                if($p->getLevel()->getBlock($p->subtract(0, 1))->getId() === Block::GLASS){
                                         $p->getLevel()->setBlock($p->subtract(0, 1), Block::get(0));
                                 }
                         }

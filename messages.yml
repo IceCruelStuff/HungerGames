@@ -11,4 +11,6 @@ waiting_tip: '&6 > &eStarting game in &b%seconds% &eseconds! &6 <'
 match_full: '&cGame full. Please find a different game !'
 already_running: '&cGame running. Please find a different game !'
 refill_chests: '&a%game% > &eAll chests were refilled!'
+no_win: '&a&b%game% > Game is now open!'
+skywars_time_left: '&a%game% > &egame ends in &b%seconds% &eseconds.'
 ...

@@ -43,7 +43,7 @@ class Loader extends PluginBase{
                 $this->signManager = new SignManager($this);
                 $this->messages = new Config($this->dataPath() . "messages.yml", Config::YAML, Msg::getDefaultHGMessages());
                 $this->getServer()->getCommandMap()->register("hg", new HGCommand($this));
-                $this->getServer()->getScheduler()->scheduleDelayedTask(new LoadGamesTask($this), 20 * 5);
+                $this->getServer()->getScheduler()->scheduleDelayedTask(new LoadGamesTask($this), 20);
                 $h = $this->getServer()->getScheduler()->scheduleDelayedRepeatingTask($t = new RefreshSignsTask($this), 20 * 5, 20);
                 $t->setHandler($h);
                 $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
@@ -248,6 +248,17 @@ class Loader extends PluginBase{
          */
         public function getSignManager(): SignManager{
                 return $this->signManager;
+        }
+
+        /**
+         * @param string $key
+         * @param string $message
+         */
+        public function pushMessage(string $key, string $message){
+                if(!$this->messages->exists($key)){
+                        $this->messages->set($key, $message);
+                        $this->messages->save();
+                }
         }
 
         /**

@@ -3,6 +3,8 @@ namespace hungergames\lib\mgr;
 use hungergames\lib\editor\GameEditor;
 use hungergames\Loader;
 use hungergames\obj\HungerGames;
+use pocketmine\utils\TextFormat;
+
 class GlobalManager{
         /** @var HungerGames[] */
         private $games = [];
@@ -32,6 +34,7 @@ class GlobalManager{
                 $level_src = $this->HGApi->getServer()->getDataPath() . "worlds/" . $game->gameLevel->getFolderName();
                 $level_dst = $this->HGApi->dataPath() . "mapBackups/" . $game->gameLevel->getFolderName();
                 $this->HGApi->getMapBackup()->asyncWrite($level_src, $level_dst);
+                $this->HGApi->getLogger()->info(TextFormat::GREEN . "Creating map backup for game '" . TextFormat::YELLOW . $game->getName() . TextFormat::GREEN . "'");
         }
 
         /**

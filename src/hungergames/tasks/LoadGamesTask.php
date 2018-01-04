@@ -2,6 +2,8 @@
 namespace hungergames\tasks;
 use hungergames\Loader;
 use pocketmine\scheduler\PluginTask;
+use pocketmine\utils\TextFormat;
+
 class LoadGamesTask extends PluginTask{
         /** @var Loader */
         private $HGApi;
@@ -18,6 +20,6 @@ class LoadGamesTask extends PluginTask{
                 foreach($this->HGApi->getAllGameResources() as $game){
                         $this->HGApi->getGlobalManager()->load($game);
                 }
-                $this->HGApi->getLogger()->info("All games have been loaded! At least that's what I think :p");
+                $this->HGApi->getLogger()->info(TextFormat::GREEN . "All games have been loaded! At least that's what I think :p");
         }
 }

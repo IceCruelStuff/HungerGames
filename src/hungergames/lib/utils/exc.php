@@ -45,13 +45,7 @@ class exc{
          * @return bool|int
          */
         public static function checkIsNumber($v){
-                if(is_numeric($v))
-                        return true;
-                elseif(is_int($v))
-                        return true;
-                elseif(is_float($v))
-                        return true;
-                return false;
+                return (is_numeric($v) || is_int($v) || is_float($v));
         }
 
         /**
@@ -60,6 +54,14 @@ class exc{
          */
         public static function stringToInteger($val){
                 return self::checkIsNumber($val) ? intval($val) : 0;
+        }
+
+        /**
+         * @param $val
+         * @return float
+         */
+        public static function stringToFloat($val){
+                return self::checkIsNumber($val) ? floatval($val) : 0.0;
         }
 
         /**

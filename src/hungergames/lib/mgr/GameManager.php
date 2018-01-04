@@ -150,7 +150,6 @@ class GameManager{
          * @param bool   $message
          */
         public function addPlayer(Player $p, $message = false){
-                $this->HGApi->getStorage()->addPlayer($p, $this->getGame());
                 if(!$this->tpPlayerToOpenSlot($p)){
                         foreach($this->HGApi->getScriptManager()->getScripts() as $script){
                                 if(!$script->isEnabled()) continue;
@@ -161,6 +160,8 @@ class GameManager{
                         }
                         return;
                 }
+                $p->getInventory()->clearAll();
+                $this->HGApi->getStorage()->addPlayer($p, $this->getGame());
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){
                         if(!$script->isEnabled()) continue;
                         $script->onPlayerJoinGame($p, $this->getGame());
@@ -214,24 +215,7 @@ class GameManager{
         public function addPlayers(array $players, $message = false){
                 foreach($players as $p){
                         if($p instanceof Player){
-                                if(!$this->tpPlayerToOpenSlot($p)){
-                                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                                if(!$script->isEnabled()) continue;
-                                                $script->gameIsFull($p, $this->getGame());
-                                        }
-                                        if($message){
-                                                $p->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.full"))));
-                                        }
-                                        return;
-                                }
-                                $this->HGApi->getStorage()->addPlayer($p, $this->getGame());
-                                foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                        if(!$script->isEnabled()) continue;
-                                        $script->onPlayerJoinGame($p, $this->getGame());
-                                }
-                                if($message){
-                                        $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.join"))));
-                                }
+                                $this->addPlayer($p, $message);
                         }
                 }
         }
@@ -244,36 +228,11 @@ class GameManager{
          */
         public function setPlayers(array $players, $message = false){
                 foreach($this->HGApi->getStorage()->getPlayersInGame($this->getGame()) as $p){
-                        $this->HGApi->getStorage()->removePlayer($p);
-                        $p->teleport($this->getGame()->getLobbyPosition());
-                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                if(!$script->isEnabled()) continue;
-                                $script->onPlayerQuitGame($p, $this->getGame());
-                        }
-                        if($message){
-                                $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
-                        }
+                        $this->removePlayer($p, $message);
                 }
                 foreach($players as $p){
                         if($p instanceof Player){
-                                if(!$this->tpPlayerToOpenSlot($p)){
-                                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                                if(!$script->isEnabled()) continue;
-                                                $script->gameIsFull($p, $this->getGame());
-                                        }
-                                        if($message){
-                                                $p->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.full"))));
-                                        }
-                                        return;
-                                }
-                                $this->HGApi->getStorage()->addPlayer($p, $this->getGame());
-                                foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                        if(!$script->isEnabled()) continue;
-                                        $script->onPlayerJoinGame($p, $this->getGame());
-                                }
-                                if($message){
-                                        $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.join"))));
-                                }
+                                $this->addPlayer($p, $message);
                         }
                 }
         }
@@ -286,33 +245,8 @@ class GameManager{
          * @param bool   $message
          */
         public function replacePlayer(Player $newPlayer, Player $oldPlayer, $message = false){
-                if(!$this->tpPlayerToOpenSlot($newPlayer)){
-                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                if(!$script->isEnabled()) continue;
-                                $script->gameIsFull($newPlayer, $this->getGame());
-                        }
-                        if($message){
-                                $newPlayer->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$newPlayer->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.full"))));
-                        }
-                        return;
-                }
-                $this->HGApi->getStorage()->addPlayer($newPlayer, $this->getGame());
-                foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                        if(!$script->isEnabled()) continue;
-                        $script->onPlayerJoinGame($newPlayer, $this->getGame());
-                }
-                if($message){
-                        $this->sendGameMessage(str_replace(["%player%", "%game%"], [$newPlayer->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.join")));
-                }
-                $this->HGApi->getStorage()->removePlayer($oldPlayer);
-                $oldPlayer->teleport($this->getGame()->getLobbyPosition());
-                foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                        if(!$script->isEnabled()) continue;
-                        $script->onPlayerQuitGame($oldPlayer, $this->getGame());
-                }
-                if($message){
-                        $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$oldPlayer->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
-                }
+                $this->removePlayer($oldPlayer, $message);
+                $this->addPlayer($newPlayer, $message);
         }
 
         /**
@@ -332,6 +266,7 @@ class GameManager{
                         }
                         return;
                 }
+                $p->getInventory()->clearAll();
                 $this->HGApi->getStorage()->addWaitingPlayer($p, $this->getGame());
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){
                         if(!$script->isEnabled()) continue;
@@ -349,8 +284,8 @@ class GameManager{
          * @param bool   $message
          */
         public function removeWaitingPlayer(Player $p, $message = false){
-                $p->teleport($this->getGame()->getLobbyPosition());
                 $this->HGApi->getStorage()->removeWaitingPlayer($p);
+                $p->teleport($this->game->getLobbyPosition());
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){
                         if(!$script->isEnabled()) continue;
                         $script->onPlayerQuitGame($p, $this->getGame());
@@ -367,15 +302,7 @@ class GameManager{
          */
         public function removeWaitingPlayers($message = false){
                 foreach($this->HGApi->getStorage()->getAllWaitingPlayers() as $p){
-                        $p->teleport($this->getGame()->getLobbyPosition());
-                        $this->HGApi->getStorage()->removeWaitingPlayer($p);
-                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                if(!$script->isEnabled()) continue;
-                                $script->onPlayerQuitGame($p, $this->getGame());
-                        }
-                        if($message){
-                                $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
-                        }
+                        $this->removeWaitingPlayer($p, $message);
                 }
         }
 
@@ -388,24 +315,7 @@ class GameManager{
         public function addWaitingPlayers(array $players, $message = false){
                 foreach($players as $p){
                         if($p instanceof Player){
-                                $this->HGApi->getStorage()->addWaitingPlayer($p, $this->getGame());
-                                if(!$this->tpPlayerToOpenSlot($p)){
-                                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                                if(!$script->isEnabled()) continue;
-                                                $script->gameIsFull($p, $this->getGame());
-                                        }
-                                        if($message){
-                                                $p->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.full"))));
-                                        }
-                                        return;
-                                }
-                                foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                        if(!$script->isEnabled()) continue;
-                                        $script->onPlayerJoinGame($p, $this->getGame());
-                                }
-                        }
-                        if($message){
-                                $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.join"))));
+                                $this->addWaitingPlayer($p, $message);
                         }
                 }
         }
@@ -418,36 +328,11 @@ class GameManager{
          */
         public function setWaitingPlayers(array $players, $message = false){
                 foreach($this->HGApi->getStorage()->getPlayersInWaitingGame($this->getGame()) as $p){
-                        $p->teleport($this->getGame()->getLobbyPosition());
-                        $this->HGApi->getStorage()->removeWaitingPlayer($p);
-                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                if(!$script->isEnabled()) continue;
-                                $script->onPlayerQuitGame($p, $this->getGame());
-                        }
-                        if($message){
-                                $p->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
-                        }
+                        $this->removeWaitingPlayer($p, $message);
                 }
                 foreach($players as $p){
                         if($p instanceof Player){
-                                if($this->tpPlayerToOpenSlot($p)){
-                                        $this->HGApi->getStorage()->addWaitingPlayer($p, $this->getGame());
-                                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                                if(!$script->isEnabled()) continue;
-                                                $script->onPlayerJoinGame($p, $this->getGame());
-                                        }
-                                        if($message){
-                                                $p->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.join"))));
-                                        }
-                                }else{
-                                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                                if(!$script->isEnabled()) continue;
-                                                $script->gameIsFull($p, $this->getGame());
-                                        }
-                                        if($message){
-                                                $p->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$p->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.full"))));
-                                        }
-                                }
+                                $this->addWaitingPlayer($p, $message);
                         }
                 }
         }
@@ -460,31 +345,8 @@ class GameManager{
          * @param bool   $message
          */
         public function replaceWaitingPlayer(Player $newPlayer, Player $oldPlayer, $message = false){
-                $oldPlayer->teleport($this->getGame()->getLobbyPosition());
-                $this->HGApi->getStorage()->removeWaitingPlayer($oldPlayer);
-                foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                        if(!$script->isEnabled()) continue;
-                        $script->onPlayerQuitGame($oldPlayer, $this->getGame());
-                }
-                if(!$this->tpPlayerToOpenSlot($newPlayer)){
-                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                if(!$script->isEnabled()) continue;
-                                $script->gameIsFull($newPlayer, $this->getGame());
-                        }
-                        if($message){
-                                $newPlayer->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$newPlayer->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.full"))));
-                        }
-                        return;
-                }
-                $this->HGApi->getStorage()->addWaitingPlayer($newPlayer, $this->getGame());
-                foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                        if(!$script->isEnabled()) continue;
-                        $script->onPlayerJoinGame($newPlayer, $this->getGame());
-                }
-                if($message){
-                        $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$oldPlayer->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
-                        $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$newPlayer->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.join"))));
-                }
+                $this->removeWaitingPlayer($oldPlayer, $message);
+                $this->addWaitingPlayer($newPlayer, $message);
         }
 
         /** @var bool */

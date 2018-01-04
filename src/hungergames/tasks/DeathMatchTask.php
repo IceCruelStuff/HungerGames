@@ -4,6 +4,8 @@ use hungergames\lib\utils\Msg;
 use hungergames\Loader;
 use hungergames\obj\HungerGames;
 use pocketmine\scheduler\PluginTask;
+use pocketmine\utils\TextFormat;
+
 class DeathMatchTask extends PluginTask{
         /** @var Loader */
         private $HGApi;
@@ -38,6 +40,7 @@ class DeathMatchTask extends PluginTask{
                         $this->HGApi->getStorage()->removePlayersInGame($this->game);
                         $lvl_path = Loader::getInstance()->getServer()->getDataPath() . "worlds/";
                         $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName());
+                        $this->HGApi->getLogger()->info(TextFormat::GREEN . "Resetting map for game '" . TextFormat::YELLOW . $this->game->getName() . TextFormat::GREEN . "'");
                         $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
                         return;
                 }
