@@ -74,7 +74,7 @@ class EventListener implements Listener{
                                 $game = $this->HGApi->getSignManager()->getSignGame($b);
                                 if($game === null) return;
                                 if($this->HGApi->getStorage()->isPlayerSet($p) or $this->HGApi->getStorage()->isPlayerWaiting($p)) return;
-                                if($this->HGApi->getGlobalManager()->getGameManager($game)->getStatus() === "running") return;
+                                if($this->HGApi->getGlobalManager()->getGameManager($game)->getStatus() === "running" || $this->HGApi->getGlobalManager()->getGameManager($game)->getStatus() === "reset") return;
                                 $this->HGApi->getGlobalManager()->getGameManager($game)->addWaitingPlayer($p, true);
                                 if($this->HGApi->getGlobalManager()->getGameManager($game)->isWaiting) return;//checks if task started
                                 $t = new WaitingForPlayersTask($this->HGApi, $game);

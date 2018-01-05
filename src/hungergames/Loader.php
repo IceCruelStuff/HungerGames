@@ -6,6 +6,7 @@ use hungergames\hgmap\MapBackup;
 use hungergames\lib\GameStorage;
 use hungergames\lib\mgr\GlobalManager;
 use hungergames\lib\mgr\SignManager;
+use hungergames\tasks\GameSaveTask;
 use hungergames\tasks\LoadGamesTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
@@ -294,6 +295,8 @@ class Loader extends PluginBase{
                         "sign_line_3" => "&aGame: &f{game}",
                         "sign_line_4" => "&eStatus: {status}",
                         "is_sky_wars" => "no",
+                        "clear_inventory_on_join" => true,
+                        "auto_save" => true,
                         "min_players" => (int)2,
                         "max_players" => (int)8,
                         "game_seconds" => (float)60 * 5,

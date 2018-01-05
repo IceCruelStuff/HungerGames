@@ -6,7 +6,6 @@ use hungergames\obj\HungerGames;
 use pocketmine\math\Vector3;
 use pocketmine\tile\Sign;
 use pocketmine\utils\Config;
-
 class SignManager{
         /** @var Loader */
         private $HGApi;

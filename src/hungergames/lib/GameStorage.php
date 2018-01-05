@@ -300,16 +300,11 @@ class GameStorage extends Storage{
         }
 
         /**
-         * Checks if game is overloaded
+         * @deprecated this function is no longer in use and will be removed in future versions
          *
          * @return bool
          */
         public function scanOverload(){
-                $array_sum = (count($this->getAllPlayers()) + count($this->getAllWaitingPlayers()));
-                if($array_sum >= $this->playerOverloadSize or GameManager::$runningGames >= $this->gameOverloadSize or
-                    ($array_sum >= $this->playerOverloadSize and GameManager::$runningGames >= $this->gameOverloadSize)){
-                        return true;
-                }
                 return false;
         }
 }

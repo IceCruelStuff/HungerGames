@@ -198,4 +198,14 @@ abstract class HGAPIScript{
         public function onPlayerWinGame(Player $p, HungerGames $game){
 
         }
+
+        /**
+         * Called when game ends with no winner
+         *
+         * @param array       $players
+         * @param HungerGames $game
+         */
+        public function onGameEnd(array $players, HungerGames $game){
+
+        }
 }

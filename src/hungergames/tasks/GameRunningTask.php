@@ -40,51 +40,48 @@ class GameRunningTask extends PluginTask{
                 }
                 if($count == 0){
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("open");
+                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("reset");
                         $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
+                        $lvl_path = Loader::getInstance()->getServer()->getDataPath() . "worlds/";
+                        $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName(), $this->game->getName());
+                        $this->HGApi->getLogger()->info(TextFormat::GREEN . "Resetting map for game '" . TextFormat::YELLOW . $this->game->getName() . TextFormat::GREEN . "'");
                         return;
                 }
                 if($count == 1){
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("open");
+                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("reset");
                         $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
                         foreach($this->HGApi->getStorage()->getPlayersInGame($this->game) as $p){
                                 $p->teleport($this->game->getLobbyPosition());
                                 $p->getInventory()->clearAll();
-                                foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                        if(!$script->isEnabled()) continue;
-                                        $script->onPlayerWinGame($p, $this->game);
-                                }
+                                $this->HGApi->getScriptManager()->callOnPlayerWinGame($p, $this->game);
                                 $msg = Msg::getHGMessage("hg.message.win");
                                 $msg = str_replace(["%game%", "%player%"], [$this->game->getName(), $p->getName()], $msg);
                                 $this->HGApi->getServer()->broadcastMessage(Msg::color($msg));
                         }
                         $this->HGApi->getStorage()->removePlayersInGame($this->game);
                         $lvl_path = Loader::getInstance()->getServer()->getDataPath() . "worlds/";
-                        $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName());
+                        $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName(), $this->game->getName());
                         $this->HGApi->getLogger()->info(TextFormat::GREEN . "Resetting map for game '" . TextFormat::YELLOW . $this->game->getName() . TextFormat::GREEN . "'");
                         return;
                 }
                 if($count >= 2 and $this->seconds <= 0){
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("open");
+                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("reset");
                         $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
 
                         if($this->game->isSkyWars() !== "no"){
+                                $this->HGApi->getScriptManager()->callOnGameEnd($this->HGApi->getStorage()->getPlayersInGame($this->game), $this->game);
                                 foreach($this->HGApi->getStorage()->getPlayersInGame($this->game) as $p){
                                         $p->getInventory()->clearAll();
                                         $p->teleport($this->game->getLobbyPosition());
-                                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                                if(!$script->isEnabled()) continue;
-                                                $script->onPlayerWinGame($p, $this->game);
-                                        }
                                 }
                                 $this->HGApi->getStorage()->removePlayersInGame($this->game);
                                 $msg = Msg::getHGMessage("hg.message.noWin");
                                 $msg = str_replace("%game%", $this->game->getName(), $msg);
                                 $this->HGApi->getServer()->broadcastMessage(Msg::color($msg));
                                 $lvl_path = Loader::getInstance()->getServer()->getDataPath() . "worlds/";
-                                $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName());
+                                $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName(), $this->game->getName());
                                 $this->HGApi->getLogger()->info(TextFormat::GREEN . "Resetting map for game '" . TextFormat::YELLOW . $this->game->getName() . TextFormat::GREEN . "'");
                                 return;
                         }
@@ -95,10 +92,7 @@ class GameRunningTask extends PluginTask{
                         $msg = Msg::getHGMessage("hg.message.deathMatch");
                         $msg = str_replace("%game%", $this->game->getName(), $msg);
                         $this->HGApi->getGlobalManager()->getGameManagerByName($this->game->getName())->sendGameMessage(Msg::color($msg));
-                        foreach($this->HGApi->getScriptManager()->getScripts() as $script){
-                                if(!$script->isEnabled()) continue;
-                                $script->onDeathMatchStart($this->HGApi->getStorage()->getPlayersInGame($this->game), $this->game);
-                        }
+                        $this->HGApi->getScriptManager()->callOnDeathMatchStart($this->HGApi->getStorage()->getPlayersInGame($this->game), $this->game);
                         $task = new DeathMatchTask($this->HGApi, $this->game);
                         $h = $this->HGApi->getServer()->getScheduler()->scheduleRepeatingTask($task, 20);
                         $task->setHandler($h);

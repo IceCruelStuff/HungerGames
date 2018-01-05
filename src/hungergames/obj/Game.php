@@ -59,6 +59,13 @@ class Game{
         }
 
         /**
+         * Saves the game resource
+         */
+        public function save(){
+                Loader::getInstance()->updateResourceData($this->getName(), $this->gameC);
+        }
+
+        /**
          * Get the game name
          *
          * @return string

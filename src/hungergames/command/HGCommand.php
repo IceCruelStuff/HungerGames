@@ -150,20 +150,10 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                                         $sender->sendMessage(Msg::color("&cGame does not exist!"));
                                         return false;
                                 }
-                                $loaded = $this->HGApi->getServer()->isLevelLoaded($this->HGApi->getServer()->getLevelByName($level));
-                                $check = $this->HGApi->getServer()->loadLevel($level);
-                                if(!$loaded){
-                                        if($check){
-                                                $game1 = $this->HGApi->getGlobalManager()->getGameEditorByName($game);
-                                                $game1->setGameLevel($level);
-                                                $sender->sendMessage(Msg::color("&aSet game level of $game to $level."));
-                                                return true;
-                                        }else{
-                                                $sender->sendMessage(Msg::color("&cCould not find any level with name $level."));
-                                                return false;
-                                        }
-                                }
-                                return false;
+                                $game1 = $this->HGApi->getGlobalManager()->getGameEditorByName($game);
+                                $game1->setGameLevel($level);
+                                $sender->sendMessage(Msg::color("&aSet game level of $game to $level."));
+                                return true;
                         case "ws":
                                 if(!$sender->hasPermission("hg.command.ws")) return false;
                                 if(empty($args[1]) or empty($args[2])){
@@ -251,7 +241,7 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                                         return false;
                                 }
                                 if($this->HGApi->getStorage()->isPlayerSet($sender) or $this->HGApi->getStorage()->isPlayerWaiting($sender)) return false;
-                                if($this->HGApi->getGlobalManager()->getGameManager($game)->getStatus() === "running") return false;
+                                if($this->HGApi->getGlobalManager()->getGameManager($game)->getStatus() === "running" || $this->HGApi->getGlobalManager()->getGameManager($game)->getStatus() === "reset") return false;
                                 $this->HGApi->getGlobalManager()->getGameManager($game)->addWaitingPlayer($sender, true);
                                 $sender->sendMessage(Msg::color("&aJoining game!"));
                                 if($this->HGApi->getGlobalManager()->getGameManager($game)->isWaiting) return false;//checks if task started

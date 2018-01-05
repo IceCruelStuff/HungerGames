@@ -79,7 +79,9 @@ class GameEditor{
          */
         public function setGameLevel($level){
                 $this->push("game_level", $level);
+                $this->game->deleteOldMapBackup();
                 $this->game->reloadGameLevel();
+                $this->game->createGameLevelBackup();
         }
 
         /**

@@ -3,10 +3,11 @@
 namespace hungergames\tasks;
 
 use pocketmine\scheduler\AsyncTask;
+use pocketmine\Server;
 
 class AsyncMapBackup extends AsyncTask{
 
-        private $source, $destination;
+        private $source, $destination, $game;
 
         /**
          *
@@ -14,9 +15,9 @@ class AsyncMapBackup extends AsyncTask{
          *
          * @param string $source
          * @param string $destination
-         *
+         * @param string $game
          */
-        public function __construct(string $source, string $destination){
+        public function __construct(string $source, string $destination, string $game){
                 $this->source = $source;
                 $this->destination = $destination;
         }
@@ -28,6 +29,18 @@ class AsyncMapBackup extends AsyncTask{
          */
         public function onRun(){
                 $this->write($this->source, $this->destination);
+        }
+
+        /**
+         *
+         * @param Server $server
+         *
+         */
+        public function onCompletion(Server $server){
+                $mgr = $server->getPluginManager()->getPlugin("HungerGames")->getGlobalManager()->getGameManagerByName($this->game);
+                if($mgr !== null){
+                        $mgr->setStatus("open");
+                }
         }
 
         /**

@@ -2,8 +2,8 @@
 namespace hungergames\lib\utils;
 class Info{
         const AUTHOR = "xBeastMode";
-        const VERSION = "Build#18.1";
-        const API_VERSION = "0.2";
+        const VERSION = "Build#18.2";
+        const API_VERSION = "0.3";
         const FOR_API = ["3.0.0-ALPHA10"];
         const CONTRIBUTORS = [];
 

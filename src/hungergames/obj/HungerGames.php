@@ -25,6 +25,8 @@ class HungerGames extends Game{
         private $slots;
         /** @var bool */
         private $isSkyWars;
+        /** @var bool */
+        private $clearInventoryOnJoin;
         /** @var Item[] */
         private $chestItems;
         /** @var float */
@@ -41,44 +43,19 @@ class HungerGames extends Game{
          */
         public function init(){
                 $this->game = Loader::getInstance()->getGameArenaByName($this->getName());
-                $game = $this->game;
-                $this->min = exc::stringToInteger($game->get("min_players"));
-                $this->max = exc::stringToInteger($game->get("max_players"));
-                $this->gameSeconds = floatval($game->get("game_seconds"));
-                $this->waitingSeconds = floatval($game->get("waiting_seconds"));
-                if(!Loader::getInstance()->getServer()->isLevelLoaded($game->get("game_level"))){
-                        Loader::getInstance()->getServer()->loadLevel($game->get("game_level"));
-                }
-                $this->gameLevel = Loader::getInstance()->getServer()->getLevelByName($game->get("game_level"));
-                if($this->gameLevel === null){
-                        Loader::getInstance()->getLogger()->alert("Game level of game " . $this->getName() . " not found, using default level");
-                        $this->gameLevel = Loader::getInstance()->getServer()->getDefaultLevel();
-                }
-                $dm_pos = $game->get("death_match_pos");
-                if(!Loader::getInstance()->getServer()->isLevelLoaded($dm_pos["level"])){
-                        Loader::getInstance()->getServer()->loadLevel($dm_pos["level"]);
-                }
-                $dm_level = Loader::getInstance()->getServer()->getLevelByName($dm_pos["level"]);
-                if($dm_level === null){
-                        Loader::getInstance()->getLogger()->alert("Level of death match for game " . $this->getName() . " not found, using default level");
-                        $dm_level = Loader::getInstance()->getServer()->getDefaultLevel();
-                }
-                $this->deathMatchPos = new Position(floatval($dm_pos["x"]), floatval($dm_pos["y"]), floatval($dm_pos["z"]), $dm_level);
-                $lobby_pos = $game->get("lobby_pos");
-                if(!Loader::getInstance()->getServer()->isLevelLoaded($lobby_pos["level"])){
-                        Loader::getInstance()->getServer()->loadLevel($lobby_pos["level"]);
-                }
-                $lobby_level = Loader::getInstance()->getServer()->getLevelByName($lobby_pos["level"]);
-                if($lobby_level === null){
-                        Loader::getInstance()->getLogger()->alert("Level of death match for game " . $this->getName() . " not found, using default level");
-                        $lobby_level = Loader::getInstance()->getServer()->getDefaultLevel();
-                }
-                $this->lobbyPos = new Position(floatval($lobby_pos["x"]), floatval($lobby_pos["y"]), floatval($lobby_pos["z"]), $lobby_level);
-                $this->slots = $game->get("slots");
-                $this->isSkyWars = $game->get("is_sky_wars");
-                $this->chestItems = $game->get("chest_items");
-                $this->refillAfter = $game->get("refill_chests_after_seconds");
-                $this->signList = $game->get("sign_list");
+                $this->reloadMinimumPlayers();
+                $this->reloadMaximumPlayers();
+                $this->reloadGameSeconds();
+                $this->reloadWaitingSeconds();
+                $this->reloadGameLevel();
+                $this->reloadDeathMatchPosition();
+                $this->reloadLobbyPosition();
+                $this->reloadSlots();
+                $this->reloadIsSkyWars();
+                $this->reloadClearInventoryOnJoin();
+                $this->reloadChestItems();
+                $this->reloadRefillAfter();
+                $this->reloadSignList();
                 $this->init = true;
         }
 
@@ -152,7 +129,7 @@ class HungerGames extends Game{
          * Reloads game seconds of game
          */
         public function reloadGameSeconds(){
-                $this->max = exc::stringToFloat($this->game->get("game_seconds"));
+                $this->gameSeconds = exc::stringToFloat($this->game->get("game_seconds"));
         }
 
         /**
@@ -168,7 +145,7 @@ class HungerGames extends Game{
          * Reloads waiting seconds of game
          */
         public function reloadWaitingSeconds(){
-                $this->max = exc::stringToFloat($this->game->get("waiting_seconds"));
+                $this->waitingSeconds = exc::stringToFloat($this->game->get("waiting_seconds"));
         }
 
         /**
@@ -178,6 +155,34 @@ class HungerGames extends Game{
          */
         public function getGameLevel(): Level{
                 return $this->gameLevel;
+        }
+
+        /**
+         * Deletes old map backups
+         */
+        public function deleteOldMapBackup(){
+                $old_map = Loader::getInstance()->dataPath() . "mapBackups/" . $this->gameLevel->getFolderName();
+                if(file_exists($old_map)){
+                        rmdir($old_map);
+                }
+        }
+
+        /**
+         * Creates a backup of current game
+         */
+        public function createGameLevelBackup(){
+                $level_src = Loader::getInstance()->getServer()->getDataPath() . "worlds/" . $this->gameLevel->getFolderName();
+                $level_dst = Loader::getInstance()->dataPath() . "mapBackups/" . $this->gameLevel->getFolderName();
+                Loader::getInstance()->getMapBackup()->asyncWrite($level_src, $level_dst, $this->getName());
+        }
+
+        /**
+         * Creates a backup of current game
+         */
+        public function resetGameLevelBackup(){
+                $level_src = Loader::getInstance()->dataPath() . "mapBackups/" . $this->gameLevel->getFolderName();
+                $level_dst = Loader::getInstance()->getServer()->getDataPath() . "worlds/" . $this->gameLevel->getFolderName();
+                Loader::getInstance()->getMapBackup()->asyncWrite($level_src, $level_dst, $this->getName());
         }
 
         /**
@@ -241,7 +246,7 @@ class HungerGames extends Game{
                         Loader::getInstance()->getLogger()->alert("Level of death match for game " . $this->getName() . " not found, using default level");
                         $dm_level = Loader::getInstance()->getServer()->getDefaultLevel();
                 }
-                $this->lobbyPos = new Position(floatval($dm_pos["x"]), floatval($dm_pos["y"]), floatval($dm_pos["z"]), $dm_level);
+                $this->deathMatchPos = new Position(floatval($dm_pos["x"]), floatval($dm_pos["y"]), floatval($dm_pos["z"]), $dm_level);
         }
 
         /**
@@ -249,7 +254,7 @@ class HungerGames extends Game{
          *
          * @return Position[]|null
          */
-        public function getSlots(): array {
+        public function getSlots(): array{
                 $slots = [];
                 foreach($this->slots as $slotNumber => $pos){
                         $slots[] = new Position(floatval($pos["x"]), floatval($pos["y"]), floatval($pos["z"]), $this->gameLevel);
@@ -281,18 +286,34 @@ class HungerGames extends Game{
         }
 
         /**
+         * Returns if game should clear players inventory on join
+         *
+         * @return bool
+         */
+        public function clearInventoryOnJoin(): bool {
+                return $this->clearInventoryOnJoin;
+        }
+
+        /**
+         * Reloads if game should clear players inventory on join
+         */
+        public function reloadClearInventoryOnJoin(){
+                $this->clearInventoryOnJoin = boolval($this->game->get("clear_inventory_on_join", true));
+        }
+
+        /**
          * Returns after how much time the chests are refilled
          *
          * @return float
          */
-        public function refillAfter(): float {
+        public function refillAfter(): float{
                 return $this->refillAfter;
         }
 
         /**
          * Reloads after how much time the chests are refilled
          */
-        public function reloadAfter(){
+        public function reloadRefillAfter(){
                 $this->refillAfter = $this->game->get("refill_chests_after_seconds");
         }
 

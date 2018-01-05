@@ -160,7 +160,9 @@ class GameManager{
                         }
                         return;
                 }
-                $p->getInventory()->clearAll();
+                if($this->game->clearInventoryOnJoin()){
+                        $p->getInventory()->clearAll();
+                }
                 $this->HGApi->getStorage()->addPlayer($p, $this->getGame());
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){
                         if(!$script->isEnabled()) continue;
@@ -266,7 +268,9 @@ class GameManager{
                         }
                         return;
                 }
-                $p->getInventory()->clearAll();
+                if($this->game->clearInventoryOnJoin()){
+                        $p->getInventory()->clearAll();
+                }
                 $this->HGApi->getStorage()->addWaitingPlayer($p, $this->getGame());
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){
                         if(!$script->isEnabled()) continue;
