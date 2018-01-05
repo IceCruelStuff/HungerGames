@@ -296,7 +296,6 @@ class Loader extends PluginBase{
                         "sign_line_4" => "&eStatus: {status}",
                         "is_sky_wars" => "no",
                         "clear_inventory_on_join" => true,
-                        "auto_save" => true,
                         "min_players" => (int)2,
                         "max_players" => (int)8,
                         "game_seconds" => (float)60 * 5,
