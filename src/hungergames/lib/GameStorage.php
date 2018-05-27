@@ -1,14 +1,9 @@
 <?php
 namespace hungergames\lib;
-use hungergames\lib\mgr\GameManager;
 use pocketmine\Player;
 use hungergames\Loader;
 use hungergames\obj\HungerGames;
 class GameStorage extends Storage{
-        /** @var int */
-        private $gameOverloadSize = 25;
-        /** @var int */
-        private $playerOverloadSize = 600;
 
         /**
          * Loads all games

@@ -1,6 +1,7 @@
 <?php
 namespace hungergames\lib\utils;
 use RecursiveArrayIterator;
+use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 class exc{
         const CHARS = [
@@ -9,9 +10,12 @@ class exc{
         ];
 
         /**
+         *
          * @param            $string
          * @param array|null $elements
+         *
          * @return mixed
+         *
          */
         public static function _($string, ?array $elements = null){
                 if(is_array($elements)){
@@ -32,41 +36,56 @@ class exc{
         }
 
         /**
+         *
          * @param        $val
          * @param string $exploder
+         *
          * @return string
+         *
          */
         public static function double($val, $exploder = "."){
                 return number_format((float)$val, 2, $exploder, "");
         }
 
         /**
+         *
          * @param $v
+         *
          * @return bool|int
+         *
          */
         public static function checkIsNumber($v){
                 return (is_numeric($v) || is_int($v) || is_float($v));
         }
 
         /**
+         *
          * @param $val
+         *
          * @return int
+         *
          */
         public static function stringToInteger($val){
                 return self::checkIsNumber($val) ? intval($val) : 0;
         }
 
         /**
+         *
          * @param $val
+         *
          * @return float
+         *
          */
         public static function stringToFloat($val){
                 return self::checkIsNumber($val) ? floatval($val) : 0.0;
         }
 
         /**
+         *
          * @param array $val
+         *
          * @return null
+         *
          */
         public static function randomValue(array $val){
                 if(empty($val)) return null;
@@ -74,8 +93,11 @@ class exc{
         }
 
         /**
+         *
          * @param $length
+         *
          * @return int
+         *
          */
         public static function randomNumber($length){
                 $num = range(0, 9);
@@ -87,10 +109,13 @@ class exc{
         }
 
         /**
+         *
          * @param            $length
          * @param bool|true  $numbers
          * @param bool|false $chars
+         *
          * @return string
+         *
          */
         public static function randomString($length, $numbers = true, $chars = false){
                 $abc = range("A", "Z");
@@ -117,10 +142,13 @@ class exc{
         }
 
         /**
+         *
          * @param            $string
          * @param bool|false $numbers
          * @param bool|false $chars
+         *
          * @return string
+         *
          */
         public static function mixString($string, $numbers = false, $chars = false){
                 $num = range(0, 9);
@@ -146,8 +174,11 @@ class exc{
         }
 
         /**
+         *
          * @param $string
+         *
          * @return array
+         *
          */
         public static function getChars($string){
                 preg_match_all("/[[:punct:]]/", $string, $m);
@@ -155,8 +186,11 @@ class exc{
         }
 
         /**
+         *
          * @param $string
+         *
          * @return string
+         *
          */
         public static function replaceChars($string){
                 foreach(exc::getChars($string) as $char){
@@ -166,16 +200,22 @@ class exc{
         }
 
         /**
+         *
          * @param $string
+         *
          * @return string
+         *
          */
         public static function replaceAllKeepLetters($string){
                 return preg_replace("![^a-z0-9]+!i", "", $string);
         }
 
         /**
+         *
          * @param $string
+         *
          * @return mixed
+         *
          */
         public static function clearColors($string){
                 $colors = ["&a", "&b", "&c", "&d", "&e", "&f", "&r", "&k", "&l", "&o"];
@@ -189,8 +229,11 @@ class exc{
         }
 
         /**
+         *
          * @param array $values
+         *
          * @return array
+         *
          */
         public static function returnArrayOfMultiArray(array $values){
                 $result = [];
@@ -202,8 +245,11 @@ class exc{
         }
 
         /**
+         *
          * @param $filePath
+         *
          * @return array
+         *
          */
         public static function getFileClasses($filePath){
                 $php_code = file_get_contents($filePath);
@@ -212,8 +258,11 @@ class exc{
         }
 
         /**
+         *
          * @param $php_code
+         *
          * @return array
+         *
          */
         public static function getPHPClasses($php_code){
                 $classes = [];
@@ -231,9 +280,12 @@ class exc{
         }
 
         /**
+         *
          * @param $key
          * @param $haystack
+         *
          * @return bool
+         *
          */
         public static function array_key_exists_md($key, $haystack){
                 $haystack = self::returnArrayOfMultiArray($haystack);
@@ -241,5 +293,27 @@ class exc{
                         if($key === $r or $key === $v) return true;
                 }
                 return false;
+        }
+
+        /**
+         *
+         * @param $dir
+         *
+         */
+        public static function delete($dir){
+                if(is_dir($dir)){
+                        $files = new RecursiveIteratorIterator(
+                            new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS),
+                            RecursiveIteratorIterator::CHILD_FIRST
+                        );
+                        foreach($files as $file){
+                                if($file->isDir()){
+                                        rmdir($file->getRealPath());
+                                }else{
+                                        unlink($file->getRealPath());
+                                }
+                        }
+                        rmdir($dir);
+                }
         }
 }

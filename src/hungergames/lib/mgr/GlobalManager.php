@@ -31,9 +31,7 @@ class GlobalManager{
                 $this->HGApi->getStorage()->loadGame($game);
                 $this->gamesMgr[$game->getName()] = new GameManager($game, $this->HGApi);
                 $this->gamesEditor[$game->getName()] = new GameEditor($game);
-                $level_src = $this->HGApi->getServer()->getDataPath() . "worlds/" . $game->gameLevel->getFolderName();
-                $level_dst = $this->HGApi->dataPath() . "mapBackups/" . $game->gameLevel->getFolderName();
-                $this->HGApi->getMapBackup()->asyncWrite($level_src, $level_dst, $game->getName());
+                $game->createGameLevelBackup();
                 $this->HGApi->getLogger()->info(TextFormat::GREEN . "Creating map backup for game '" . TextFormat::YELLOW . $game->getName() . TextFormat::GREEN . "'");
         }
 

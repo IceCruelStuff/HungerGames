@@ -3,6 +3,7 @@ namespace hungergames\lib\mgr;
 use hungergames\lib\utils\Msg;
 use hungergames\Loader;
 use hungergames\obj\HungerGames;
+use pocketmine\level\Position;
 use pocketmine\Player;
 class GameManager{
         /** @var int */
@@ -13,16 +14,15 @@ class GameManager{
         public $game;
         /** @var Loader */
         private $HGApi;
-        /** @var int */
-        private $slotN;
-        /** @var int */
-        private $lastSlotN;
+        /** @var Position[] */
+        private $openSlots = [];
+        /** @var Position[] */
+        private $usedSlots = [];
 
         public function __construct(HungerGames $game, Loader $main){
                 $this->HGApi = $main;
                 $this->game = $game;
-                $this->status = "open";
-                $this->slotN = $this->getOpenSlots();
+                $this->refresh();
         }
 
         /**
@@ -39,8 +39,8 @@ class GameManager{
          */
         public function refresh(){
                 $this->status = "open";
-                $this->slotN = $this->getOpenSlots();
-                $this->lastSlotN = null;
+                $this->openSlots = $this->game->getSlots();
+                $this->usedSlots = [];
                 $this->isWaiting = false;
         }
 
@@ -63,42 +63,126 @@ class GameManager{
         }
 
         /**
-         * Checks how much opens slots there are
          *
-         * @return int
+         * @return array|null|Position[]
+         *
          */
         public function getOpenSlots(){
-                return count($this->game->getSlots()) - 1;
+                return $this->openSlots;
         }
 
         /**
+         *
+         * @param array $slots
+         *
+         */
+        public function addOpenSlots(array $slots){
+                foreach($slots as $slot){
+                        if($slot instanceof Position){
+                                $this->openSlots[] = $slot;
+                        }
+                }
+        }
+
+        /**
+         *
+         * @param array $slots
+         *
+         */
+        public function setOpenSlots(array $slots){
+                $this->openSlots = [];
+                $this->addOpenSlots($slots);
+        }
+
+        /**
+         *
+         * Checks how much opens slots there are
+         *
+         * @return int
+         *
+         */
+        public function getOpenSlotCount(){
+                return count($this->openSlots);
+        }
+
+        /**
+         *
+         * @return Position[]
+         *
+         */
+        public function getUsedSlots(){
+                return $this->usedSlots;
+        }
+
+        /**
+         *
+         * @param array $slots
+         *
+         */
+        public function addUsedSlots(array $slots){
+                foreach($slots as $key => $slot){
+                        if($slot instanceof Position){
+                                $this->usedSlots[$key] = $slot;
+                        }
+                }
+        }
+
+        /**
+         *
+         * @param array $slots
+         *
+         */
+        public function setUsedSlots(array $slots){
+                $this->usedSlots = [];
+                $this->addUsedSlots($slots);
+        }
+
+        /**
+         *
+         * Checks how much opens slots there are
+         *
+         * @return int
+         *
+         */
+        public function getUsedSlotCount(){
+                return count($this->usedSlots);
+        }
+
+        /**
+         *
+         * @param Player $player
+         *
+         */
+        public function resetUsedSlot(Player $player){
+                if(isset($this->usedSlots[strtolower($player->getName())])){
+                        $this->addOpenSlots([$this->usedSlots[strtolower($player->getName())]]);
+                        unset($this->usedSlots[strtolower($player->getName())]);
+                }
+        }
+
+        /**
+         *
          * Teleport player to game position
          *
          * @param Player $p
+         *
          * @return bool
+         *
          */
         public function tpPlayerToOpenSlot(Player $p){
-                if($this->slotN < 0) return false;
-                $this->lastSlotN = $this->slotN;
-                $slot = $this->getGame()->getSlots()[$this->slotN];
+                if($this->getOpenSlotCount() < 1) return false;
+                $slot = array_pop($this->openSlots);
+                $this->addUsedSlots([strtolower($p->getName()) => $slot]);
                 $p->teleport($slot);
-                $this->slotN -= 1;
                 return true;
         }
 
         /**
-         * Gets last used slot
          *
-         * @return int
-         */
-        public function getLastUsedSlot(){
-                return $this->lastSlotN;
-        }
-
-        /**
          * Sends game players message
          *
          * @param $message
+         *
          */
         public function sendGameMessage($message){
                 $pig = $this->HGApi->getStorage()->getPlayersInGame($this->getGame());
@@ -112,9 +196,11 @@ class GameManager{
         }
 
         /**
+         *
          * Sends game players tip
          *
          * @param $message
+         *
          */
         public function sendGameTip($message){
                 $pig = $this->HGApi->getStorage()->getPlayersInGame($this->getGame());
@@ -128,9 +214,11 @@ class GameManager{
         }
 
         /**
+         *
          * Sends game players popup
          *
          * @param $message
+         *
          */
         public function sendGamePopup($message){
                 $pig = $this->HGApi->getStorage()->getPlayersInGame($this->getGame());
@@ -144,10 +232,12 @@ class GameManager{
         }
 
         /**
+         *
          * Adds player into game
          *
          * @param Player $p
          * @param bool   $message
+         *
          */
         public function addPlayer(Player $p, $message = false){
                 if(!$this->tpPlayerToOpenSlot($p)){
@@ -174,12 +264,15 @@ class GameManager{
         }
 
         /**
+         *
          * Removes player from game
          *
          * @param Player $p
          * @param bool   $message
+         *
          */
         public function removePlayer(Player $p, $message = false){
+                $this->resetUsedSlot($p);
                 $this->HGApi->getStorage()->removePlayer($p);
                 $p->teleport($this->getGame()->getLobbyPosition());
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){
@@ -192,10 +285,12 @@ class GameManager{
         }
 
         /**
+         *
          * Removes player from game without teleporting
          *
          * @param Player $p
          * @param bool   $message
+         *
          */
         public function removePlayerWithoutTeleport(Player $p, $message = false){
                 $this->HGApi->getStorage()->removePlayer($p);
@@ -209,10 +304,12 @@ class GameManager{
         }
 
         /**
+         *
          * Adds player into game
          *
          * @param array $players
          * @param bool  $message
+         *
          */
         public function addPlayers(array $players, $message = false){
                 foreach($players as $p){
@@ -223,10 +320,12 @@ class GameManager{
         }
 
         /**
+         *
          * Sets players of game
          *
          * @param array $players
          * @param bool  $message
+         *
          */
         public function setPlayers(array $players, $message = false){
                 foreach($this->HGApi->getStorage()->getPlayersInGame($this->getGame()) as $p){
@@ -240,11 +339,13 @@ class GameManager{
         }
 
         /**
+         *
          * Replaces all waiting players
          *
          * @param Player $newPlayer
          * @param Player $oldPlayer
          * @param bool   $message
+         *
          */
         public function replacePlayer(Player $newPlayer, Player $oldPlayer, $message = false){
                 $this->removePlayer($oldPlayer, $message);
@@ -252,10 +353,12 @@ class GameManager{
         }
 
         /**
+         *
          * Adds player into game
          *
          * @param Player $p
          * @param bool   $message
+         *
          */
         public function addWaitingPlayer(Player $p, $message = false){
                 if(!$this->tpPlayerToOpenSlot($p)){
@@ -282,12 +385,15 @@ class GameManager{
         }
 
         /**
+         *
          * Removes player from game
          *
          * @param Player $p
          * @param bool   $message
+         *
          */
         public function removeWaitingPlayer(Player $p, $message = false){
+                $this->resetUsedSlot($p);
                 $this->HGApi->getStorage()->removeWaitingPlayer($p);
                 $p->teleport($this->game->getLobbyPosition());
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){
@@ -300,9 +406,11 @@ class GameManager{
         }
 
         /**
+         *
          * removes all waiting players
          *
          * @param bool|false $message
+         *
          */
         public function removeWaitingPlayers($message = false){
                 foreach($this->HGApi->getStorage()->getAllWaitingPlayers() as $p){
@@ -311,10 +419,12 @@ class GameManager{
         }
 
         /**
+         *
          * Adds waiting player into game
          *
          * @param array $players
          * @param bool  $message
+         *
          */
         public function addWaitingPlayers(array $players, $message = false){
                 foreach($players as $p){
@@ -325,10 +435,12 @@ class GameManager{
         }
 
         /**
+         *
          * Sets waiting players of game
          *
          * @param array $players
          * @param bool  $message
+         *
          */
         public function setWaitingPlayers(array $players, $message = false){
                 foreach($this->HGApi->getStorage()->getPlayersInWaitingGame($this->getGame()) as $p){
@@ -342,11 +454,13 @@ class GameManager{
         }
 
         /**
+         *
          * Swaps players
          *
          * @param Player $newPlayer
          * @param Player $oldPlayer
          * @param bool   $message
+         *
          */
         public function replaceWaitingPlayer(Player $newPlayer, Player $oldPlayer, $message = false){
                 $this->removeWaitingPlayer($oldPlayer, $message);

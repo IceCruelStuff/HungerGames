@@ -288,7 +288,7 @@ class HGCommand extends Command implements PluginIdentifiableCommand{
                         case "dm":
                                 if(!$sender->hasPermission("hg.command.dm")) return false;
                                 if(empty($args[1])){
-                                        $sender->sendMessage(Msg::color("&a- /hg lobby <game>"));
+                                        $sender->sendMessage(Msg::color("&a- /hg dm <game>"));
                                         return false;
                                 }
                                 $game = $args[1];

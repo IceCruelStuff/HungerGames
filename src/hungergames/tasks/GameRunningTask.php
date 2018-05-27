@@ -60,8 +60,7 @@ class GameRunningTask extends PluginTask{
                                 $this->HGApi->getServer()->broadcastMessage(Msg::color($msg));
                         }
                         $this->HGApi->getStorage()->removePlayersInGame($this->game);
-                        $lvl_path = Loader::getInstance()->getServer()->getDataPath() . "worlds/";
-                        $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName(), $this->game->getName());
+                        $this->game->resetGameLevelBackup();
                         $this->HGApi->getLogger()->info(TextFormat::GREEN . "Resetting map for game '" . TextFormat::YELLOW . $this->game->getName() . TextFormat::GREEN . "'");
                         return;
                 }
@@ -80,8 +79,7 @@ class GameRunningTask extends PluginTask{
                                 $msg = Msg::getHGMessage("hg.message.noWin");
                                 $msg = str_replace("%game%", $this->game->getName(), $msg);
                                 $this->HGApi->getServer()->broadcastMessage(Msg::color($msg));
-                                $lvl_path = Loader::getInstance()->getServer()->getDataPath() . "worlds/";
-                                $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName(), $this->game->getName());
+                                $this->game->resetGameLevelBackup();
                                 $this->HGApi->getLogger()->info(TextFormat::GREEN . "Resetting map for game '" . TextFormat::YELLOW . $this->game->getName() . TextFormat::GREEN . "'");
                                 return;
                         }

@@ -42,7 +42,6 @@ class Loader extends PluginBase{
                 $this->scriptManager = new HGAPIScriptManager($this);
                 $this->mapBackup = new MapBackup($this);
                 $this->signManager = new SignManager($this);
-                $this->messages = new Config($this->dataPath() . "messages.yml", Config::YAML, Msg::getDefaultHGMessages());
                 $this->getServer()->getCommandMap()->register("hg", new HGCommand($this));
                 $this->getServer()->getScheduler()->scheduleDelayedTask(new LoadGamesTask($this), 20);
                 $h = $this->getServer()->getScheduler()->scheduleDelayedRepeatingTask($t = new RefreshSignsTask($this), 20 * 5, 20);
@@ -54,6 +53,7 @@ class Loader extends PluginBase{
                 @mkdir($this->dataPath() . "scripts/");
                 @mkdir($this->dataPath() . "scriptConfigs/");
                 @mkdir($this->dataPath() . "mapBackups/");
+                $this->messages = new Config($this->dataPath() . "messages.yml", Config::YAML, Msg::getDefaultHGMessages());
                 $this->scriptManager->loadScripts();
         }
 

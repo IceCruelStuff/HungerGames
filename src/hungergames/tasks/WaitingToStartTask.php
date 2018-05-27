@@ -6,6 +6,8 @@ use hungergames\obj\HungerGames;
 use pocketmine\block\Block;
 use pocketmine\scheduler\PluginTask;
 use pocketmine\tile\Chest;
+use pocketmine\utils\TextFormat;
+
 class WaitingToStartTask extends PluginTask{
         /** @var Loader */
         private $HGApi;
