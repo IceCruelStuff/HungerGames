@@ -1,6 +1,8 @@
 # HungerGames
 =============
 
+[![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://https://discord.gg/uctHyRD)
+
 BIG NOTE
 ---------
 COMPILING IT WITH pmt.mcpe.me WILL MAKE THE PLUGIN CORRUPTED. DOWNLOAD FROM _RELEASES_ [HERE](https://github.com/InfinityGamers/HungerGames-UPDATED/releases/latest)
