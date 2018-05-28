@@ -5,6 +5,8 @@ use hungergames\Loader;
 use hungergames\obj\HungerGames;
 use pocketmine\level\Position;
 use pocketmine\Player;
+use pocketmine\tile\Chest;
+
 class GameManager{
         /** @var int */
         public static $runningGames = 0;
@@ -18,6 +20,8 @@ class GameManager{
         private $openSlots = [];
         /** @var Position[] */
         private $usedSlots = [];
+        /** @var bool */
+        public $isWaiting = false;
 
         public function __construct(HungerGames $game, Loader $main){
                 $this->HGApi = $main;
@@ -467,6 +471,16 @@ class GameManager{
                 $this->addWaitingPlayer($newPlayer, $message);
         }
 
-        /** @var bool */
-        public $isWaiting = false;
+        /**
+         *
+         * Refills chests
+         *
+         */
+        public function refillChests(){
+                foreach($this->game->gameLevel->getTiles() as $tile){
+                        if($tile instanceof Chest){
+                                $tile->getInventory()->setContents($this->game->getChestItems());
+                        }
+                }
+        }
 }

@@ -1,5 +1,6 @@
 <?php
 namespace hungergames\tasks;
+use hungergames\lib\mgr\GameManager;
 use hungergames\lib\utils\Msg;
 use hungergames\Loader;
 use hungergames\obj\HungerGames;
@@ -9,22 +10,34 @@ class WaitingForPlayersTask extends PluginTask{
         private $HGApi;
         /** @var HungerGames */
         private $game;
-
+        /** @var GameManager */
+        private $manager;
+        
+        /**
+         *
+         * WaitingForPlayersTask constructor.
+         * @param Loader      $main
+         * @param HungerGames $game
+         * 
+         */
         public function __construct(Loader $main, HungerGames $game){
                 parent::__construct($main);
                 $this->HGApi = $main;
                 $this->game = $game;
+                $this->manager = $main->getGlobalManager()->getGameManagerByName($game->getName());
         }
 
         /**
+         * 
          * @param $tick
+         * 
          */
         public function onRun(int $tick){
                 $count = $this->HGApi->getStorage()->getAllWaitingPlayersInGameCount($this->game);
                 if($count == 0){
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("open");
+                        $this->manager->setStatus("open");
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
+                        $this->manager->refresh();
                         return;
                 }
                 if($count < $this->game->getMinimumPlayers()){
@@ -35,7 +48,7 @@ class WaitingForPlayersTask extends PluginTask{
                         return;
                 }
                 if($count >= $this->game->getMinimumPlayers()){
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("waiting");
+                        $this->manager->setStatus("waiting");
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
                         $task = new WaitingToStartTask($this->HGApi, $this->game);
                         $h = $this->HGApi->getServer()->getScheduler()->scheduleRepeatingTask($task, 20);

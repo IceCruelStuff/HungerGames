@@ -6,13 +6,22 @@ class RefreshSignsTask extends PluginTask{
         /** @var Loader */
         private $HGApi;
 
+        /**
+         *
+         * RefreshSignsTask constructor.
+         *
+         * @param Loader $main
+         *
+         */
         public function __construct(Loader $main){
                 parent::__construct($main);
                 $this->HGApi = $main;
         }
 
         /**
+         *
          * @param $currentTick
+         *
          */
         public function onRun(int $currentTick){
                 $this->HGApi->getSignManager()->refreshAllSigns();

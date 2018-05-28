@@ -1,10 +1,10 @@
 <?php
 namespace hungergames\tasks;
+use hungergames\lib\mgr\GameManager;
 use hungergames\lib\utils\Msg;
 use hungergames\Loader;
 use hungergames\obj\HungerGames;
 use pocketmine\scheduler\PluginTask;
-use pocketmine\tile\Chest;
 use pocketmine\utils\TextFormat;
 
 class GameRunningTask extends PluginTask{
@@ -14,43 +14,50 @@ class GameRunningTask extends PluginTask{
         private $game;
         /** @var float */
         private $seconds;
+        /** @var GameManager */
+        private $manager;
 
+        /**
+         *
+         * GameRunningTask constructor.
+         *
+         * @param Loader      $main
+         * @param HungerGames $game
+         *
+         */
         public function __construct(Loader $main, HungerGames $game){
                 parent::__construct($main);
                 $this->HGApi = $main;
                 $this->game = $game;
                 $this->seconds = $game->getGameSeconds();
+                $this->manager = $main->getGlobalManager()->getGameManagerByName($game->getName());
         }
 
         /**
+         *
          * @param $currentTick
+         *
          */
         public function onRun(int $currentTick){
                 $count = $this->HGApi->getStorage()->getPlayersInGameCount($this->game);
                 --$this->seconds;
-                if($this->game->getGameSeconds() - $this->seconds <= $this->game->refillAfter()){
-                        foreach($this->game->gameLevel->getTiles() as $tile){
-                                if($tile instanceof Chest){
-                                        $tile->getInventory()->setContents($this->game->getChestItems());
-                                }
-                        }
+                if($this->seconds % $this->game->refillAfter() === 0){
+                        $this->manager->refillChests();
                         $msg = Msg::getHGMessage("hg.message.refill");
                         $msg = str_replace("%game%", $this->game->getName(), $msg);
-                        $this->HGApi->getGlobalManager()->getGameManagerByName($this->game->getName())->sendGameMessage($msg);
+                        $this->manager->sendGameMessage($msg);
                 }
                 if($count == 0){
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("reset");
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
-                        $lvl_path = Loader::getInstance()->getServer()->getDataPath() . "worlds/";
-                        $this->HGApi->getMapBackup()->asyncWrite(Loader::getInstance()->dataPath() . "mapBackups/" . $this->game->gameLevel->getFolderName(), $lvl_path . $this->game->gameLevel->getFolderName(), $this->game->getName());
+                        $this->manager->setStatus("reset");
+                        $this->manager->refresh();
+                        $this->game->resetGameLevelBackup();
                         $this->HGApi->getLogger()->info(TextFormat::GREEN . "Resetting map for game '" . TextFormat::YELLOW . $this->game->getName() . TextFormat::GREEN . "'");
                         return;
                 }
                 if($count == 1){
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("reset");
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
+                        $this->manager->setStatus("reset");
                         foreach($this->HGApi->getStorage()->getPlayersInGame($this->game) as $p){
                                 $p->teleport($this->game->getLobbyPosition());
                                 $p->getInventory()->clearAll();
@@ -66,8 +73,8 @@ class GameRunningTask extends PluginTask{
                 }
                 if($count >= 2 and $this->seconds <= 0){
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->setStatus("reset");
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->refresh();
+                        $this->manager->setStatus("reset");
+                        $this->manager->refresh();
 
                         if($this->game->isSkyWars() !== "no"){
                                 $this->HGApi->getScriptManager()->callOnGameEnd($this->HGApi->getStorage()->getPlayersInGame($this->game), $this->game);
@@ -101,12 +108,12 @@ class GameRunningTask extends PluginTask{
                         $msg = Msg::getHGMessage("hg.message.dmTime");
                         $msg = str_replace(["%game%", "%seconds%"], [$this->game->getName(), $this->seconds], $msg);
                         $msg = Msg::color($msg);
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->sendGamePopup($msg);
+                        $this->manager->sendGamePopup($msg);
                 }else{
                         $msg = Msg::getHGMessage("hg.message.swTimeLeft");
                         $msg = str_replace(["%game%", "%seconds%"], [$this->game->getName(), $this->seconds], $msg);
                         $msg = Msg::color($msg);
-                        $this->HGApi->getGlobalManager()->getGameManager($this->game)->sendGamePopup($msg);
+                        $this->manager->sendGamePopup($msg);
                 }
         }
 }
