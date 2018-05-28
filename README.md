@@ -1,7 +1,7 @@
 # HungerGames
 =============
 
-[![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://https://discord.gg/uctHyRD)
+[![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/uctHyRD)
 
 BIG NOTE
 ---------
