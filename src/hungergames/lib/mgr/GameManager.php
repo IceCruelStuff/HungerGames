@@ -256,6 +256,7 @@ class GameManager{
                 }
                 if($this->game->clearInventoryOnJoin()){
                         $p->getInventory()->clearAll();
+                        $p->getArmorInventory()->clearAll();
                 }
                 $this->HGApi->getStorage()->addPlayer($p, $this->getGame());
                 foreach($this->HGApi->getScriptManager()->getScripts() as $script){

@@ -4,7 +4,6 @@ use hungergames\lib\utils\exc;
 use hungergames\Loader;
 use hungergames\obj\HungerGames;
 use pocketmine\Player;
-
 class HGAPIScriptManager{
         /** @var HGAPIScript[] */
         protected $scripts = [];

@@ -41,7 +41,7 @@ class GameRunningTask extends PluginTask{
         public function onRun(int $currentTick){
                 $count = $this->HGApi->getStorage()->getPlayersInGameCount($this->game);
                 --$this->seconds;
-                if($this->seconds % $this->game->refillAfter() === 0){
+                if(fmod($this->game->refillAfter(), $this->seconds) === 0){
                         $this->manager->refillChests();
                         $msg = Msg::getHGMessage("hg.message.refill");
                         $msg = str_replace("%game%", $this->game->getName(), $msg);

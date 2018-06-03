@@ -78,10 +78,10 @@ class WaitingToStartTask extends PluginTask{
                         foreach($this->HGApi->getStorage()->getPlayersInWaitingGame($this->game) as $p){
                                 $this->HGApi->getStorage()->addPlayer($p, $this->game);
                         }
+                        $this->HGApi->getStorage()->removePlayersInWaitingGame($this->game);
                         $this->HGApi->getServer()->getScheduler()->cancelTask($this->getTaskId());
                         $message = str_replace("%game%", $this->game->getName(), Msg::getHGMessage("hg.message.start"));
                         $this->manager->sendGameMessage(Msg::color($message));
-                        $this->HGApi->getStorage()->removePlayersInWaitingGame($this->game);
                         $this->HGApi->getScriptManager()->callOnGameStart($this->HGApi->getStorage()->getPlayersInGame($this->game), $this->game);
                         
                         return;
