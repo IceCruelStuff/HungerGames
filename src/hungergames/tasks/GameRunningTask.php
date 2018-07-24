@@ -60,6 +60,7 @@ class GameRunningTask extends Task{
                         foreach($this->HGApi->getStorage()->getPlayersInGame($this->game) as $p){
                                 $p->teleport($this->game->getLobbyPosition());
                                 $p->getInventory()->clearAll();
+                                $p->getArmorInventory()->clearAll();
                                 $this->HGApi->getScriptManager()->callOnPlayerWinGame($p, $this->game);
                                 $msg = Msg::getHGMessage("hg.message.win");
                                 $msg = str_replace(["%game%", "%player%"], [$this->game->getName(), $p->getName()], $msg);
