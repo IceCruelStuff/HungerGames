@@ -200,6 +200,16 @@ abstract class HGAPIScript{
         }
 
         /**
+         * Called when players lose a game
+         *
+         * @param Player      $player
+         * @param HungerGames $game
+         */
+        public function onPlayerLoseGame(Player $player, HungerGames $game) {
+
+        }
+
+        /**
          * Called when game ends with no winner
          *
          * @param array       $players
