@@ -1,197 +1,204 @@
 # HungerGames
 =============
 
-[![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/uctHyRD)
+## Installation
 
-BIG NOTE
----------
-COMPILING IT WITH pmt.mcpe.me WILL MAKE THE PLUGIN CORRUPTED. DOWNLOAD FROM _RELEASES_ [HERE](https://github.com/InfinityGamers/HungerGames-UPDATED/releases/latest)
+Grab the latest build from **[Poggit CI](https://poggit.pmmp.io/ci/IceCruelStuff/HungerGames-1)** and put it into your `plugins` folder.
 
-A HungerGames plugin for PocketMine-MP developed by xBeastMode
---------------------------------------------------------------
+### How to setup a join sign?
 
-#New Features? 
-Yes, of course. You can choose between SkyWars or HungerGames!
-How? You can make a game with the following command: /hg add <game name>
+On the sign, set the first line to "hg". The second line should be the name of your game.
 
-Watch my YouTube video showing bow to setup a game arena:
-[![MCPE - HG plugin tutorial updated](http://img.youtube.com/vi/0Jtt696xak4/0.jpg)](http://www.youtube.com/watch?v=0Jtt696xak4)
-<h3> 
-When you join a game the plugin will automatically backup the map.
-</h3>
-
-- Other features: Scripts have been added. I did not make any scripts for it yet, maybe in the future.
-
-#How to setup a join sign?
-
-on the first line set the line to "hg" and on the second line set the line to the name of your game.
 The sign should now refresh automatically and you'll be able to join.
 
-or... join a game by simply typing: `/hg join <game>`
+You can also join a game by typing `/hg join <game>`.
 
-#Future updates? 
-I am planning to adding many more features to this plugin, if you wish me to add one, please say it in issues, thank you.
+### For Developers
 
-- For Devs:
+This plugin comes with a script loader API. You can use this to access game functions, like when player joins, quits, wins, etc. You do not need to enable it, as it loads itself.
 
-This plugin comes with a script loader api. You can use this to access game functions, like when player joins, quits, wins, etc. You do not need to enable it, as it loads itself.
-
-<h3><div style="font-family: verdana, sans-serif;">If you wish to create one here's an example code:</div><h3>
 <details>
-<summary>Click here to view example:</summary>
+<summary>Example Code</summary>
 
-```PHP
-//Example script:
-
-
+```php
 <?php
-class ExampleScript extends \hungergames\api\scripts\HGAPIScript{
-    public function __construct(){
-        parent::__construct("Script names here", "Versions here 1.0", "Authors here xBeastMode");
+
+use hungergames\api\scripts\HGAPIScript;
+
+class ExampleScript extends HGAPIScript {
+
+    public function __construct() {
+        parent::__construct("Script name", "Versions here", "Author");
     }
-    public function onLoad(){
+
+    public function onLoad() {
         $this->sendConsoleMessage("Test script loaded!");
     }
 }
 
-
-//All function from this script api are:
+// functions from this script
 
 /**
-     * Creates script config
-     *
-     * @param $name
-     * @param array $values
-     * @return Config
-     */
-    public void function createConfig($name, array $values)
-    /**
-     * Gets script config
-     *
-     * @return Config
-     */
-    public Config function getConfig()
-    /**
-     * Gets the name of the script
-     *
-     * @return string
-     */
-    public string function getName()
-    /**
-     * Gets the name of the script
-     *
-     * @return string
-     */
-    public string function getVersion()
-    /**
-     * Gets the author of the script
-     *
-     * @return string
-     */
-    public string function getAuthor()
-    /**
-     * disables script
-     */
-    public void function setDisabled()
-    /**
-     * enables script
-     */
-    public void function setEnabled();
-    /**
-     * returns whether script is enabled or not
-     *
-     * @return bool
-     */
-    public bool function isEnabled()
-    /**
-     * Sends console message
-     *
-     * @param $message
-     */
-    public void function sendConsoleMessage($message)
-    /**
-     * Called when script is loaded
-     */
-    public function onLoad(){
-    //your code here
-    }
-    /**
-     * called when player joins game
-     *
-     * @param Player $p
-     * @param HungerGames $game
-     */
-    public function onPlayerJoinGame(Player $p, HungerGames $game){
-    //your code here
-    }
-    /**
-     * called when player quits game
-     *
-     * @param Player $p
-     * @param HungerGames $game
-     */
-    public function onPlayerQuitGame(Player $p, HungerGames $game){
-    //your code here
-    }
-    /**
-     * Called when player fails to join full game
-     *
-     * @param Player $p
-     * @param HungerGames $game
-     */
-    public function gameIsFull(Player $p, HungerGames $game){
-    //your code here
-    }
+ * Creates script config
+ *
+ * @param $name
+ * @param array $values
+ * @return Config
+ */
+public function createConfig($name, array $values);
 
-    /**
-     * Called when player is waiting for players
-     *
-     * @param array $players
-     * @param HungerGames $game
-     */
-    public function whileWaitingForPlayers(array $players, HungerGames $game){
-    //your code here
-    }
-    /**
-     * Called when player is waiting for players
-     *
-     * @param array $players
-     * @param HungerGames $game
-     */
-    public function whileWaitingToStart(array $players, HungerGames $game){
-    //your code here
-    }
-    /**
-     * Called when game starts
-     *
-     * @param array $players
-     * @param HungerGames $game
-     */
-    public function onGameStart(array $players, HungerGames $game){
-    //your code here
-    }
-    /**
-     * Called when death match starts
-     *
-     * @param array $players
-     * @param HungerGames $game
-     */
-    public function onDeathMatchStart(array $players, HungerGames $game){
-    //your code here
-    }
-    /**
-     * Called when players wins a game
-     *
-     * @param Player $p
-     * @param HungerGames $game
-     */
-    public function onPlayerWinGame(Player $p, HungerGames $game){
-    //your code here
-    }information
+/**
+ * Gets script config
+ *
+ * @return Config
+ */
+public function getConfig();
+
+/**
+ * Gets the name of the script
+ *
+ * @return string
+ */
+public function getName();
+
+/**
+ * Gets the name of the script
+ *
+ * @return string
+ */
+public function getVersion();
+
+/**
+ * Gets the author of the script
+ *
+ * @return string
+ */
+public function getAuthor();
+
+/**
+ * Disables script
+ */
+public function setDisabled();
+
+/**
+ * Enables script
+ */
+public function setEnabled();
+
+/**
+ * Returns whether script is enabled or not
+ *
+ * @return bool
+ */
+public function isEnabled();
+
+/**
+ * Sends console message
+ *
+ * @param $message
+ */
+public function sendConsoleMessage($message);
+
+/**
+ * Called when script is loaded
+ */
+public function onLoad() : void {
+    // code
+}
+
+/**
+ * Called when player joins game
+ *
+ * @param Player $player
+ * @param HungerGames $game
+ */
+public function onPlayerJoinGame(Player $player, HungerGames $game) {
+    // code
+}
+
+/**
+ * Called when player quits game
+ *
+ * @param Player $player
+ * @param HungerGames $game
+ */
+public function onPlayerQuitGame(Player $player, HungerGames $game) {
+    // code
+}
+
+/**
+ * Called when players wins a game
+ *
+ * @param Player $player
+ * @param HungerGames $game
+ */
+public function onPlayerWinGame(Player $player, HungerGames $game) {
+    // code
+}
+
+/**
+ * Called when players lose a game
+ *
+ * @param Player $player
+ * @param HungerGames $game
+ */
+public function onPlayerLoseGame(Player $player, HungerGames $game) {
+    // code
+}
+
+/**
+ * Called when player fails to join full game
+ *
+ * @param Player $player
+ * @param HungerGames $game
+ */
+public function gameIsFull(Player $player, HungerGames $game) {
+    // code
+}
+
+/**
+ * Called when player is waiting for players
+ *
+ * @param array $players
+ * @param HungerGames $game
+ */
+public function whileWaitingForPlayers(array $players, HungerGames $game) {
+    // code
+}
+
+/**
+ * Called when player is waiting for players
+ *
+ * @param array $players
+ * @param HungerGames $game
+ */
+public function whileWaitingToStart(array $players, HungerGames $game) {
+    // code
+}
+
+/**
+ * Called when game starts
+ *
+ * @param array $players
+ * @param HungerGames $game
+ */
+public function onGameStart(array $players, HungerGames $game) {
+    // code
+}
+
+/**
+ * Called when death match starts
+ *
+ * @param array $players
+ * @param HungerGames $game
+ */
+public function onDeathMatchStart(array $players, HungerGames $game) {
+    // code
+}
 ```
 </details>
 
-Commands:
+### Commands:
 
 * /hg add <game> : adds a new game
   * OP perm: hg.command.add
