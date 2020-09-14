@@ -1,5 +1,6 @@
 # HungerGames
-=============
+
+A HungerGames plugin for PocketMine-MP.
 
 ## Installation
 
