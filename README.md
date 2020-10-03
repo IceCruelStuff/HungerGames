@@ -19,7 +19,7 @@ You can also join a game by typing `/hg join <game>`.
 This plugin comes with a script loader API. You can use this to access game functions, like when player joins, quits, wins, etc. You do not need to enable it, as it loads itself.
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><strong>Example Code 📖</strong></summary>
 
 ```php
 <?php
@@ -199,43 +199,97 @@ public function onDeathMatchStart(array $players, HungerGames $game) {
 ```
 </details>
 
-### Commands:
+### Game Commands
 
-* /hg add <game> : adds a new game
-  * OP perm: hg.command.add
-    
-* /hg del <game> : deletes a game
-  * OP perm: hg.command.del
-  
-* /hg min <game> <number> : changes the number of minimum players required to start a game
-  * OP perm: hg.command.min
-  
-* /hg max <game> <number> : changes number of maximum players that can enter a game
-  * OP perm: hg.command.max
+#### /hg join
+**Usage:** `/hg join <game>`
 
-* /hg level <game> <level name> : changes level of game where players are gonna go
-  * OP perm: hg.command.level
+**Description:** Joins a new game
 
-* /hg ws <game> <number> : sets amount of seconds to wait before game starts  
-  * OP perm: hg.command.ws
+**Permission:** None
 
-* /hg gs <game> <number> : sets amount of second to pass before death match starts
-  * OP perm: hg.command.gs
+#### /hg leave
+**Usage:** `/hg leave`
 
-* /hg addslot <game> <name> : adds new slot to game (positions sets where you are standing)
-  * OP perm: hg.command.slot.add
+**Description:** Leaves the game that you are playing
 
-* /hg delslot <game> <name> : deletes slot from game by name
-  * OP perm: hg.command.slot.del
+**Permission** None
 
-* /hg lobby <game> : sets the lobby position of a game where you're standing
-  * OP perm: hg.command.lobby
-  
-* /hg dm <game> : sets the death match position of a game where you're standing
-  * OP perm: hg.command.dm
+### Setup Commands
 
-* /hg leave : leaves game that you are playing
-  * OP perm: none
-  
-* /hg join <game> : join a new game
-  * OP perm: none
+#### /hg add
+**Usage:** `/hg add <game>`
+
+**Description:** Adds a new game
+
+**Permission:** `hg.command.add` (OP)
+
+#### /hg del
+**Usage:** `/hg del <game>`
+
+**Description:** Deletes a game
+
+**Permission:** `hg.command.del` (OP)
+
+#### /hg min
+**Usage:** `/hg min <game> <number>`
+
+**Description:** Changes the number of minimum players required to start a game
+
+**Permission:** `hg.command.min` (OP)
+
+#### /hg max
+**Usage:** `/hg max <game> <number>`
+
+**Description:** Changes the number of maximum players that can enter a game
+
+**Permission:** `hg.command.max` (OP)
+
+#### /hg level
+**Usage:** `/hg level <game> <level name>`
+
+**Description:** Changes what level the players are going to go
+
+**Permission:** `hg.command.level` (OP)
+
+#### /hg ws
+**Usage:** `/hg ws <game> <number>`
+
+**Description:** Sets amount of seconds to wait before the game starts
+
+**Permission:** `hg.command.ws` (OP)
+
+#### /hg gs
+**Usage:** `/hg gs <game> <number>`
+
+**Description:** Sets the amount of seconds to pass before the death match starts
+
+**Permission:** `hg.command.gs` (OP)
+
+#### /hg addslot
+**Usage:** `/hg addslot <game> <name>`
+
+**Description:** Adds a new slot to the game (positions sets where you are standing)
+
+**Permission:** `hg.command.slot.add` (OP)
+
+#### /hg delslot
+**Usage:** `/hg delslot <game> <name>`
+
+**Description:** Deletes a slot from game by name
+
+**Permission:** `hg.command.slot.del` (OP)
+
+#### /hg lobby
+**Usage:** `/hg lobby <game>`
+
+**Description:** Sets the lobby position of a game where you're standing
+
+**Permission:** `hg.command.lobby` (OP)
+
+#### /hg dm
+**Usage:** `/hg dm <game>`
+
+**Description:** Sets the death match position of a game where you're standing
+
+**Permission:** `hg.command.dm` (OP)
