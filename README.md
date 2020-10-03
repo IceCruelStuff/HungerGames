@@ -19,7 +19,7 @@ You can also join a game by typing `/hg join <game>`.
 This plugin comes with a script loader API. You can use this to access game functions, like when player joins, quits, wins, etc. You do not need to enable it, as it loads itself.
 
 <details>
-<summary>Example Code</summary>
+<summary><strong>Example Code</strong></summary>
 
 ```php
 <?php
