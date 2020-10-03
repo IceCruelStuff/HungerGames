@@ -202,94 +202,94 @@ public function onDeathMatchStart(array $players, HungerGames $game) {
 ### Game Commands
 
 #### /hg join
-**Usage:** `/hg join <game>`
+***Usage:*** `/hg join <game>`
 
-**Description:** Joins a new game
+***Description:*** Joins a new game
 
-**Permission:** None
+***Permission:*** None
 
 #### /hg leave
-**Usage:** `/hg leave`
+***Usage:*** `/hg leave`
 
-**Description:** Leaves the game that you are playing
+***Description:*** Leaves the game that you are playing
 
-**Permission** None
+***Permission:*** None
 
 ### Setup Commands
 
 #### /hg add
-**Usage:** `/hg add <game>`
+***Usage:*** `/hg add <game>`
 
-**Description:** Adds a new game
+***Description:*** Adds a new game
 
-**Permission:** `hg.command.add` (OP)
+***Permission:*** `hg.command.add` (OP)
 
 #### /hg del
-**Usage:** `/hg del <game>`
+***Usage:*** `/hg del <game>`
 
-**Description:** Deletes a game
+***Description:*** Deletes a game
 
-**Permission:** `hg.command.del` (OP)
+***Permission:*** `hg.command.del` (OP)
 
 #### /hg min
-**Usage:** `/hg min <game> <number>`
+***Usage:*** `/hg min <game> <number>`
 
-**Description:** Changes the number of minimum players required to start a game
+***Description:*** Changes the number of minimum players required to start a game
 
-**Permission:** `hg.command.min` (OP)
+***Permission:*** `hg.command.min` (OP)
 
 #### /hg max
-**Usage:** `/hg max <game> <number>`
+***Usage:*** `/hg max <game> <number>`
 
-**Description:** Changes the number of maximum players that can enter a game
+***Description:*** Changes the number of maximum players that can enter a game
 
-**Permission:** `hg.command.max` (OP)
+***Permission:*** `hg.command.max` (OP)
 
 #### /hg level
-**Usage:** `/hg level <game> <level name>`
+***Usage:*** `/hg level <game> <level name>`
 
-**Description:** Changes what level the players are going to go
+***Description:*** Changes what level the players are going to go
 
-**Permission:** `hg.command.level` (OP)
+***Permission:*** `hg.command.level` (OP)
 
 #### /hg ws
-**Usage:** `/hg ws <game> <number>`
+***Usage:*** `/hg ws <game> <number>`
 
-**Description:** Sets amount of seconds to wait before the game starts
+***Description:*** Sets amount of seconds to wait before the game starts
 
-**Permission:** `hg.command.ws` (OP)
+***Permission:*** `hg.command.ws` (OP)
 
 #### /hg gs
-**Usage:** `/hg gs <game> <number>`
+***Usage:*** `/hg gs <game> <number>`
 
-**Description:** Sets the amount of seconds to pass before the death match starts
+***Description:*** Sets the amount of seconds to pass before the death match starts
 
-**Permission:** `hg.command.gs` (OP)
+***Permission:*** `hg.command.gs` (OP)
 
 #### /hg addslot
-**Usage:** `/hg addslot <game> <name>`
+***Usage:*** `/hg addslot <game> <name>`
 
-**Description:** Adds a new slot to the game (positions sets where you are standing)
+***Description:*** Adds a new slot to the game (positions sets where you are standing)
 
-**Permission:** `hg.command.slot.add` (OP)
+***Permission:*** `hg.command.slot.add` (OP)
 
 #### /hg delslot
-**Usage:** `/hg delslot <game> <name>`
+***Usage:*** `/hg delslot <game> <name>`
 
-**Description:** Deletes a slot from game by name
+***Description:*** Deletes a slot from game by name
 
-**Permission:** `hg.command.slot.del` (OP)
+***Permission:*** `hg.command.slot.del` (OP)
 
 #### /hg lobby
-**Usage:** `/hg lobby <game>`
+***Usage:*** `/hg lobby <game>`
 
-**Description:** Sets the lobby position of a game where you're standing
+***Description:*** Sets the lobby position of a game where you're standing
 
-**Permission:** `hg.command.lobby` (OP)
+***Permission:*** `hg.command.lobby` (OP)
 
 #### /hg dm
-**Usage:** `/hg dm <game>`
+***Usage:*** `/hg dm <game>`
 
-**Description:** Sets the death match position of a game where you're standing
+***Description:*** Sets the death match position of a game where you're standing
 
-**Permission:** `hg.command.dm` (OP)
+***Permission:*** `hg.command.dm` (OP)
