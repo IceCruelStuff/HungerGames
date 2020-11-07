@@ -100,7 +100,7 @@ class Loader extends PluginBase {
 	/**
 	 * Creates HungerGames resource name
 	 *
-	 * @param	     $resource
+	 * @param string $resource
 	 * @param HungerGames $data
 	 */
 	public function createGameResource($resource, HungerGames $data) {
@@ -110,7 +110,7 @@ class Loader extends PluginBase {
 	/**
 	 * Deletes HungerGames resource name
 	 *
-	 * @param $resource
+	 * @param string $resource
 	 */
 	public function deleteGameResource($resource) {
 		if ($this->gameResourceExists($resource)) {
