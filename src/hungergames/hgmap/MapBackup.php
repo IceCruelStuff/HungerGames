@@ -5,7 +5,8 @@ namespace hungergames\hgmap;
 use hungergames\Loader;
 use hungergames\tasks\AsyncMapBackup;
 
-class MapBackup {
+class MapBackup
+{
 
     /** @var Loader */
     public $loader;
@@ -17,7 +18,8 @@ class MapBackup {
      * @param Loader $loader
      *
      */
-    public function __construct(Loader $loader) {
+    public function __construct(Loader $loader)
+	{
         $this->loader = $loader;
     }
 
@@ -31,7 +33,8 @@ class MapBackup {
      *
      * @return void
      */
-    public function write($source, $destination, string $game) {
+    public function write($source, $destination, string $game)
+	{
         $this->asyncWrite($source, $destination, $game);
     }
 
@@ -42,7 +45,8 @@ class MapBackup {
      * @param    $destination
      * @param string $game
      */
-    public function asyncWrite($source, $destination, string $game) {
+    public function asyncWrite($source, $destination, string $game)
+	{
         $this->loader->getServer()->getAsyncPool()->submitTask(new AsyncMapBackup($source, $destination, $game));
     }
 
@@ -57,7 +61,8 @@ class MapBackup {
      * @return void
      *
      */
-    public function reset($source, $destination, string $game) {
+    public function reset($source, $destination, string $game)
+	{
         $this->asyncWrite($source, $destination, $game);
     }
 
