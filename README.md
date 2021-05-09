@@ -36,17 +36,18 @@ class ExampleScript extends HGAPIScript {
         $this->sendConsoleMessage("Test script loaded!");
     }
 }
+```
 
-// functions from this script
-
+**Functions**
+```php
 /**
  * Creates script config
  *
- * @param $name
+ * @param string $name
  * @param array $values
  * @return Config
  */
-public function createConfig($name, array $values);
+public function createConfig(string $name, array $values);
 
 /**
  * Gets script config
@@ -96,9 +97,9 @@ public function isEnabled();
 /**
  * Sends console message
  *
- * @param $message
+ * @param string $message
  */
-public function sendConsoleMessage($message);
+public function sendConsoleMessage(string $message);
 
 /**
  * Called when script is loaded

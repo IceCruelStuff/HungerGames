@@ -41,6 +41,10 @@ class Loader extends PluginBase {
 	}
 
 	public function onEnable() : void {
+		$levels = scandir($this->getServer()->getDataPath() . "worlds/");
+		foreach ($levels as $level) {
+			$this->getServer()->loadLevel($level); // load all worlds
+		}
 		$this->storage = new GameStorage();
 		$this->globalManager = new GlobalManager($this);
 		$this->scriptManager = new HGAPIScriptManager($this);
@@ -100,19 +104,19 @@ class Loader extends PluginBase {
 	/**
 	 * Creates HungerGames resource name
 	 *
-	 * @param	     $resource
+	 * @param string $resource
 	 * @param HungerGames $data
 	 */
-	public function createGameResource($resource, HungerGames $data) {
+	public function createGameResource(string $resource, HungerGames $data) {
 		file_put_contents($this->getResourceDataPath() . $resource . ".dat", serialize($data));
 	}
 
 	/**
 	 * Deletes HungerGames resource name
 	 *
-	 * @param $resource
+	 * @param string $resource
 	 */
-	public function deleteGameResource($resource) {
+	public function deleteGameResource(string $resource) {
 		if ($this->gameResourceExists($resource)) {
 			unlink($this->getResourceDataPath() . $resource . ".dat");
 		}
@@ -121,10 +125,10 @@ class Loader extends PluginBase {
 	/**
 	 * Gets game resource by Id
 	 *
-	 * @param $resource
+	 * @param string $resource
 	 * @return HungerGames|null
 	 */
-	public function getGameResource($resource) {
+	public function getGameResource(string $resource) {
 		if (file_exists($this->getResourceDataPath() . $resource . ".dat")) {
 			return unserialize(file_get_contents($this->getResourceDataPath() . $resource . ".dat"));
 		}
@@ -134,20 +138,20 @@ class Loader extends PluginBase {
 	/**
 	 * Checks if game resource exists
 	 *
-	 * @param $resource
+	 * @param string $resource
 	 * @return bool
 	 */
-	public function gameResourceExists($resource) {
+	public function gameResourceExists(string $resource) {
 		return file_exists($this->getResourceDataPath() . $resource . ".dat");
 	}
 
 	/**
 	 * Updates resource by recreating it
 	 *
-	 * @param	     $resource
+	 * @param string $resource
 	 * @param HungerGames $data
 	 */
-	public function updateResourceData($resource, HungerGames $data) {
+	public function updateResourceData(string $resource, HungerGames $data) {
 		$this->createGameResource($resource, $data);
 	}
 
@@ -193,20 +197,20 @@ class Loader extends PluginBase {
 	/**
 	 * Checks if game arena exists
 	 *
-	 * @param $name
+	 * @param string $name
 	 * @return bool
 	 */
-	public function gameArenaExists($name) {
+	public function gameArenaExists(string $name) {
 		return file_exists($this->getArenasDataPath() . $name . ".yml");
 	}
 
 	/**
 	 * Gets game arena by name
 	 *
-	 * @param $name
+	 * @param string $name
 	 * @return null|Config
 	 */
-	public function getGameArenaByName($name) {
+	public function getGameArenaByName(string $name) {
 		return file_exists($this->getArenasDataPath() . $name . ".yml") ? new Config($this->getArenasDataPath() . $name . ".yml", Config::YAML) : null;
 	}
 
@@ -278,11 +282,11 @@ class Loader extends PluginBase {
 	/**
 	 * Gets message by index
 	 *
-	 * @param $message
+	 * @param int $index
 	 * @return string
 	 */
-	public function getMessage($message) {
-		return $this->getMessages()[$message];
+	public function getMessage(int $index) {
+		return $this->getMessages()[$index];
 	}
 
 	/**
@@ -337,8 +341,8 @@ class Loader extends PluginBase {
 			],
 			"sign_list" => []
 		];
-		$c = new Config($this->getArenasDataPath() . $game->getName() . ".yml", Config::YAML, $contents);
-		$c->save();
+		$config = new Config($this->getArenasDataPath() . $game->getName() . ".yml", Config::YAML, $contents);
+		$config->save();
 	}
 
 }

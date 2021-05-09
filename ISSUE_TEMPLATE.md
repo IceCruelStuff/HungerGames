@@ -1,11 +1,11 @@
 ### Build Version
-- 18.2
+- 1.0
 
 ### PocketMine API Version
-- 3.0.0-ALPHA12
+- 3.0.0
 
 ### Steps to reproduce
-- explain how to reproduce your issue
+- Explain how to reproduce your issue
 
 ### Arena Config
 ```yaml
