@@ -384,7 +384,9 @@ class GameManager {
 		}
 		$this->HGApi->getStorage()->addWaitingPlayer($p, $this->getGame());
 		foreach ($this->HGApi->getScriptManager()->getScripts() as $script) {
-			if (!$script->isEnabled()) continue;
+			if (!$script->isEnabled()) {
+				continue;
+			}
 			$script->onPlayerJoinGame($p, $this->getGame());
 		}
 		if ($message) {
@@ -405,7 +407,9 @@ class GameManager {
 		$this->HGApi->getStorage()->removeWaitingPlayer($p);
 		$p->teleport($this->game->getLobbyPosition());
 		foreach ($this->HGApi->getScriptManager()->getScripts() as $script) {
-			if (!$script->isEnabled()) continue;
+			if (!$script->isEnabled()) {
+				continue;
+			}
 			$script->onPlayerQuitGame($p, $this->getGame());
 		}
 		if ($message) {
@@ -487,4 +491,5 @@ class GameManager {
 			}
 		}
 	}
+
 }
