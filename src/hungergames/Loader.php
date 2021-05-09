@@ -286,7 +286,7 @@ class Loader extends PluginBase {
 	 * @return string
 	 */
 	public function getMessage(int $index) {
-		return $this->getMessages()[$message];
+		return $this->getMessages()[$index];
 	}
 
 	/**
