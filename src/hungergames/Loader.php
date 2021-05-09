@@ -282,10 +282,10 @@ class Loader extends PluginBase {
 	/**
 	 * Gets message by index
 	 *
-	 * @param $message
+	 * @param int $index
 	 * @return string
 	 */
-	public function getMessage($message) {
+	public function getMessage(int $index) {
 		return $this->getMessages()[$message];
 	}
 
