@@ -24,9 +24,9 @@ This plugin comes with a script loader API. You can use this to access game func
 ```php
 <?php
 
-use hungergames\api\scripts\HGAPIScript;
+use HungerGames\API\Scripts\HungerGamesAPI;
 
-class ExampleScript extends HGAPIScript {
+class ExampleScript extends HungerGamesAPI {
 
     public function __construct() {
         parent::__construct("Script name", "Versions here", "Author");
