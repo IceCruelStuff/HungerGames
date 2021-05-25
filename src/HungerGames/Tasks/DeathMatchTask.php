@@ -12,7 +12,7 @@ class DeathMatchTask extends Task {
 
     /** @var Loader */
     private $hungerGamesAPI;
-    /** @var Loader */
+    /** @var HungerGames */
     private $game;
 
     public function __construct(Loader $loader, HungerGames $game) {
@@ -33,7 +33,7 @@ class DeathMatchTask extends Task {
                 $player->getInventory()->clearAll();
                 $player->getArmorInventory()->clearAll();
                 $this->hungerGamesAPI->getScriptManager()->callOnPlayerWinGame($player, $this->game);
-                $msg = Msg::getHGMessage("hg.message.win");
+                $msg = Msg::getHungerGamesMessage("hg.message.win");
                 $msg = str_replace(["%game%", "%player%"], [$this->game->getName(), $player->getName()], $msg);
                 $this->hungerGamesAPI->getServer()->broadcastMessage(Msg::color($msg));
             }
