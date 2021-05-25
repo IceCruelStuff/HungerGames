@@ -43,9 +43,9 @@ class GameRunningTask extends Task {
     public function onRun(int $currentTick) {
         $count = $this->hungerGamesAPI->getStorage()->getPlayersInGameCount($this->game);
         --$this->seconds;
-        if (fmod($this->game->refillAfter(), $this->seconds) === 0) {
+        if (fmod($this->game->refillAfter(), $this->seconds) == 0) {
             $this->manager->refillChests();
-            $msg = Msg::getHGMessage("hg.message.refill");
+            $msg = Msg::getHungerGamesMessage("hg.message.refill");
             $msg = str_replace("%game%", $this->game->getName(), $msg);
             $this->manager->sendGameMessage($msg);
         }
@@ -65,7 +65,7 @@ class GameRunningTask extends Task {
                 $player->getInventory()->clearAll();
                 $player->getArmorInventory()->clearAll();
                 $this->hungerGamesAPI->getScriptManager()->callOnPlayerWinGame($player, $this->game);
-                $msg = Msg::getHGMessage("hg.message.win");
+                $msg = Msg::getHungerGamesMessage("hg.message.win");
                 $msg = str_replace(["%game%", "%player%"], [$this->game->getName(), $player->getName()], $msg);
                 $this->hungerGamesAPI->getServer()->broadcastMessage(Msg::color($msg));
             }
@@ -85,7 +85,7 @@ class GameRunningTask extends Task {
                     $player->teleport($this->game->getLobbyPosition());
                 }
                 $this->hungerGamesAPI->getStorage()->removePlayersInGame($this->game);
-                $msg = Msg::getHGMessage("hg.message.noWin");
+                $msg = Msg::getHungerGamesMessage("hg.message.noWin");
                 $msg = str_replace("%game%", $this->game->getName(), $msg);
                 $this->hungerGamesAPI->getServer()->broadcastMessage(Msg::color($msg));
                 $this->game->resetGameLevelBackup();
@@ -95,7 +95,7 @@ class GameRunningTask extends Task {
             foreach ($this->hungerGamesAPI->getStorage()->getPlayersInGame($this->game) as $player) {
                 $player->teleport($this->game->getDeathMatchPosition());
             }
-            $msg = Msg::getHGMessage("hg.message.deathMatch");
+            $msg = Msg::getHungerGamesMessage("hg.message.deathMatch");
             $msg = str_replace("%game%", $this->game->getName(), $msg);
             $this->hungerGamesAPI->getGlobalManager()->getGameManagerByName($this->game->getName())->sendGameMessage(Msg::color($msg));
             $this->hungerGamesAPI->getScriptManager()->callOnDeathMatchStart($this->hungerGamesAPI->getStorage()->getPlayersInGame($this->game), $this->game);
@@ -106,12 +106,12 @@ class GameRunningTask extends Task {
         }
 
         if ($this->game->isSkyWars() === "no") {
-            $msg = Msg::getHGMessage("hg.message.dmTime");
+            $msg = Msg::getHungerGamesMessage("hg.message.dmTime");
             $msg = str_replace(["%game%", "%seconds%"], [$this->game->getName(), $this->seconds], $msg);
             $msg = Msg::color($msg);
             $this->manager->sendGamePopup($msg);
         } else {
-            $msg = Msg::getHGMessage("hg.message.swTimeLeft");
+            $msg = Msg::getHungerGamesMessage("hg.message.swTimeLeft");
             $msg = str_replace(["%game%", "%seconds%"], [$this->game->getName(), $this->seconds], $msg);
             $msg = Msg::color($msg);
             $this->manager->sendGamePopup($msg);
