@@ -36,11 +36,11 @@ abstract class HungerGamesAPI {
     /**
      * Creates script config
      *
-     * @param       $name
+     * @param string $name
      * @param array $values
      * @return Config
      */
-    public function createConfig($name, array $values) {
+    public function createConfig(string $name, array $values) {
         if (substr($name, strlen($name) - 4) !== ".yml") {
             $this->config = new Config($this->scriptConfigPath . $name . ".yml", Config::YAML, $values);
         } else {
@@ -86,14 +86,14 @@ abstract class HungerGamesAPI {
     }
 
     /**
-     * disables script
+     * Disables script
      */
     public function setDisabled() {
         $this->enabled = false;
     }
 
     /**
-     * enables script
+     * Enables script
      */
     public function setEnabled() {
         $this->enabled = true;
@@ -111,9 +111,9 @@ abstract class HungerGamesAPI {
     /**
      * Sends console message
      *
-     * @param $message
+     * @param string $message
      */
-    public function sendConsoleMessage($message) {
+    public function sendConsoleMessage(string $message) {
         $this->logger->notice("[HungerGames Script: " . $this->getName() . "]: " . $message);
     }
 
@@ -197,7 +197,7 @@ abstract class HungerGamesAPI {
     /**
      * Called when players wins a game
      *
-     * @param Player      $players
+     * @param Player      $player
      * @param HungerGames $game
      */
     public function onPlayerWinGame(Player $player, HungerGames $game) {

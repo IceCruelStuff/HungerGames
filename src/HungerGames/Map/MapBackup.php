@@ -25,23 +25,23 @@ class MapBackup {
      *
      * Writes folder backup
      *
-     * @param    $source
-     * @param    $destination
+     * @param string $source
+     * @param string $destination
      * @param string $game
      *
      * @return void
      */
-    public function write($source, $destination, string $game) {
+    public function write(string $source, string $destination, string $game) {
         $this->asyncWrite($source, $destination, $game);
     }
 
     /**
      *
-     * @param    $source
-     * @param    $destination
+     * @param string $source
+     * @param string $destination
      * @param string $game
      */
-    public function asyncWrite($source, $destination, string $game) {
+    public function asyncWrite(string $source, string $destination, string $game) {
         $this->loader->getServer()->getAsyncPool()->submitTask(new AsyncMapBackup($source, $destination, $game));
     }
 
@@ -49,14 +49,14 @@ class MapBackup {
      *
      * Resets game map
      *
-     * @param    $source
-     * @param    $destination
+     * @param string $source
+     * @param string $destination
      * @param string $game
      *
      * @return void
      *
      */
-    public function reset($source, $destination, string $game) {
+    public function reset(string $source, string $destination, string $game) {
         $this->asyncWrite($source, $destination, $game);
     }
 

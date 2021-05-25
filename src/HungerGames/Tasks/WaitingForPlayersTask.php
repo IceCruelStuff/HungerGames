@@ -45,7 +45,7 @@ class WaitingForPlayersTask extends Task {
         }
         if ($count < $this->game->getMinimumPlayers()) {
             $this->hungerGamesAPI->getScriptManager()->callWhileWaitingForPlayers($this->hungerGamesAPI->getStorage()->getPlayersInWaitingGame($this->game), $this->game);
-            $msg = Msg::getHGMessage("hg.message.awaiting");
+            $msg = Msg::getHungerGamesMessage("hg.message.awaiting");
             $msg = str_replace("%game%", $this->game->getName(), $msg);
             $this->hungerGamesAPI->getGlobalManager()->getGameManagerByName($this->game->getName())->sendGamePopup(Msg::color($msg));
             return;

@@ -95,7 +95,7 @@ class GameStorage extends Storage {
                 }
             }
         }
-        return $players !== null ? $players : null;
+        return $players !== [] ? $players : [];
     }
 
     /**
@@ -238,7 +238,7 @@ class GameStorage extends Storage {
                 }
             }
         }
-        return $players !== null ? $players : null;
+        return $players !== [] ? $players : [];
     }
 
     /**

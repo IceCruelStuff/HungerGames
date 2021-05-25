@@ -108,7 +108,7 @@ class GlobalManager {
      * Gets game editor by hg object from global manager
      *
      * @param HungerGames $game
-     * @return null
+     * @return GameEditor|null
      */
     public function getGameEditor(HungerGames $game) {
         if (isset($this->gamesEditor[$game->getName()])) {

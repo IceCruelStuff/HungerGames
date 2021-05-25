@@ -216,7 +216,7 @@ class HungerGamesCommand extends Command implements PluginIdentifiableCommand {
                 }
                 if (empty($args[1]) || empty($args[2])) {
                     $sender->sendMessage(Msg::color("&a- /hg addslot <game> <name>"));
-                    return false;
+                    // return false;
                 }
                 $game = $args[1];
                 $slot = $args[2];
@@ -245,7 +245,6 @@ class HungerGamesCommand extends Command implements PluginIdentifiableCommand {
                 $game1 = $this->hungerGamesAPI->getGlobalManager()->getGameEditorByName($game);
                 if ($game1->removeSlot($slot)) {
                     $sender->sendMessage(Msg::color("&aDeleted slot " . $slot . " for game " . $game . "."));
-                    return true;
                 } else {
                     $sender->sendMessage(Msg::color("&cSlot $slot not found for game $game."));
                     return false;

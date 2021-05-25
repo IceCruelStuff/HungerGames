@@ -51,7 +51,7 @@ class WaitingToStartTask extends Task {
         }
         if ($this->seconds > 0) {
             if ($count >= $this->game->getMinimumPlayers()) {
-                $message = str_replace(["%seconds%", "%game%"], [$this->seconds, $this->game->getName()], Msg::getHGMessage("hg.message.waiting"));
+                $message = str_replace(["%seconds%", "%game%"], [$this->seconds, $this->game->getName()], Msg::getHungerGamesMessage("hg.message.waiting"));
                 $this->manager->sendGamePopup(Msg::color($message));
                 $this->hungerGamesAPI->getScriptManager()->callWhileWaitingToStart($this->hungerGamesAPI->getStorage()->getPlayersInWaitingGame($this->game), $this->game);
                 return;
@@ -82,7 +82,7 @@ class WaitingToStartTask extends Task {
             }
             $this->hungerGamesAPI->getStorage()->removePlayersInWaitingGame($this->game);
             $this->hungerGamesAPI->getScheduler()->cancelTask($this->getTaskId());
-            $message = str_replace("%game%", $this->game->getName(), Msg::getHGMessage("hg.message.start"));
+            $message = str_replace("%game%", $this->game->getName(), Msg::getHungerGamesMessage("hg.message.start"));
             $this->manager->sendGameMessage(Msg::color($message));
             $this->hungerGamesAPI->getScriptManager()->callOnGameStart($this->hungerGamesAPI->getStorage()->getPlayersInGame($this->game), $this->game);
             return;

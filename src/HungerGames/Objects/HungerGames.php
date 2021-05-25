@@ -35,7 +35,7 @@ class HungerGames extends Game {
     private $chestItems;
     /** @var float */
     private $refillAfter;
-    /** @var \string[] */
+    /** @var string[] */
     private $signList;
     /** @var bool */
     private $init = false;
@@ -305,7 +305,7 @@ class HungerGames extends Game {
      *
      * Returns all slots of games
      *
-     * @return Position[]|null
+     * @return Position[]
      *
      */
     public function getSlots() : array {
@@ -313,7 +313,7 @@ class HungerGames extends Game {
         foreach ($this->slots as $slotNumber => $pos) {
             $slots[] = new Position(floatval($pos["x"]), floatval($pos["y"]), floatval($pos["z"]), $this->gameLevel);
         }
-        return $slots === null ? null : $slots;
+        return $slots === [] ? [] : $slots;
     }
 
     /**
@@ -422,7 +422,7 @@ class HungerGames extends Game {
      *
      * Gets signs list
      *
-     * @return \string[]
+     * @return string[]
      *
      */
     public function getSignList() : array {
