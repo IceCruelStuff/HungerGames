@@ -47,18 +47,18 @@ class Exc {
      *
      */
     public static function double(float $val, $exploder = ".") {
-        return number_format((float)$val, 2, $exploder, "");
+        return number_format((float) $val, 2, $exploder, "");
     }
 
     public static function isNumber($value) {
-        return (is_numeric($value) || is_int($value) || is_float($value));
+        return is_numeric($value);
     }
 
-    public static function stringToInteger($val){
+    public static function stringToInteger($val) {
         return self::isNumber($val) ? intval($val) : 0;
     }
 
-    public static function stringToFloat($val){
+    public static function stringToFloat($val) {
         return self::isNumber($val) ? floatval($val) : 0.0;
     }
 
@@ -101,7 +101,7 @@ class Exc {
      * @return string
      *
      */
-    public static function randomString(int $length, $numbers = true, $chars = false){
+    public static function randomString(int $length, $numbers = true, $chars = false) {
         $abc = range("A", "Z");
         $num = range(0, 9);
         $str = "";
@@ -134,7 +134,7 @@ class Exc {
      * @return string
      *
      */
-    public static function mixString(string $string, $numbers = false, $chars = false){
+    public static function mixString(string $string, $numbers = false, $chars = false) {
         $num = range(0, 9);
         $str = "";
         if (!$numbers && !$chars) {
@@ -176,7 +176,7 @@ class Exc {
      * @return string
      *
      */
-    public static function replaceChars(string $string){
+    public static function replaceChars(string $string) {
         foreach (Exc::getChars($string) as $char) {
             $string = str_replace($char, "", $string);
         }
@@ -248,7 +248,7 @@ class Exc {
      * @return array
      *
      */
-    public static function getPHPClasses(string $phpCode){
+    public static function getPHPClasses(string $phpCode) {
         $classes = [];
         $tokens = token_get_all($phpCode);
         $count = count($tokens);
