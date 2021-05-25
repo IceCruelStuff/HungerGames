@@ -40,7 +40,7 @@ class SignManager {
         if (!is_int($amount)) {
             return;
         }
-        $this->refreshedSigns = $amount;
+        $this->refreshedSignsCount = $amount;
     }
 
     /**
