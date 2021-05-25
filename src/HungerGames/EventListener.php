@@ -151,7 +151,7 @@ class EventListener implements Listener {
 			}
 			$count = $this->hungerGamesAPI->getStorage()->getPlayersInGameCount($game);
 			if ($count > 1) {
-				$msg = Msg::getHGMessage("hg.message.death");
+				$msg = Msg::getHungerGamesMessage("hg.message.death");
 				$msg = str_replace(["%player%", "%game%", "%left%"], [$player->getName(), $game->getName(), $count], $msg);
 				$this->hungerGamesAPI->getGlobalManager()->getGameManager($game)->sendGameMessage(Msg::color($msg));
 			}
