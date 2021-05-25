@@ -235,9 +235,9 @@ class Loader extends PluginBase {
 	/**
 	 * Get script manager, manage all scripts
 	 *
-	 * @return HGAPIScriptManager
+	 * @return HungerGamesAPIManager
 	 */
-	public function getScriptManager() : HGAPIScriptManager {
+	public function getScriptManager() : HungerGamesAPIManager {
 		return $this->scriptManager;
 	}
 
