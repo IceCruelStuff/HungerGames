@@ -1,9 +1,9 @@
 <?php
 
-namespace hungergames;
+namespace HungerGames;
 
-use hungergames\lib\utils\Msg;
-use hungergames\tasks\WaitingForPlayersTask;
+use HungerGames\Lib\Utils\Msg;
+use HungerGames\Tasks\WaitingForPlayersTask;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\SignChangeEvent;
 use pocketmine\event\entity\EntityLevelChangeEvent;
