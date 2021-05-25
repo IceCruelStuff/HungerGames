@@ -4,7 +4,7 @@ namespace HungerGames\Lib\Manager;
 
 use HungerGames\Lib\Utils\Msg;
 use HungerGames\Loader;
-use hungergames\obj\HungerGames;
+use HungerGames\Object\HungerGames;
 use pocketmine\level\Position;
 use pocketmine\Player;
 use pocketmine\tile\Chest;
@@ -226,10 +226,10 @@ class GameManager {
      *
      * Sends game players popup
      *
-     * @param $message
+     * @param string $message
      *
      */
-    public function sendGamePopup($message) {
+    public function sendGamePopup(string $message) {
         $pig = $this->hungerGamesAPI->getStorage()->getPlayersInGame($this->getGame());
         for ($i = 0; $i < count($pig); ++$i) {
             $pig[$i]->sendPopup($message);
@@ -257,7 +257,7 @@ class GameManager {
                 $script->gameIsFull($player, $this->getGame());
             }
             if ($message) {
-                $player->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.full"))));
+                $player->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHungerGamesMessage("hg.message.full"))));
             }
             return;
         }
@@ -273,7 +273,7 @@ class GameManager {
             $script->onPlayerJoinGame($player, $this->getGame());
         }
         if ($message) {
-            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.join"))));
+            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHungerGamesMessage("hg.message.join"))));
         }
     }
 
@@ -296,7 +296,7 @@ class GameManager {
             $script->onPlayerQuitGame($player, $this->getGame());
         }
         if ($message) {
-            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
+            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHungerGamesMessage("hg.message.quit"))));
         }
     }
 
@@ -317,7 +317,7 @@ class GameManager {
             $script->onPlayerQuitGame($player, $this->getGame());
         }
         if ($message) {
-            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
+            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHungerGamesMessage("hg.message.quit"))));
         }
     }
 
@@ -387,7 +387,7 @@ class GameManager {
                 $script->gameIsFull($player, $this->getGame());
             }
             if ($message) {
-                $player->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.full"))));
+                $player->sendMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHungerGamesMessage("hg.message.full"))));
             }
             return;
         }
@@ -402,7 +402,7 @@ class GameManager {
             $script->onPlayerJoinGame($player, $this->getGame());
         }
         if ($message) {
-            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.join"))));
+            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHungerGamesMessage("hg.message.join"))));
         }
     }
 
@@ -425,7 +425,7 @@ class GameManager {
             $script->onPlayerQuitGame($player, $this->getGame());
         }
         if ($message) {
-            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHGMessage("hg.message.quit"))));
+            $this->sendGameMessage(Msg::color(str_replace(["%player%", "%game%"], [$player->getName(), $this->getGame()->getName()], Msg::getHungerGamesMessage("hg.message.quit"))));
         }
     }
 
