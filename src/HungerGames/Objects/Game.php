@@ -81,9 +81,9 @@ class Game {
     /**
      * Updates the game name
      *
-     * @param $new
+     * @param string $name
      */
-    public function setName($new) {
+    public function setName(string $name) {
         $this->name = $new;
         Loader::getInstance()->updateResourceData($this->name, $this->gameC);
     }
