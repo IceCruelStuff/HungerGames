@@ -1,20 +1,20 @@
 <?php
 
-namespace hungergames;
+namespace HungerGames;
 
-use hungergames\api\scripts\HGAPIScriptManager;
-use hungergames\command\HGCommand;
-use hungergames\hgmap\MapBackup;
-use hungergames\lib\GameStorage;
-use hungergames\lib\mgr\GlobalManager;
-use hungergames\lib\mgr\SignManager;
-use hungergames\tasks\GameSaveTask;
-use hungergames\tasks\LoadGamesTask;
+use HungerGames\API\Scripts\HungerGamesAPIManager;
+use HungerGames\Command\HungerGamesCommand;
+use HungerGames\Map\MapBackup;
+use HungerGames\Lib\GameStorage;
+use HungerGames\Lib\Manager\GlobalManager;
+use HungerGames\Lib\Manager\SignManager;
+use HungerGames\Tasks\GameSaveTask;
+use HungerGames\Tasks\LoadGamesTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-use hungergames\obj\HungerGames;
-use hungergames\lib\utils\Msg;
-use hungergames\tasks\RefreshSignsTask;
+use HungerGames\Object\HungerGames;
+use HungerGames\Lib\Utils\Msg;
+use HungerGames\Tasks\RefreshSignsTask;
 
 class Loader extends PluginBase {
 
