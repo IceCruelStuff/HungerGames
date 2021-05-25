@@ -18,7 +18,7 @@ class Msg {
      */
     public static function getEnableMessage() {
         $t = str_repeat("=", 50);
-        return exc::_("%n%n%n%%e$t%n%n%n%%aYou are using HungerGames version %%6$0!%n%%bMade by %%6$1!%n%n%n%%e$t%n%n%n", [Info::Version(), "[]"]);
+        return Exc::_("%n%n%n%%e$t%n%n%n%%aYou are using HungerGames version %%6$0!%n%%bMade by %%6$1!%n%n%n%%e$t%n%n%n", [Info::Version(), "[]"]);
     }
 
     /**
@@ -65,28 +65,28 @@ class Msg {
      * @return string
      */
     public static function color(string $message) {
-        $message = str_replace("&0", exc::_("%%0"), $message);
-        $message = str_replace("&1", exc::_("%%1"), $message);
-        $message = str_replace("&2", exc::_("%%2"), $message);
-        $message = str_replace("&3", exc::_("%%3"), $message);
-        $message = str_replace("&4", exc::_("%%4"), $message);
-        $message = str_replace("&5", exc::_("%%5"), $message);
-        $message = str_replace("&6", exc::_("%%6"), $message);
-        $message = str_replace("&7", exc::_("%%7"), $message);
-        $message = str_replace("&8", exc::_("%%8"), $message);
-        $message = str_replace("&9", exc::_("%%9"), $message);
-        $message = str_replace("&a", exc::_("%%a"), $message);
-        $message = str_replace("&b", exc::_("%%b"), $message);
-        $message = str_replace("&c", exc::_("%%c"), $message);
-        $message = str_replace("&d", exc::_("%%d"), $message);
-        $message = str_replace("&e", exc::_("%%e"), $message);
-        $message = str_replace("&f", exc::_("%%f"), $message);
-        $message = str_replace("&k", exc::_("%%k"), $message);
-        $message = str_replace("&l", exc::_("%%l"), $message);
-        $message = str_replace("&m", exc::_("%%m"), $message);
-        $message = str_replace("&n", exc::_("%%n"), $message);
-        $message = str_replace("&o", exc::_("%%o"), $message);
-        $message = str_replace("&r", exc::_("%%r"), $message);
+        $message = str_replace("&0", Exc::_("%%0"), $message);
+        $message = str_replace("&1", Exc::_("%%1"), $message);
+        $message = str_replace("&2", Exc::_("%%2"), $message);
+        $message = str_replace("&3", Exc::_("%%3"), $message);
+        $message = str_replace("&4", Exc::_("%%4"), $message);
+        $message = str_replace("&5", Exc::_("%%5"), $message);
+        $message = str_replace("&6", Exc::_("%%6"), $message);
+        $message = str_replace("&7", Exc::_("%%7"), $message);
+        $message = str_replace("&8", Exc::_("%%8"), $message);
+        $message = str_replace("&9", Exc::_("%%9"), $message);
+        $message = str_replace("&a", Exc::_("%%a"), $message);
+        $message = str_replace("&b", Exc::_("%%b"), $message);
+        $message = str_replace("&c", Exc::_("%%c"), $message);
+        $message = str_replace("&d", Exc::_("%%d"), $message);
+        $message = str_replace("&e", Exc::_("%%e"), $message);
+        $message = str_replace("&f", Exc::_("%%f"), $message);
+        $message = str_replace("&k", Exc::_("%%k"), $message);
+        $message = str_replace("&l", Exc::_("%%l"), $message);
+        $message = str_replace("&m", Exc::_("%%m"), $message);
+        $message = str_replace("&n", Exc::_("%%n"), $message);
+        $message = str_replace("&o", Exc::_("%%o"), $message);
+        $message = str_replace("&r", Exc::_("%%r"), $message);
         return $message;
     }
 
@@ -128,7 +128,7 @@ class Msg {
      * @param string $key
      * @param string $default
      *
-     * @return \string[]
+     * @return string
      */
     public static function getConfigMessage(string $key, string $default) {
         Loader::getInstance()->pushMessage($key, $default);
