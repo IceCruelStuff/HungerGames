@@ -22,16 +22,10 @@ class HungerGamesAPIManager {
      * Loads script
      *
      * @param HungerGamesAPI $script
-     * @return bool
      */
     public function loadScript(HungerGamesAPI $script) {
-        if ($script instanceof HungerGamesAPI) {
-            $script->onLoad();
-            $this->scripts[$script->getName()] = $script;
-            return true;
-        } else {
-            return false;
-        }
+        $script->onLoad();
+        $this->scripts[$script->getName()] = $script;
     }
 
     /**
