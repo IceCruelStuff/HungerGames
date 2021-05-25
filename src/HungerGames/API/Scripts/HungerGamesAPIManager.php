@@ -14,8 +14,8 @@ class HungerGamesAPIManager {
     /** @var Loader */
     private $hungerGamesAPI;
 
-    public function __construct(Loader $main) {
-        $this->hungerGamesAPI = $main;
+    public function __construct(Loader $loader) {
+        $this->hungerGamesAPI = $loader;
     }
 
     /**
