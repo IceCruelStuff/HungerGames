@@ -51,9 +51,9 @@ class Storage {
      * Clears out array index
      *
      * @param array $array
-     * @param       $index
+     * @param int $index
      */
-    public function clearOutIndexFromArray(array $array, $index) {
+    public function clearOutIndexFromArray(array $array, int $index) {
         if (!isset($array[$index])) {
             return;
         }
@@ -64,11 +64,11 @@ class Storage {
      * Clears out multi array index
      *
      * @param array $array
-     * @param       $index
+     * @param int $index
      */
-    public function clearOutIndexFromMultiArray(array $array, $index) {
+    public function clearOutIndexFromMultiArray(array $array, int $index) {
         foreach ($array as $res => $ret) {
-            foreach( $ret as $off => $tar) {
+            foreach ($ret as $off => $tar) {
                 if ($tar !== $index) {
                     continue;
                 }
