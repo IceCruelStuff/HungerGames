@@ -24,7 +24,7 @@ class HungerGamesAPIManager {
      * @param HungerGamesAPI $script
      * @return bool
      */
-    public function loadScript($script) {
+    public function loadScript(HungerGamesAPI $script) {
         if ($script instanceof HungerGamesAPI) {
             $script->onLoad();
             $this->scripts[$script->getName()] = $script;
@@ -63,12 +63,12 @@ class HungerGamesAPIManager {
     }
 
     /**
-     * returns script by name
+     * Returns script by name
      *
-     * @param $name
+     * @param string $name
      * @return HungerGamesAPI|null
      */
-    public function getScript($name) {
+    public function getScript(string $name) {
         if (isset($this->scripts[$name])) {
             return $this->scripts[$name];
         }
