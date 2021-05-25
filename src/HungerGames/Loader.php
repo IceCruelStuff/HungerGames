@@ -27,7 +27,7 @@ class Loader extends PluginBase {
 	private $globalManager;
 	/** @var Config */
 	private $messages;
-	/** @var HGAPIScriptManager */
+	/** @var HungerGamesAPIManager */
 	private $scriptManager;
 	/** @var MapBackup */
 	private $mapBackup;
@@ -47,7 +47,7 @@ class Loader extends PluginBase {
 		}
 		$this->storage = new GameStorage();
 		$this->globalManager = new GlobalManager($this);
-		$this->scriptManager = new HGAPIScriptManager($this);
+		$this->scriptManager = new HungerGamesAPIManager($this);
 		$this->mapBackup = new MapBackup($this);
 		$this->signManager = new SignManager($this);
 		$this->getServer()->getCommandMap()->register("hg", new HGCommand($this));
@@ -168,7 +168,7 @@ class Loader extends PluginBase {
 				$data[] = unserialize(file_get_contents($ret));
 			}
 		}
-		return $data === null ? null : $data;
+		return $data === [] ? [] : $data;
 	}
 
 	/**
@@ -191,7 +191,7 @@ class Loader extends PluginBase {
 		foreach ($res as $ret) {
 			$data[] = new Config($ret, Config::YAML);
 		}
-		return $data === null ? null : $data;
+		return $data === [] ? [] : $data;
 	}
 
 	/**
