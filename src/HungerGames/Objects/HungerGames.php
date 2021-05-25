@@ -305,7 +305,7 @@ class HungerGames extends Game {
      *
      * Returns all slots of games
      *
-     * @return Position[]|[]
+     * @return Position[]
      *
      */
     public function getSlots() : array {
