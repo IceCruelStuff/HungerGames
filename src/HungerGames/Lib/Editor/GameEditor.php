@@ -28,8 +28,8 @@ class GameEditor {
      * @param int $min
      *
      */
-    public function setMinimumPlayers($min) {
-        if (!Exc::checkIsNumber($min)) {
+    public function setMinimumPlayers(int $min) {
+        if (!Exc::isNumber($min)) {
             return;
         }
         $this->push("min_players", (int) $min);
@@ -43,8 +43,8 @@ class GameEditor {
      * @param int $max
      *
      */
-    public function setMaximumPlayers($max) {
-        if (!Exc::checkIsNumber($max)) {
+    public function setMaximumPlayers(int $max) {
+        if (!Exc::isNumber($max)) {
             return;
         }
         $this->push("max_players", (int) $max);
@@ -58,8 +58,8 @@ class GameEditor {
      * @param float $seconds
      *
      */
-    public function setGameSeconds($seconds) {
-        if(!Exc::checkIsNumber($seconds)) {
+    public function setGameSeconds(float $seconds) {
+        if(!Exc::isNumber($seconds)) {
             return;
         }
         $this->push("game_seconds", (float) $seconds);
@@ -73,8 +73,8 @@ class GameEditor {
      * @param float $seconds
      *
      */
-    public function setWaitingSeconds($seconds) {
-        if (!Exc::checkIsNumber($seconds)) {
+    public function setWaitingSeconds(float $seconds) {
+        if (!Exc::isNumber($seconds)) {
             return;
         }
         $this->push("waiting_seconds", (float) $seconds);
@@ -88,7 +88,7 @@ class GameEditor {
      * @param string $level
      *
      */
-    public function setGameLevel($level) {
+    public function setGameLevel(string $level) {
         $this->push("game_level", $level);
         $this->game->deleteOldMapBackup();
         $this->game->reloadGameLevel();
@@ -154,7 +154,7 @@ class GameEditor {
      * @return bool
      *
      */
-    public function removeSlot($slotName) {
+    public function removeSlot(string $slotName) {
         if (empty($this->gameArena->getAll()["slots"][$slotName])) {
             return false;
         }
