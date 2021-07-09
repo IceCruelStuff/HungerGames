@@ -21,6 +21,8 @@ class Game {
      * Loads game
      *
      * @param HungerGames $game
+     *
+     * @return void
      */
     public function loadGame(HungerGames $game) {
         $this->gameC = $game;
