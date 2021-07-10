@@ -10,6 +10,7 @@ use HungerGames\Lib\Manager\GlobalManager;
 use HungerGames\Lib\Manager\SignManager;
 use HungerGames\Tasks\GameSaveTask;
 use HungerGames\Tasks\LoadGamesTask;
+use pocketmine\permission\Permission;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use HungerGames\Object\HungerGames;
@@ -45,6 +46,7 @@ class Loader extends PluginBase {
 		foreach ($levels as $level) {
 			$this->getServer()->loadLevel($level); // load all worlds
 		}
+        $this->registerPermissions();
 		$this->storage = new GameStorage();
 		$this->globalManager = new GlobalManager($this);
 		$this->scriptManager = new HungerGamesAPIManager($this);
@@ -64,6 +66,21 @@ class Loader extends PluginBase {
 		$this->messages = new Config($this->dataPath() . "messages.yml", Config::YAML, Msg::getDefaultHGMessages());
 		$this->scriptManager->loadScripts();
 	}
+
+    private function registerPermissions() {
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.add", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.del", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.min", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.max", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.level", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.ws", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.gs", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.create", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.slot.add", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.slot.del", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.lobby", "", Permission::DEFAULT_OP));
+        $this->getServer()->getPluginManager()->registerPermission(new Permission("hg.command.dm", "", Permission::DEFAULT_OP));
+    }
 
 	/**
 	 * HungerGames base class
