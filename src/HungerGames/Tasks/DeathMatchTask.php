@@ -32,6 +32,8 @@ class DeathMatchTask extends Task {
                 $player->teleport($this->game->getLobbyPosition());
                 $player->getInventory()->clearAll();
                 $player->getArmorInventory()->clearAll();
+                $player->subtractXp($player->getXpDropAmount());
+                $player->setXpAndProgress(0, 0);
                 $this->hungerGamesAPI->getScriptManager()->callOnPlayerWinGame($player, $this->game);
                 $msg = Msg::getHungerGamesMessage("hg.message.win");
                 $msg = str_replace(["%game%", "%player%"], [$this->game->getName(), $player->getName()], $msg);
