@@ -5,29 +5,3 @@ authors: [xBeastMode, IceCruelStuff]
 description: HungerGames plugin for PocketMine-MP
 api: 3.15.0
 load: POSTWORLD
-
-permissions:
-  hg.command.add:
-    default: op
-  hg.command.del:
-    default: op
-  hg.command.min:
-    default: op
-  hg.command.max:
-    default: op
-  hg.command.level:
-    default: op
-  hg.command.ws:
-    default: op
-  hg.command.gs:
-    default: op
-  hg.sign.create:
-    default: op
-  hg.command.slot.add:
-    default: op
-  hg.command.slot.del:
-    default: op
-  hg.command.lobby:
-    default: op
-  hg.command.dm:
-    default: op
