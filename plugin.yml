@@ -1,5 +1,5 @@
 name: HungerGames
-version: 1.0
+version: 1.0.0
 main: HungerGames\Loader
 authors: [xBeastMode, IceCruelStuff]
 description: HungerGames plugin for PocketMine-MP
