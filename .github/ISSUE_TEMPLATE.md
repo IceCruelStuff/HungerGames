@@ -8,6 +8,4 @@
 - Explain how to reproduce your issue
 
 ### Arena Config
-```yaml
-The arenas config is located at "plugins/HugerGames/Arenas/".
-```
+The arena config is located at `plugins/HungerGames/Arenas`.
