@@ -25,7 +25,7 @@ abstract class HungerGamesAPI {
     /** @var Config */
     protected $config;
 
-    public function __construct($name, $version = "1.0", $author = "Author Name") {
+    public function __construct($name, $version = "1.0", $author = "") {
         $this->scriptName = $name;
         $this->version = $version;
         $this->author = $author;
