@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdoc>
-  <title>Replicado Uspdev</title>
+  <title>API Documentation</title>
   <parser>
     <target>docs</target>
   </parser>
