@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>API Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico"/>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/base.css">
+            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
+        <script src="../js/search.js"></script>
+        <script defer src="../js/searchIndex.js"></script>
+    </head>
+<body>
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title">API Documentation</h1>
+    <nav class="phpdocumentor-topnav">
+    </nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <aside class="four phpdocumentor-columns phpdocumentor-sidebar">
+    <section data-search-form class="phpdocumentor-search">
+        <h2 class="phpdocumentor-sidebar__category-header">Search</h2>
+        <label class="phpdocumentor-label">
+            <span class="visually-hidden">Search for</span>
+            <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+        </label>
+    </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                    <h3 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="../namespaces/hungergames.html"><abbr title="\HungerGames">HungerGames</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="../namespaces/hungergames-api.html"><abbr title="\HungerGames\API">API</abbr></a></li>
+                                            <li><a href="../namespaces/hungergames-command.html"><abbr title="\HungerGames\Command">Command</abbr></a></li>
+                                            <li><a href="../namespaces/hungergames-lib.html"><abbr title="\HungerGames\Lib">Lib</abbr></a></li>
+                                            <li><a href="../namespaces/hungergames-map.html"><abbr title="\HungerGames\Map">Map</abbr></a></li>
+                                            <li><a href="../namespaces/hungergames-object.html"><abbr title="\HungerGames\Object">Object</abbr></a></li>
+                                            <li><a href="../namespaces/hungergames-tasks.html"><abbr title="\HungerGames\Tasks">Tasks</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="../indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="eight phpdocumentor-columns phpdocumentor-content">
+                    <ul class="phpdocumentor-breadcrumbs">
+                        <li><a href="../namespaces/hungergames.html">HungerGames</a></li>
+            </ul>
+
+    <article class="phpdocumentor-element phpdocumentor-class">
+        <h2 class="phpdocumentor-content__title">
+            Loader
+                            <span class="phpdocumentor-class__extends">
+                    extends <abbr title="\pocketmine\plugin\PluginBase">PluginBase</abbr>
+                </span>
+                                                        </h2>
+        <aside class="phpdocumentor-element-found-in">
+            <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+            :
+            <span class="phpdocumentor-element-found-in__line">20</span>
+        </aside>
+
+        <p class="phpdocumentor-class__summary"></p>
+        <section class="phpdocumentor-class__description"></section>
+        
+
+        <h3>Table of Contents</h3>
+
+<dl class="phpdocumentor-table_of_contents">
+                    <dt><a href="../classes/HungerGames-Loader.html#property_instance">$instance</a> : <a href="../classes/HungerGames-Loader.html"><abbr title="\HungerGames\Loader">Loader</abbr></a></dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#property_storage">$storage</a> : <a href="../classes/HungerGames-Lib-GameStorage.html"><abbr title="\HungerGames\Lib\GameStorage">GameStorage</abbr></a></dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#property_globalManager">$globalManager</a> : <a href="../classes/HungerGames-Lib-Manager-GlobalManager.html"><abbr title="\HungerGames\Lib\Manager\GlobalManager">GlobalManager</abbr></a></dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#property_messages">$messages</a> : <abbr title="\pocketmine\utils\Config">Config</abbr></dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#property_scriptManager">$scriptManager</a> : <a href="../classes/HungerGames-API-Scripts-HungerGamesAPIManager.html"><abbr title="\HungerGames\API\Scripts\HungerGamesAPIManager">HungerGamesAPIManager</abbr></a></dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#property_mapBackup">$mapBackup</a> : <a href="../classes/HungerGames-Map-MapBackup.html"><abbr title="\HungerGames\Map\MapBackup">MapBackup</abbr></a></dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#property_signManager">$signManager</a> : <a href="../classes/HungerGames-Lib-Manager-SignManager.html"><abbr title="\HungerGames\Lib\Manager\SignManager">SignManager</abbr></a></dt>
+            <dd></dd>
+                            <dt><a href="../classes/HungerGames-Loader.html#method_onLoad">onLoad()</a> : void</dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_onEnable">onEnable()</a> : void</dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_registerPermissions">registerPermissions()</a> : mixed</dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getInstance">getInstance()</a> : <a href="../classes/HungerGames-Loader.html"><abbr title="\HungerGames\Loader">Loader</abbr></a></dt>
+            <dd>HungerGames base class</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_dataPath">dataPath()</a> : string</dt>
+            <dd>HungerGames base folder</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getArenasDataPath">getArenasDataPath()</a> : string</dt>
+            <dd>HungerGames arena folder</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getResourceDataPath">getResourceDataPath()</a> : string</dt>
+            <dd>HungerGames resource data path</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_createGameResource">createGameResource()</a> : mixed</dt>
+            <dd>Creates HungerGames resource name</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_deleteGameResource">deleteGameResource()</a> : mixed</dt>
+            <dd>Deletes HungerGames resource name</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getGameResource">getGameResource()</a> : <a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a>|null</dt>
+            <dd>Gets game resource by Id</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_gameResourceExists">gameResourceExists()</a> : bool</dt>
+            <dd>Checks if game resource exists</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_updateResourceData">updateResourceData()</a> : mixed</dt>
+            <dd>Updates resource by recreating it</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getAllGameResources">getAllGameResources()</a> : \HungerGames\Object\HungerGames[]|null</dt>
+            <dd>Gets all games</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_deleteGameArena">deleteGameArena()</a> : mixed</dt>
+            <dd>Delete HungerGames game arena</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getAllGameArenas">getAllGameArenas()</a> : \pocketmine\utils\Config[]</dt>
+            <dd>Gets all games</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_gameArenaExists">gameArenaExists()</a> : bool</dt>
+            <dd>Checks if game arena exists</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getGameArenaByName">getGameArenaByName()</a> : null|<abbr title="\pocketmine\utils\Config">Config</abbr></dt>
+            <dd>Gets game arena by name</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getStorage">getStorage()</a> : <a href="../classes/HungerGames-Lib-GameStorage.html"><abbr title="\HungerGames\Lib\GameStorage">GameStorage</abbr></a></dt>
+            <dd>Game storage, game info is stored</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getGlobalManager">getGlobalManager()</a> : <a href="../classes/HungerGames-Lib-Manager-GlobalManager.html"><abbr title="\HungerGames\Lib\Manager\GlobalManager">GlobalManager</abbr></a></dt>
+            <dd>Get global manager, manage all games</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getScriptManager">getScriptManager()</a> : <a href="../classes/HungerGames-API-Scripts-HungerGamesAPIManager.html"><abbr title="\HungerGames\API\Scripts\HungerGamesAPIManager">HungerGamesAPIManager</abbr></a></dt>
+            <dd>Get script manager, manage all scripts</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getMapBackup">getMapBackup()</a> : <a href="../classes/HungerGames-Map-MapBackup.html"><abbr title="\HungerGames\Map\MapBackup">MapBackup</abbr></a></dt>
+            <dd>Gets map backup to backup and reset maps</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getSignManager">getSignManager()</a> : <a href="../classes/HungerGames-Lib-Manager-SignManager.html"><abbr title="\HungerGames\Lib\Manager\SignManager">SignManager</abbr></a></dt>
+            <dd>Gets sign manager, to refresh all signs</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_pushMessage">pushMessage()</a> : mixed</dt>
+            <dd></dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getMessages">getMessages()</a> : string[]</dt>
+            <dd>Get all the messages</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_getMessage">getMessage()</a> : string</dt>
+            <dd>Gets message by index</dd>
+                <dt><a href="../classes/HungerGames-Loader.html#method_createGameArena">createGameArena()</a> : mixed</dt>
+            <dd>Create HungerGames game arena</dd>
+                </dl>
+
+
+        
+                    <section>
+                <h3 class="phpdocumentor-properties__header">Properties</h3>
+                                    <a id="property_instance"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+            phpdocumentor-property--static                    "
+>
+    <h4 class="phpdocumentor-property__name">$instance</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">23</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__type"><a href="../classes/HungerGames-Loader.html"><abbr title="\HungerGames\Loader">Loader</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$instance</span>
+         = <span class="phpdocumentor-signature__default-value">null</span>    </code>
+        
+
+</article>
+                                    <a id="property_storage"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$storage</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">26</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/HungerGames-Lib-GameStorage.html"><abbr title="\HungerGames\Lib\GameStorage">GameStorage</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$storage</span>
+            </code>
+        
+
+</article>
+                                    <a id="property_globalManager"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$globalManager</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">28</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/HungerGames-Lib-Manager-GlobalManager.html"><abbr title="\HungerGames\Lib\Manager\GlobalManager">GlobalManager</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$globalManager</span>
+            </code>
+        
+
+</article>
+                                    <a id="property_messages"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$messages</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">30</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><abbr title="\pocketmine\utils\Config">Config</abbr></span>
+        <span class="phpdocumentor-signature__name">$messages</span>
+            </code>
+        
+
+</article>
+                                    <a id="property_scriptManager"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$scriptManager</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">32</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/HungerGames-API-Scripts-HungerGamesAPIManager.html"><abbr title="\HungerGames\API\Scripts\HungerGamesAPIManager">HungerGamesAPIManager</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$scriptManager</span>
+            </code>
+        
+
+</article>
+                                    <a id="property_mapBackup"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$mapBackup</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">34</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/HungerGames-Map-MapBackup.html"><abbr title="\HungerGames\Map\MapBackup">MapBackup</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$mapBackup</span>
+            </code>
+        
+
+</article>
+                                    <a id="property_signManager"></a>
+<article
+        class="
+            phpdocumentor-property
+            phpdocumentor-property--private
+                                "
+>
+    <h4 class="phpdocumentor-property__name">$signManager</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">36</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__type"><a href="../classes/HungerGames-Lib-Manager-SignManager.html"><abbr title="\HungerGames\Lib\Manager\SignManager">SignManager</abbr></a></span>
+        <span class="phpdocumentor-signature__name">$signManager</span>
+            </code>
+        
+
+</article>
+                                                            </section>
+        
+                    <section>
+                <h3 class="phpdocumentor-methods__header">Methods</h3>
+                                    <a id="method_onLoad"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">onLoad()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">38</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">onLoad</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">void</span>
+    </code>
+
+    
+    
+    
+
+
+    
+</article>
+                                    <a id="method_onEnable"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">onEnable()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">44</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">onEnable</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">void</span>
+    </code>
+
+    
+    
+    
+
+
+    
+</article>
+                                    <a id="method_registerPermissions"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--private
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">registerPermissions()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">70</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+                                <span class="phpdocumentor-signature__name">registerPermissions</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getInstance"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                    phpdocumentor-element--static                    "
+>
+    <h4 class="phpdocumentor-method__name">getInstance()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">90</span>
+    </aside>
+        <p class="phpdocumentor-summary">HungerGames base class</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                        <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getInstance</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Loader.html"><abbr title="\HungerGames\Loader">Loader</abbr></a></span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Loader.html"><abbr title="\HungerGames\Loader">Loader</abbr></a></span>
+            
+</article>
+                                    <a id="method_dataPath"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">dataPath()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">99</span>
+    </aside>
+        <p class="phpdocumentor-summary">HungerGames base folder</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">dataPath</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_getArenasDataPath"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getArenasDataPath()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">108</span>
+    </aside>
+        <p class="phpdocumentor-summary">HungerGames arena folder</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getArenasDataPath</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_getResourceDataPath"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getResourceDataPath()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">117</span>
+    </aside>
+        <p class="phpdocumentor-summary">HungerGames resource data path</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getResourceDataPath</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_createGameResource"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">createGameResource()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">127</span>
+    </aside>
+        <p class="phpdocumentor-summary">Creates HungerGames resource name</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">createGameResource</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$resource</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$data</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$resource</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$data</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_deleteGameResource"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteGameResource()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">136</span>
+    </aside>
+        <p class="phpdocumentor-summary">Deletes HungerGames resource name</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">deleteGameResource</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$resource</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$resource</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getGameResource"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getGameResource()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">148</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets game resource by Id</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getGameResource</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$resource</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a>|null</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$resource</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a>|null</span>
+            
+</article>
+                                    <a id="method_gameResourceExists"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">gameResourceExists()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">161</span>
+    </aside>
+        <p class="phpdocumentor-summary">Checks if game resource exists</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">gameResourceExists</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$resource</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$resource</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method_updateResourceData"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">updateResourceData()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">171</span>
+    </aside>
+        <p class="phpdocumentor-summary">Updates resource by recreating it</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">updateResourceData</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$resource</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$data</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$resource</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$data</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getAllGameResources"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getAllGameResources()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">180</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets all games</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getAllGameResources</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">\HungerGames\Object\HungerGames[]|null</span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">\HungerGames\Object\HungerGames[]|null</span>
+            
+</article>
+                                    <a id="method_deleteGameArena"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">deleteGameArena()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">196</span>
+    </aside>
+        <p class="phpdocumentor-summary">Delete HungerGames game arena</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">deleteGameArena</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$game</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$game</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getAllGameArenas"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getAllGameArenas()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">205</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets all games</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getAllGameArenas</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">\pocketmine\utils\Config[]</span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">\pocketmine\utils\Config[]</span>
+            
+</article>
+                                    <a id="method_gameArenaExists"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">gameArenaExists()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">220</span>
+    </aside>
+        <p class="phpdocumentor-summary">Checks if game arena exists</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">gameArenaExists</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">bool</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            
+</article>
+                                    <a id="method_getGameArenaByName"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getGameArenaByName()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">230</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets game arena by name</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getGameArenaByName</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$name</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">null|<abbr title="\pocketmine\utils\Config">Config</abbr></span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$name</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">null|<abbr title="\pocketmine\utils\Config">Config</abbr></span>
+            
+</article>
+                                    <a id="method_getStorage"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getStorage()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">239</span>
+    </aside>
+        <p class="phpdocumentor-summary">Game storage, game info is stored</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getStorage</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Lib-GameStorage.html"><abbr title="\HungerGames\Lib\GameStorage">GameStorage</abbr></a></span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Lib-GameStorage.html"><abbr title="\HungerGames\Lib\GameStorage">GameStorage</abbr></a></span>
+            
+</article>
+                                    <a id="method_getGlobalManager"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getGlobalManager()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">248</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get global manager, manage all games</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getGlobalManager</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Lib-Manager-GlobalManager.html"><abbr title="\HungerGames\Lib\Manager\GlobalManager">GlobalManager</abbr></a></span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Lib-Manager-GlobalManager.html"><abbr title="\HungerGames\Lib\Manager\GlobalManager">GlobalManager</abbr></a></span>
+            
+</article>
+                                    <a id="method_getScriptManager"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getScriptManager()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">257</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get script manager, manage all scripts</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getScriptManager</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-API-Scripts-HungerGamesAPIManager.html"><abbr title="\HungerGames\API\Scripts\HungerGamesAPIManager">HungerGamesAPIManager</abbr></a></span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-API-Scripts-HungerGamesAPIManager.html"><abbr title="\HungerGames\API\Scripts\HungerGamesAPIManager">HungerGamesAPIManager</abbr></a></span>
+            
+</article>
+                                    <a id="method_getMapBackup"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getMapBackup()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">266</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets map backup to backup and reset maps</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getMapBackup</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Map-MapBackup.html"><abbr title="\HungerGames\Map\MapBackup">MapBackup</abbr></a></span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Map-MapBackup.html"><abbr title="\HungerGames\Map\MapBackup">MapBackup</abbr></a></span>
+            
+</article>
+                                    <a id="method_getSignManager"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getSignManager()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">275</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets sign manager, to refresh all signs</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getSignManager</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Lib-Manager-SignManager.html"><abbr title="\HungerGames\Lib\Manager\SignManager">SignManager</abbr></a></span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="../classes/HungerGames-Lib-Manager-SignManager.html"><abbr title="\HungerGames\Lib\Manager\SignManager">SignManager</abbr></a></span>
+            
+</article>
+                                    <a id="method_pushMessage"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">pushMessage()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">283</span>
+    </aside>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">pushMessage</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$key</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                    <span class="phpdocumentor-signature__argument">
+            ,                 <span class="phpdocumentor-signature__argument__name">$message</span> :
+                <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$key</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$message</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                    <a id="method_getMessages"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getMessages()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">295</span>
+    </aside>
+        <p class="phpdocumentor-summary">Get all the messages</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getMessages</span>(
+                )
+        : <span class="phpdocumentor-signature__response_type">string[]</span>
+    </code>
+
+    
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string[]</span>
+            
+</article>
+                                    <a id="method_getMessage"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">getMessage()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">305</span>
+    </aside>
+        <p class="phpdocumentor-summary">Gets message by index</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">getMessage</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$index</span> :
+                <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">string</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$index</span>
+                    : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            
+</article>
+                                    <a id="method_createGameArena"></a>
+<article
+        class="
+            phpdocumentor-method
+            phpdocumentor-method--public
+                                                        "
+>
+    <h4 class="phpdocumentor-method__name">createGameArena()</h4>
+    <aside class="phpdocumentor-element-found-in">
+        <abbr class="phpdocumentor-element-found-in__file" title="src/HungerGames/Loader.php"><a href="../files/src-hungergames-loader.html"><abbr title="src/HungerGames/Loader.php">Loader.php</abbr></a></abbr>
+        :
+        <span class="phpdocumentor-element-found-in__line">314</span>
+    </aside>
+        <p class="phpdocumentor-summary">Create HungerGames game arena</p>
+        <code class="phpdocumentor-signature phpdocumentor-code ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+                                <span class="phpdocumentor-signature__name">createGameArena</span>(
+                    <span class="phpdocumentor-signature__argument">
+                            <span class="phpdocumentor-signature__argument__name">$game</span> :
+                <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a></span>
+                            </span>
+                )
+        : <span class="phpdocumentor-signature__response_type">mixed</span>
+    </code>
+
+    
+            <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+        <dl class="phpdocumentor-argument-list">
+                            <dt class="phpdocumentor-argument-list__entry">
+                    <span class="phpdocumentor-signature__argument__name">$game</span>
+                    : <span class="phpdocumentor-signature__argument__return-type"><a href="../classes/HungerGames-Object-HungerGames.html"><abbr title="\HungerGames\Object\HungerGames">HungerGames</abbr></a></span>
+                                    </dt>
+                <dd class="phpdocumentor-argument-list__definition"><section class="phpdocumentor-description"></section></dd>
+                    </dl>
+    
+    
+
+
+            <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+            
+</article>
+                                                            </section>
+            </article>
+                <div data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+
+    <h2>Search results</h2>
+    <ul class="phpdocumentor-search-results__entries">
+    </ul>
+</div>
+            </div>
+        </div>
+    </main>
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>
