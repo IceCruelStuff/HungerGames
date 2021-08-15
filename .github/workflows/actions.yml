@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         persist-credentials: false
-    - name: PhpDocumentor
+    - name: Generate Docs
       uses: gpupo/actions-phpDocumentor@1.0
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@3.7.1
