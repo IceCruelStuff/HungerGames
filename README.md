@@ -7,7 +7,7 @@ A HungerGames plugin for PocketMine-MP.
 Grab the latest build from **[Poggit CI](https://poggit.pmmp.io/ci/IceCruelStuff/HungerGames-1)** and put it into your `plugins` folder.
 
 ## API Docs
-API Docs can be found at https://icecruelstuff.github.io/HungerGames/
+API Docs can be found at https://icecruelstuff.github.io/HungerGames/.
 
 ## Example Code
 
